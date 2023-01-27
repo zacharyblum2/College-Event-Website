@@ -1,11 +1,11 @@
 
-###### College-Event-Website
+# College-Event-Website
 
 Web-based application that stores universities, their clubs, members and showcases upcoming events.
 
-# Application: College Event Website    
+### Application: College Event Website    
 
-# Problem:  
+### Problem:  
 Most  universities in  the country  host  events  around  campus  and  off  campus.  These  events are 
 organized  by  college  students  in  most  cases.   Students  are  clustered  RSOs (Registered Student 
 Organizations)  by  different organizations, clubs, fraternities around campus. These events could 
@@ -14,7 +14,7 @@ where they post their events for the upcoming weeks.    One needs to check the w
 each event to his/her calendar.    These events are just official events and not  all events around 
 the university are included.  Another limitation is that one has no way to track weekly events. 
   
-# Project Description  
+### Project Description  
 You  are  asked  to  implement  a  web-based  application  that  solves  the  problems.      Any  student 
 (user)  may  register  with  the  application  to  obtain  a  user  ID  and  a  password.  There  are  three 
 user  levels:  super  admin  who  creates  a  profile  for  a  university  (name,  location,  description, 
@@ -41,7 +41,7 @@ university,  and  event  of  RSOs  of  which  they  are  member.  They  will  no
 events,  but  should  be  able  to  rate,  comment  and  edit  (update)  their  comments  for  any  
 event.   
 
-# Technical Requirements:  
+### Technical Requirements:  
 
 	1. The design of the database must follow the design process: business 
 	operations/constraints, ER-model, the relational model, normalization, implementation, 
@@ -54,13 +54,13 @@ event.
 	5. Sample data should be included, e.g., 10 uses, 5 RSOs, 20 events, 10 comments, 10 SQL 
 	queries... 
 	6. Programming languages that can be used for the project: HTML, Javascript, PHP, Java, CSS, 
-	c#, and stored procedures.  DBMS’s: Oracle, SQL Server, and MySQL. Other languages and 
+	c###, and stored procedures.  DBMS’s: Oracle, SQL Server, and MySQL. Other languages and 
 	DBMSs: check with the instructor. 
 	7. Advanced features include, but not limited to, event feeds from the university’s events 
 	system (e.g., from https://events.ucf.edu), social network integration, crash recovery 
 	policy/procedures, security, index-only/composite search-key indices, etc.    
 
-# Grading:  
+### Grading:  
 	
 	• Assignment   10% 
 	
@@ -68,7 +68,7 @@ event.
 	
 	• Report    50%   
 
-# Deliverables: 
+### Deliverables: 
 	
 	• Due Dates: TBA 
 	
@@ -86,7 +86,7 @@ event.
 	and codes and the report.  
  
  
-# Note: 
+### Note: 
  The instructor reserves the right to modify (add/drop) technical requirements, due dates, 
 grading weights, and to provide relevant information such as general constraint enforcement 
 codes should it deems appropriate. All changes will be announced on Webcourses. 
