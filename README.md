@@ -59,17 +59,25 @@ policy/procedures, security, index-only/composite search-key indices, etc.
 
 #Grading:  
 	• Assignment   10% 
+	
 	• Demo    40% 
+	
 	• Report    50%   
 
 #Deliverables: 
+	
 	• Due Dates: TBA 
+	
 	• Draft Design: ER diagram, relational schemas, constraints enforcement 
+	
 	• Report: The design (ER diagram, relational schemas, ...), database creation code (CREATE 
 	TABLE ..., INSERT..., SELECT ..., etc.), the software code (GUI, embedded SQL statements, 
 	etc.), screenshots of interface, output, comments/observations, lesson learned 
+	
 	• Presentation (optional): design, GUI, ER diagram, constraints enforcement (ppt) 
+	
 	• Demo: to the GTA over Zoom 
+	
 	• Submission: one compressed file *.zip via Webcourses containing all the files--the slides 
 	and codes and the report.  
  
