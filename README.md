@@ -58,6 +58,7 @@ system (e.g., from https://events.ucf.edu), social network integration, crash re
 policy/procedures, security, index-only/composite search-key indices, etc.    
 
 #Grading:  
+	
 	• Assignment   10% 
 	
 	• Demo    40% 
