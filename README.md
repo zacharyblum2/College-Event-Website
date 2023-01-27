@@ -1,4 +1,6 @@
+
 ###### College-Event-Website
+
 Web-based application that stores universities, their clubs, members and showcases upcoming events.
 
 # Application: College Event Website    
@@ -58,7 +60,7 @@ event.
 	system (e.g., from https://events.ucf.edu), social network integration, crash recovery 
 	policy/procedures, security, index-only/composite search-key indices, etc.    
 
-#Grading:  
+# Grading:  
 	
 	• Assignment   10% 
 	
@@ -66,7 +68,7 @@ event.
 	
 	• Report    50%   
 
-#Deliverables: 
+# Deliverables: 
 	
 	• Due Dates: TBA 
 	
@@ -84,7 +86,7 @@ event.
 	and codes and the report.  
  
  
-#Note: 
+# Note: 
  The instructor reserves the right to modify (add/drop) technical requirements, due dates, 
 grading weights, and to provide relevant information such as general constraint enforcement 
 codes should it deems appropriate. All changes will be announced on Webcourses. 
