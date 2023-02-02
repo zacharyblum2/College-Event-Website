@@ -1,1 +1,135 @@
-/* This is the styles css sheet for the website styling */
+:root {
+    --main-color: #2E8B57;
+    --secondary-color: #3E363F; 
+    --third-color: #1A2309;
+    --text-color: #FFFFFF;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--main-color);
+    color: var(--text-color);
+    width: 100%;
+    height: 50px;
+    margin: 0 0 10px;
+}
+
+.hRight {
+    display: flex;
+    gap: 12px;
+    padding: 0 15px 0;
+}
+
+.hLeft {
+    padding: 0 0 0 15px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    margin: 20px 0;
+    height: 100vh;
+}
+
+.create {
+    display: flex;
+    gap: 20px;
+}
+
+.login, .signup {
+    height: 100px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    background-color: transparent;
+    color: var(--secondary-color);
+    border-color: var(--main-color);
+    border-radius: 6px;
+    padding: 8px 15px;
+}
+
+.btn:hover {
+    background-color: var(--main-color);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--main-color);
+    color: var(--text-color);
+    width: 100%;
+    height: 50px;
+    margin: 10px 0 0;
+}
+
+.popup {
+    width: 400px;
+    background-color: var(--main-color);
+    border-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    visibility: hidden;
+    transition: transform .4s, top .4s;
+}
+
+.popup button {
+    border-radius: 6px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-color: var(--secondary-color);
+    padding: 8px 16px;
+}
+
+.popup button:hover {
+    padding: 12px 30px;
+}
+
+.popup p {
+    margin: 10px 0 0;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.popup input {
+    margin: 0 0 10px;
+}
+
+.popup .close {
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    margin: 10px 0px 0px;
+    padding: 5px 0px;
+}
+.openPop {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
