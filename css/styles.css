@@ -97,7 +97,7 @@ a {
     transition: transform .4s, top .4s;
 }
 
-.Popup button {
+.popup button {
     border-radius: 6px;
     background-color: var(--secondary-color);
     color: var(--text-color);
@@ -105,8 +105,18 @@ a {
     padding: 8px 16px;
 }
 
-.Popup button:hover {
+.popup button:hover {
     padding: 12px 30px;
+}
+
+.popup p {
+    margin: 10px 0 0;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.popup input {
+    margin: 0 0 10px;
 }
 
 .popup .close {
@@ -117,4 +127,9 @@ a {
     align-self: flex-end;
     margin: 10px 0px 0px;
     padding: 5px 0px;
+}
+.openPop {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
 }

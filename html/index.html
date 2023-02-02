@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="../css/styles.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/code.js"></script>
     <title>Landing Page</title>
 </head>
 <body>
@@ -24,12 +25,12 @@
         <div class="create">
             <div class="login">
                 <p>Already have an account?</p>
-                <button class="btn">Login</button>
+                <button class="btn" onclick="openLogin()">Login</button>
             </div>
     
             <div class="signup">
                 <p>Don't have an account?</p>
-                <button class="btn">Signup</button>
+                <button class="btn" onclick="openSignup()">Signup</button>
             </div>
 
             <div class="popup" id="login">
@@ -38,16 +39,16 @@
                 <input type="text" id="uName" placeholder="username"><br/>
                 <p>Password</p>
                 <input type="text" id="pWord" placeholder="password"><br/>
-                <button type="submit" class="btn" onclick="doLogin()">Login</button>
+                <button type="submit" onclick="doLogin()">Login</button>
             </div>
 
             <div class="popup" id="signup">
-                <button type="button" class="close" onclick="closeLogin()">X</button>
+                <button type="button" class="close" onclick="closeSignup()">X</button>
                 <p>Username</p>
                 <input type="text" id="uName" placeholder="username"><br/>
                 <p>Password</p>
                 <input type="text" id="pWord" placeholder="password"><br/>
-                <button type="submit" class="btn" onclick="doLogin()">Signup</button>
+                <button type="submit" onclick="doLogin()">Signup</button>
             </div>
         </div>
 
