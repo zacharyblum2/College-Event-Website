@@ -1,10 +1,10 @@
 import React from 'react';
 import './event.css';
 
-const event = () => {
+const Event = () => {
   return (
     <div>event</div>
   )
 }
 
-export default event
+export default Event
