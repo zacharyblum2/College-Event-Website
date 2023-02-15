@@ -16,14 +16,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-class Navbar extends React.Component {
-  // Return what you want to be rendered.
-  render() {
-    return (
-      <div className='navbar'>
-        <div></div>
-      </div>
-    )
-  }
-}
