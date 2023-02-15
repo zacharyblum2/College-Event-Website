@@ -1,7 +1,7 @@
 import React from 'react';
 import './calendar.css';
 
-const calendar = () => {
+const Calendar = () => {
   return (
     <div>
         calendar
@@ -9,4 +9,4 @@ const calendar = () => {
   )
 }
 
-export default calendar
+export default Calendar
