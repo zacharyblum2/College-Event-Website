@@ -3,13 +3,18 @@ import './App.css';
 import React from 'react';
 
 // Import all components directly, using index.js inside components.
+import {View} from './containers';
 import {Calendar, Event, Feed, Footer, Navbar} from './components';
+
 
 
 function App() {
   return (
-    <div> 
-      <h1>College event website</h1>
+    <div className='App'> 
+      <div className='gradient__bg'>
+        <Navbar />
+      </div>
+      <Footer />
     </div>
   );
 }
