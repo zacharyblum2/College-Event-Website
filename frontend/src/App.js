@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 
 // Import all components directly, using index.js inside components.
-import {View} from './containers';
+import {View, LoginContainer, SignupContainer} from './containers';
 import {Calendar, Event, Feed, Footer, NavbarComp} from './components';
 
 
@@ -13,6 +13,7 @@ function App() {
     <div className='App'> 
       <div className='gradient__bg'>
         <NavbarComp />
+        <LoginContainer/>
       </div>
       <Footer />
     </div>
