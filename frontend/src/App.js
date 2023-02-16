@@ -4,18 +4,14 @@ import './App.css';
 // Import all components directly, using index.js inside components.
 import {View, LoginContainer, SignupContainer} from './containers';
 import {Calendar, Event, Feed, Footer, NavbarComp} from './components';
-import { Routes, Route } from 'react-router-dom';
+import { HomePage, LoginPage, SignupPage } from './pages';
 
 function App() {
   return (
-    <div className='App'> 
-      <div className='gradient__bg'>
-        <NavbarComp />
-        <LoginContainer/>
-        <SignupContainer/>
-      </div>
-      <Footer />
+    <div className='App'>
+        <HomePage/>
     </div>
+      
   );
 }
 

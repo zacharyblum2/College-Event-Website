@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './navbarcomp.css';
 
 const NavbarComp = () => {
@@ -13,7 +12,7 @@ const NavbarComp = () => {
         <div className="navbar-nav">
           <a className="nav-item nav-link active" href="/">Home <span className="sr-only">(current)</span></a>
           <a className="nav-item nav-link" href="/universities">Universities</a>
-          <a className="nav-item nav-link" href="/signup">Sign-up</a>
+          <a className="nav-item nav-link" href="/signup">Sign Up</a>
           <a className="nav-item nav-link" href="/login">Login</a>
         </div>
       </div>
