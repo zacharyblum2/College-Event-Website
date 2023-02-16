@@ -1,5 +1,4 @@
 import React from 'react'
-import * as Icon from 'react-bootstrap-icons';
 import './loginContainer.css';
 
 const LoginContainer = () => {
@@ -40,7 +39,7 @@ const LoginContainer = () => {
 
                 <div class="text-center text-lg-start mt-4 pt-2">
                     <button type="button" class="btn btn-success btn-lg">Login</button>
-                    <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+                    <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#signupContainer"
                         style={{color: "#28a745"}}>Register</a></p>
                 </div>
                 </form>
