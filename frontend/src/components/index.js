@@ -4,3 +4,4 @@ export {default as Feed} from './feed/Feed';
 export {default as Footer} from './footer/Footer';
 export {default as NavbarComp} from './navbarcomp/NavbarComp';
 export {default as Who} from './who/Who';
+export {default as Universities} from './universities/Universities';

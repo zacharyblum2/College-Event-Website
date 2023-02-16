@@ -1,13 +1,14 @@
 import React from 'react';
 import './homePage.css';
 
-import { NavbarComp, Footer, Who} from '../../components';
+import { NavbarComp, Footer, Who, Universities} from '../../components';
 
 const HomePage = () => {
   return (
     <>
         <NavbarComp/>
         <Who/>
+        <Universities/>
         <Footer/>
     </>
   )
