@@ -10,19 +10,19 @@ const Footer = () => {
           <span>Get connected with us on social networks:</span>
         </div>
         <div>
-          <a href="" class="me-4 text-reset">
+          <a href="#" class="me-4 text-reset">
             <Icon.Facebook className='fab' style={{margin: "10px"}}/>
           </a>
-          <a href="" class="me-4 text-reset">
+          <a href="#" class="me-4 text-reset">
             <Icon.Twitter style={{margin: "10px"}}/>
           </a>
-          <a href="" class="me-4 text-reset">
+          <a href="#" class="me-4 text-reset">
             <Icon.Google style={{margin: "10px"}}/>
           </a>
-          <a href="" class="me-4 text-reset">
+          <a href="#" class="me-4 text-reset">
             <Icon.Instagram style={{margin: "10px"}}/>
           </a>
-          <a href="" class="me-4 text-reset">
+          <a href="#" class="me-4 text-reset">
             <Icon.Linkedin style={{margin: "10px"}}/>
           </a>
         </div>
@@ -32,7 +32,8 @@ const Footer = () => {
           <div class="row mt-3">
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <h6 class="text-uppercase fw-bold mb-4">
-                <i class="fas fa-gem me-3"></i>Event At
+                <Icon.Gem style={{margin: "0px 5px 0px"}}/>
+                Event At
               </h6>
               <p>
                 University event management web application, here to organize all your events
@@ -55,9 +56,11 @@ const Footer = () => {
             </div>
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-              <p><i class="fas fa-home me-3"></i> Oviedo, FL 32765, US</p>
               <p>
-                <i class="fas fa-envelope me-3"></i>
+                <Icon.HouseAdd style={{margin: "0px 5px 0px"}}/> 
+                Oviedo, FL 32765, US</p>
+              <p>
+                <Icon.Envelope style={{margin: "0px 5px 0px "}}/>
                 customersupport@eventat.com
               </p>
             </div>
