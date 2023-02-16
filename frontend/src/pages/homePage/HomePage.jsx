@@ -1,7 +1,7 @@
 import React from 'react';
 import './homePage.css';
 
-import { NavbarComp, Footer, Who, Universities} from '../../components';
+import { NavbarComp, Footer, Who, Universities, Register} from '../../components';
 
 const HomePage = () => {
   return (
@@ -9,6 +9,7 @@ const HomePage = () => {
         <NavbarComp/>
         <Who/>
         <Universities/>
+        <Register/>
         <Footer/>
     </>
   )

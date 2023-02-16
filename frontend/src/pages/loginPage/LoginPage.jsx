@@ -1,13 +1,12 @@
 import React from 'react';
-import { NavbarComp, Footer } from '../../components';
-import { LoginContainer } from '../../containers';
+import { NavbarComp, Footer, Login } from '../../components';
 import './loginPage.css';
 
 const LoginPage = () => {
   return (
     <>
         <NavbarComp/>
-        <LoginContainer/>
+        <Login/>
         <Footer/>
     </>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
-import './SignupContainer';
+import './signup.css';
 
-const SignupContainer = () => {
+const Signup = () => {
   return (
     <section class="vh-100">
       <div class="container h-100">
@@ -77,4 +77,4 @@ const SignupContainer = () => {
   )
 }
 
-export default SignupContainer
+export default Signup

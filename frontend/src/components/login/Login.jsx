@@ -1,7 +1,7 @@
 import React from 'react'
-import './loginContainer.css';
+import './login.css';
 
-const LoginContainer = () => {
+const Login = () => {
   return (
     <section class="">
         <div class="container-fluid h-custom">
@@ -50,4 +50,4 @@ const LoginContainer = () => {
   )
 }
 
-export default LoginContainer
+export default Login

@@ -1,13 +1,12 @@
 import React from 'react';
 import './signupPage.css';
-import { NavbarComp, Footer } from '../../components';
-import { SignupContainer } from '../../containers';
+import { NavbarComp, Footer, Signup} from '../../components';
 
 const SignupPage = () => {
   return (
     <>
         <NavbarComp/>
-        <SignupContainer/>
+        <Signup/>
         <Footer/>
     </>
   )
