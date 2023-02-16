@@ -1,19 +1,33 @@
 .who {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin: 50px 0;
 }
 
 .left {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 50%;
+}
+
+.left h6 {
+    font-weight: 800;
+    font-size: 30px;
+}
+
+.left p {
+    margin: 0 100px;
 }
 
 .right {
+    display: flex;
+    justify-content: center;
     width: 50%;
     height: 100%;
+    margin: 0 50px 0;
 }
 
 .uni__img {
