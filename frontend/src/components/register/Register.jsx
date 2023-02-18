@@ -9,8 +9,8 @@ const Register = () => {
             <div class="row gx-lg-5 align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
                 <h1 class="my-5 display-3 fw-bold ls-tight">
-                    The best offer <br />
-                    <span class="text-primary">for your business</span>
+                    The best event <br />
+                    <span class="text-primary">organizer</span>
                 </h1>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
