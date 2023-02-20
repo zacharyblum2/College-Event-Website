@@ -56,7 +56,7 @@ const Signup = () => {
                       </div>
 
                       <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="button" class="btn btn-primary btn-lg">Register</button>
+                        <button type="button" onclick="location.href='/user'" class="btn btn-primary btn-lg">Register</button>
                       </div>
 
                     </form>
