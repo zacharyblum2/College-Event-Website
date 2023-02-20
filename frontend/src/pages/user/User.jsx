@@ -1,8 +1,13 @@
 import React from 'react'
+import './user.css';
+import { Usernav, Userfoot} from '../../components';
 
 const User = () => {
   return (
-    <div>User</div>
+    <>
+        <Usernav/>
+        <Userfoot/>
+    </>
   )
 }
 

@@ -38,7 +38,7 @@ const Login = () => {
                 </div>
 
                 <div class="text-center text-lg-start mt-4 pt-2">
-                    <button type="button" onclick="location.href='/user'"class="btn btn-success btn-lg">Login</button>
+                    <a href="/user" class="btn btn-success btn-lg">Login</a>
                     <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#signupContainer"
                         style={{color: "#28a745"}}>Register</a></p>
                 </div>
