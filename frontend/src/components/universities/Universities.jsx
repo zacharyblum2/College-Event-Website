@@ -4,7 +4,7 @@ import './universities.css'
 const Universities = () => {
   return (
     <div className='uni'>
-        <p>Here are some of our partenered universities</p>
+        <p className='text'>Here are some of our partenered universities</p>
         <div class='logos'>
         <div className='list'>
             <img src="logos\UCF.png" alt="UCF Logo" 
