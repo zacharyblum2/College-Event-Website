@@ -7,7 +7,6 @@ const User = () => {
   return (
     <>
         <Usernav/>
-        <Header/>
         <View/>
         <Userfoot/>
     </>

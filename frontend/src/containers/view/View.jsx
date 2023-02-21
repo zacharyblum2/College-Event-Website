@@ -1,12 +1,16 @@
 import React from 'react';
 import './view.css';
 import { Leftv, Rightv } from '../../containers';
+import { Header } from '../../components';
 
 const View = () => {
   return (
     <div className='view'>
-      <Leftv/>
-      <Rightv/>
+      <Header/>
+      <div className='content'>
+        <Leftv/>
+        <Rightv/> 
+      </div>
     </div>
   )
 }

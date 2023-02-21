@@ -4,7 +4,7 @@ import './card.css';
 const Card = () => {
   return (
     <div>
-        <div class="card">
+        <div class="card" style={{width: "650px"}}>
             <h5 class="card-header">Florida Folklore Society annual meeting</h5>
             <div class="card-body">
                 <h5 class="card-title">at 12 a.m</h5>
