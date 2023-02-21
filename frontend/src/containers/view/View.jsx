@@ -1,9 +1,13 @@
 import React from 'react';
 import './view.css';
+import { Leftv, Rightv } from '../../containers';
 
 const View = () => {
   return (
-    <div>View</div>
+    <div className='view'>
+      <Leftv/>
+      <Rightv/>
+    </div>
   )
 }
 

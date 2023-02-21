@@ -8,3 +8,4 @@ export {default as Register} from './register/Register';
 export {default as Usernav} from './usernav/Usernav';
 export {default as Userfoot} from './userfoot/Userfoot';
 export {default as Header} from './header/Header';
+export {default as Cal} from './cal/Cal';

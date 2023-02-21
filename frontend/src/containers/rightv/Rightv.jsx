@@ -1,10 +1,11 @@
 import React from 'react';
-import '/rightv.css';
+import './rightv.css';
+import { Cal } from '../../components';
 
 const Rightv = () => {
   return (
     <div>
-        <input type="text" placeholder='Search all events'/>
+      <Cal/>
     </div>
   )
 }
