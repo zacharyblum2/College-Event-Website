@@ -4,6 +4,7 @@ import {Card} from '../../components';
 
 const Leftv = () => {
   return (
+    /* Should cards be lazy loaded or should there be pages?*/
     <div className="cards">
       <Card/>
       <Card/>

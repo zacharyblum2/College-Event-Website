@@ -4,7 +4,8 @@ import './usernav.css';
 const Usernav = () => {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark justify-content-between">
-      <a className="navbar-brand" href="/">EventAt: User<span></span></a>
+      {/* This should just reload the page */}
+      <a className="navbar-brand" href="/user">EventAt: User<span></span></a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
