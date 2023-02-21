@@ -4,7 +4,8 @@ import {Card} from '../../components';
 
 const Leftv = () => {
   return (
-    <div>
+    <div className="cards">
+      <Card/>
       <Card/>
     </div>
   )

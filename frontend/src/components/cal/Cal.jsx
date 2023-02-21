@@ -8,7 +8,6 @@ const Cal = () => {
   const [date, setDate] = useState(new Date());
   return (
     <div>
-      <h1 className='text-center'>React Calendar</h1>
       <div className='calendar-container'>
         <Calendar onChange={setDate} value={date} />
       </div>

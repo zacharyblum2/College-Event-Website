@@ -7,6 +7,7 @@ const View = () => {
   return (
     <div className='view'>
       <Header/>
+      <br/>
       <div className='content'>
         <Leftv/>
         <Rightv/> 
