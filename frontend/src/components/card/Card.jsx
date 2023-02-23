@@ -21,7 +21,7 @@ const Card = () => {
                 restaurant Nikkis Place</p>
                 
                 {/* This should link to a page with all of the event information */}
-                <a href="#" class="btn btn-success">Register Now</a>
+                <a href="/event" class="btn btn-success stretched-link">Register Now</a>
             </div>
         </div>
     </div>
