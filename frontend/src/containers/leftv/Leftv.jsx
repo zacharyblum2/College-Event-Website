@@ -1,14 +1,25 @@
 import React from 'react';
 import './leftv.css';
-import {Card} from '../../components';
+import {Card, Rso} from '../../components';
+
+// Import router.
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 const Leftv = () => {
   return (
-    /* Should cards be lazy loaded or should there be pages?*/
-    <div className="cards">
-      <Card/>
-      <Card/>
-    </div>
+    <Router>
+        <div className="cards">
+          <Route exact path='/user'>
+            <Card/>
+            <Card/>
+          </Route>
+          <Route exact path='/rsos'>
+            <h2 class="h5">RSOS</h2>
+            <Rso/>
+          </Route>
+        </div>
+    </Router>
+    
   )
 }
 

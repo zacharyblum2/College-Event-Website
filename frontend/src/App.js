@@ -26,6 +26,9 @@ function App() {
           <Route exact path='/user'>
             <User/>
           </Route>
+          <Route exact path='/rsos'>
+            <User/>
+          </Route>
           <Route exact path='/event'>
             <Event/>
           </Route>
