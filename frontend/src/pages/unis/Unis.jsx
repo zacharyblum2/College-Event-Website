@@ -7,6 +7,7 @@ const Unis = () => {
   return (
     <>
         <Usernav/>
+        <View/>
         <Userfoot/>
     </>
   )

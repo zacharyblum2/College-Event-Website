@@ -30,7 +30,7 @@ function App() {
             <Event/>
           </Route>
           <Route exact path='/universities'>
-            <Event/>
+            <Unis/>
           </Route>
         </Switch>
     </div>
