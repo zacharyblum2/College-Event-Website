@@ -11,8 +11,9 @@ const Usernav = () => {
       </button>
       <div className="collapse navbar-collapse flex-grow-0" id="navbarNavAltMarkup">
         <div className="navbar-nav">
+          <a className="nav-item nav-link active" href='/user'>Events <span className="sr-only">(current)</span></a>
           <a className="nav-item nav-link" href='/rsos'>RSOs <span className="sr-only">(current)</span></a>
-          <a className="nav-item nav-link active" href="/">Log out <span className="sr-only">(current)</span></a>
+          <a className="nav-item nav-link" href="/">Log out <span className="sr-only">(current)</span></a>
         </div>
       </div>
     </nav>

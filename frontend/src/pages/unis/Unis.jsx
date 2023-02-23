@@ -1,14 +1,14 @@
 import React from 'react';
 import './unis.css';
-import { Usernav, Userfoot} from '../../components';
-import { View } from '../../containers';
-
+import { NavbarComp, Footer, Unicard} from '../../components';
 const Unis = () => {
   return (
     <>
-        <Usernav/>
-        <View/>
-        <Userfoot/>
+        <NavbarComp/>
+        <div className='content'>
+            <Unicard/>
+        </div>
+        <Footer/>
     </>
   )
 }

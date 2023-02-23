@@ -3,6 +3,7 @@ import './view.css';
 import { Leftv, Rightv } from '../../containers';
 import { Header } from '../../components';
 
+
 const View = () => {
   return (
     <div className='view'>
