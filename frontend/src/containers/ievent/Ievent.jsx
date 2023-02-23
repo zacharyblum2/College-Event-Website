@@ -6,8 +6,10 @@ const Ievent = () => {
   return (
     <div class="container">
         <div class="row">
-            <Icon.HouseAddFill/>
-            Events at *University Name*
+            <a href="/user" class="stretched-link back">
+                <Icon.HouseAddFill/>
+                Events at *University Name*
+            </a>
         </div>
         <div class="row">
             EVENT NAME
