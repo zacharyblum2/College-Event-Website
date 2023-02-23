@@ -11,7 +11,6 @@ const NavbarComp = () => {
       <div className="collapse navbar-collapse flex-grow-0" id="navbarNavAltMarkup">
         <div className="navbar-nav">
           <a className="nav-item nav-link active" href="/">Home <span className="sr-only">(current)</span></a>
-          <a className="nav-item nav-link" href="/universities">Universities</a>
           <a className="nav-item nav-link" href="/signup">Sign Up</a>
           <a className="nav-item nav-link" href="/login">Login</a>
         </div>
