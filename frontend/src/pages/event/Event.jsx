@@ -1,9 +1,16 @@
 import React from 'react';
 import './event.css';
 
+import { Usernav, Userfoot, } from '../../components';
+import { Ievent } from '../../containers';
+
 const Event = () => {
   return (
-    <div>Event</div>
+    <>
+        <Usernav/>
+        <Ievent/>
+        <Userfoot/>
+    </>
   )
 }
 

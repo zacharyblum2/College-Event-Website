@@ -1,6 +1,6 @@
 import React from 'react'
 import './user.css';
-import { Usernav, Userfoot, Header} from '../../components';
+import { Usernav, Userfoot} from '../../components';
 import { View } from '../../containers';
 
 const User = () => {
