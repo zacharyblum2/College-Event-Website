@@ -19,7 +19,7 @@ const Rso = () => {
                 restaurant Nikkis Place</p>
                 
                 {/* This should link to a page with all of the event information */}
-                <a href="/event" class="btn btn-success stretched-link">Join Now</a>
+                <a href="/rso" class="btn btn-success stretched-link">Join Now</a>
             </div>
         </div>
     </div>

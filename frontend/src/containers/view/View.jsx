@@ -16,10 +16,7 @@ const View = () => {
           <br/>
           <div className='content'>
             <Leftv/>
-
-            <Route exact path='/user'>
-              <Rightv/>
-            </Route>
+            <Rightv/>
           </div>
         </div>
     </Router>
