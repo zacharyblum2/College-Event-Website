@@ -1,0 +1,10 @@
+#create {
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.but {
+    align-self: center;
+}
+

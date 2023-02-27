@@ -13,7 +13,7 @@ const Rightv = () => {
         </Route>
         
         <Route exact path='/rsos'>
-          <a href="/createrso" class="btn btn-success">Create RSO</a>
+          <a href="/createrso" class="btn btn-success strectched-link">Create RSO</a>
         </Route>
       </div>
     </Router>
