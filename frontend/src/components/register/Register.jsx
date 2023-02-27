@@ -24,15 +24,11 @@ const Register = () => {
                 <div class="card">
                     <div class="card-body py-5 px-md-5">
                     <form>
-                        <button type="submit" class="btn btn-primary btn-block mb-4"
-                        style={{backgroundColor: "hsl(189, 78%, 45%)"}}>
-                        Login
-                        </button>
+                        <a href="/login" class="btn btn-primary btn-block mb-4" 
+                        style={{backgroundColor: "hsl(189, 78%, 45%)"}}>Login</a>
                         <p>or sign up with:</p>
-                        <button type="submit" class="btn btn-primary btn-block mb-4"
-                        style={{backgroundColor: "hsl(189, 78%, 45%)"}}>
-                        Sign up
-                        </button>
+                        <a href="/signup" class="btn btn-primary btn-block mb-4" 
+                        style={{backgroundColor: "hsl(189, 78%, 45%)"}}>Sign Up</a>
                     </form>
                     </div>
                 </div>
