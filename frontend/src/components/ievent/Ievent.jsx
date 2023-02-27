@@ -2,11 +2,18 @@ import React from 'react';
 import * as Icon from 'react-bootstrap-icons';
 import './ievent.css';
 
+// export default class Ievent extends React.Component { render() { return ( )}}
 const Ievent = () => {
+
+    // Create constructor for class.
+    // constructor(props) {
+    //     super(props);
+    // }
+
   return (
     <div class="container">
         <div class="row">
-            <a href="/user" class="stretched-link back">
+            <a href="/user" class="back">
                 <Icon.HouseAddFill/>
                 Events at *University Name*
             </a>
@@ -19,6 +26,7 @@ const Ievent = () => {
         </div>
         <div class="row">
             <div class="col-lg-8" id="event-single">
+            {/*We can include a description as such once made a class {this.props.description} */ }
             The 2023 Florida Folklore Society annual meeting will take place on February 24, 2023.
             It is a hybrid event, with some portions online and others in person. This years theme is: 
             Folklorists at Work and Networking: Approaches to Researching and Promoting Folklore in 
@@ -51,7 +59,7 @@ const Ievent = () => {
                         https://www.eventbrite.com/e/florida-folklore-society-annual-meeting-2023-virtual-in-person-tickets-422845059957 
                         </p>
                     </div>
-                    <a href="https://floridafolkloresociety.org" class="btn btn-primary w-100 stretched-link"
+                    <a href="https://floridafolkloresociety.org" class="btn btn-primary w-100"
                     target="_blank" rel="noopener">Register Now
                     <Icon.BoxArrowUpRight/>
                     </a>

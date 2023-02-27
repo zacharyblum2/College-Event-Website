@@ -9,6 +9,9 @@ const Rightv = () => {
     <Router> 
       <div>
         <Route exact path='/user'>
+          {/* Only display if the user is of type admin, we should pass JSON to each page
+              and then verify if user is admin status. If so make this button display.*/}
+          <a href="/createevent" class="create hidden btn btn-success">Create event</a>
           <Cal/>
         </Route>
         

@@ -14,3 +14,4 @@ export {default as Unicard} from './unicard/Unicard';
 export {default as Rso} from './rso/Rso';
 export {default as Ievent} from './ievent/Ievent';
 export {default as Createrso} from './createrso/Createrso';
+export {default as Comment} from './comment/Comment';
