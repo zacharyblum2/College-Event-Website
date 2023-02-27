@@ -12,3 +12,4 @@ export {default as Cal} from './cal/Cal';
 export {default as Card} from './card/Card';
 export {default as Unicard} from './unicard/Unicard';
 export {default as Rso} from './rso/Rso';
+export {default as Ievent} from './ievent/Ievent';
