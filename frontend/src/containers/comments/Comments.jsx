@@ -3,11 +3,12 @@ import './comments.css';
 
 import { Comment } from '../../components';
 
-// Get all of the comment data using API. 
-// const comments = [
-    // Maybe I can pass full name instead by getting it with API before passing comments.
-    // {user_id: 'id', description: 'blah blah blah', rating: '5'}
-// ]
+
+const comments = [
+    { name: 'Martha Stewart', description: 'It was alright', rating: '2'},
+    { name: 'LeBron James', description: 'It was okay', rating: '3'},
+    { name: 'Martha Steward', description: 'I loved it!', rating: '4'},
+]
 
 const Comments = () => {
   return (
@@ -21,8 +22,10 @@ const Comments = () => {
                     <label class="form-label" for="addANote">+ Add a note</label>
                 </div>
 
-                <Comment/>
-                {/* comments.map((element) => <Comment user={element.user} description={element.description} rating={element.rating} />*/}
+                {
+                comments.map((element) => <Comment name={element.name} description={element.description} rating={element.rating}/>)
+                }   
+
                 </div>
             
             </div>
