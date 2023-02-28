@@ -1,6 +1,8 @@
 import React from 'react';
 import './usernav.css';
 
+// How can I pass the user, user_id and their university name to each page? 
+
 const Usernav = () => {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark justify-content-between">
