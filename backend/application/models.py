@@ -26,7 +26,7 @@ class Users(models.Model):
     user_type = models.IntegerField()
 
 class RSOS(models.Model):
-    name = models.CharField(max_length=20, primary_key=True, default="")
+    name = models.CharField(max_length=20, primary_key=True)
     admin = models.ForeignKey('Users', on_delete=models.CASCADE)
 
 class Views(models.Model):
