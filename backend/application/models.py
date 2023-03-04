@@ -21,6 +21,7 @@ class Belongs(models.Model):
 
 class Users(models.Model):
     user_id = models.IntegerField(primary_key=True)
+    name = models.TextField(max_length=512, default='00000000')
     password = models.TextField(max_length=512)
     email = models.TextField(max_length=512)
     user_type = models.IntegerField()

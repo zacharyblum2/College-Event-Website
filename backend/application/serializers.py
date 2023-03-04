@@ -4,7 +4,7 @@ from .models import *
 class Users_serializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ('user_id', 'password', 'email', 'user_type')
+        fields = ('user_id', 'name', 'password', 'email', 'user_type')
 
 class RSOS_serializer(serializers.ModelSerializer):
     class Meta:
