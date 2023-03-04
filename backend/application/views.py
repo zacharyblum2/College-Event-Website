@@ -29,6 +29,8 @@ def Users_login(request):
     #Frontend give me username and password
     #if exists return user_id, name, university name, user_type
 
+    #TODO: Return the University that the user belongs to
+
     if request.method == "POST":
         ret = {}
         ret["error"] = ""
