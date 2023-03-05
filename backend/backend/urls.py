@@ -25,4 +25,5 @@ router.register(r'rsos', views.RSOS_view, 'Rsos')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/login/', views.Users_login),
 ]
