@@ -1,0 +1,17 @@
+export {default as Footer} from './footer/Footer';
+export {default as NavbarComp} from './navbarcomp/NavbarComp';
+export {default as Who} from './who/Who';
+export {default as Universities} from './universities/Universities';
+export {default as Login} from './login/Login';
+export {default as Signup} from './signup/Signup';
+export {default as Register} from './register/Register';
+export {default as Usernav} from './usernav/Usernav';
+export {default as Userfoot} from './userfoot/Userfoot';
+export {default as Header} from './header/Header';
+export {default as Cal} from './cal/Cal';
+export {default as Card} from './card/Card';
+export {default as Unicard} from './unicard/Unicard';
+export {default as Rso} from './rso/Rso';
+export {default as Ievent} from './ievent/Ievent';
+export {default as Createrso} from './createrso/Createrso';
+export {default as Comment} from './comment/Comment';

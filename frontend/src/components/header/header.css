@@ -1,0 +1,26 @@
+.bot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 300px;
+}
+
+.tabs {
+    width: 100%;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.hText {
+    display: flex;
+    margin: 0 40px 0;
+}

@@ -1,0 +1,31 @@
+.uni {
+    background-color: hsl(189, 78%, 45%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 20px 0px;
+    height: 400px;
+}
+
+.logos {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.list {
+    display: flex;
+    gap: 40px;
+}
+.logo {
+    width: 60px;
+    height: 60px
+}
+
+.text {
+    margin: 0 0 15px;
+}

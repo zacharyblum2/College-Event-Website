@@ -1,0 +1,12 @@
+.view {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 100px;
+}

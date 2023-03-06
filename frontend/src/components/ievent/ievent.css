@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.location-type-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
