@@ -2,9 +2,9 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .serializers import *
 from .models import Users
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, BadRequest
 import json
 from .customExceptions import IncorrectPassword
 
@@ -51,12 +51,19 @@ def Users_login(request):
             ret["data"]['user_id'] = str(user.user_id)
             ret["data"]['name'] = str(user.name)
             ret["data"]['user_type'] = int(user.user_type)
-
+        
+        except ValueError:
+            return HttpResponseBadRequest('Please enter a valid User ID and password.'.\
+                                      format(request.method), status=400)
+        #Please make sure this is above incorrect password, we want this to throw first.
         except ObjectDoesNotExist:
-            ret["error"] = "User not found"
+            return HttpResponseBadRequest('User not found.'.\
+                                      format(request.method), status=401)
         except MultipleObjectsReturned:
-            ret["error"] = "Found multiple users with this information"
+            return HttpResponseBadRequest('Found multiple users with this information.'.\
+                                      format(request.method), status=400)
         except IncorrectPassword:
-            ret["error"] = "Wrong Password"
+            return HttpResponseBadRequest('Wrong password.'.\
+                                      format(request.method), status=401)
 
     return JsonResponse(ret)
