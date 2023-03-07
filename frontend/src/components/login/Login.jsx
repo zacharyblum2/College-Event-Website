@@ -18,12 +18,12 @@ const Login = () => {
                 </div>
                 <div class="form-outline mb-4">
                     <input type="email" id="form3Example3" class="form-control form-control-lg"
-                    placeholder="Enter a valid email address" />
+                    placeholder="Enter a valid email address" required/>
                     <label class="form-label" for="form3Example3">Email address</label>
                 </div>
                 <div class="form-outline mb-3">
                     <input type="password" id="form3Example4" class="form-control form-control-lg"
-                    placeholder="Enter password" />
+                    placeholder="Enter password" required/>
                     <label class="form-label" for="form3Example4">Password</label>
                 </div>
 
