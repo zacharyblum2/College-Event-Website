@@ -7,6 +7,19 @@ const Login = () => {
     var loginPassword;
 
     const [message, setMessage] = useState("");
+
+    function isJSON(str) {
+        try 
+        {
+            JSON.parse(res);
+        }
+        catch (e)
+        {
+            return false;
+        }
+
+        return true;
+    }
     
     const doLogin = async event =>
     {
@@ -19,19 +32,20 @@ const Login = () => {
             const response = await 
             // Check if correct url for api.
             // How can I test this?
-            fetch('http://localhost:3000/api/login/',
+            fetch('http://127.0.0.1:8000/api/login/',
             {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
+            
+            let r = await response.text();
 
-            var res = JSON.parse(await response.text());
-
-            // What will the API return? What is raise IncorrectPassword, how can I tell?
-            if (res.id <= 0)
+            // If not JSON, it is an error, set message to it.
+            if (!isJSON(r))
             {
-                setMessage('User/Password combination incorrect');
+                setMessage(r);
             }
-            else
+            else 
             {
-                // TODO: Add university in this object, once API updates.
+                let res = JSON.parse(r)
+
                 let user = {name: res.data.name, id: res.data.id, type: res.data.type}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
