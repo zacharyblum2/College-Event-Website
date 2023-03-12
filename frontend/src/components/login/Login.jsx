@@ -46,6 +46,7 @@ const Login = () => {
             {
                 let res = JSON.parse(r)
 
+                // Add university to this later.
                 let user = {name: res.data.name, id: res.data.id, type: res.data.type}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
@@ -79,12 +80,12 @@ const Login = () => {
                 </div>
                 <div class="form-outline mb-4">
                     <input type="email" id="form3Example3" class="form-control form-control-lg"
-                    placeholder="Enter a valid email address" ref={ (c) => loginEmail = c} />
+                    placeholder="Enter a valid email address" required ref={ (c) => loginEmail = c} />
                     <label class="form-label" for="form3Example3" >Email address</label>
                 </div>
                 <div class="form-outline mb-3">
                     <input type="password" id="form3Example4" class="form-control form-control-lg"
-                    placeholder="Enter password" ref={ (c) => loginPassword = c}/>
+                    placeholder="Enter password" required ref={ (c) => loginPassword = c}/>
                     <label class="form-label" for="form3Example4">Password</label>
                 </div>
 
