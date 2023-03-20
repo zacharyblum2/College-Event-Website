@@ -3,8 +3,8 @@ import './login.css';
 
 const Login = () => {
 
-    let loginEmail;
-    let loginPassword;
+    var loginEmail;
+    var loginPassword;
 
     const [message, setMessage] = useState("");
 
@@ -36,18 +36,15 @@ const Login = () => {
             {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
             
             let r = await response.text();
-            
 
             // If not JSON, it is an error, set message to it.
             if (!isJSON(r))
             {
-                console.log(r);
                 setMessage(r);
             }
             else 
             {
                 let res = JSON.parse(r)
-                console.log(r);
 
                 // Add university to this later.
                 let user = {name: res.data.name, id: res.data.id, type: res.data.type}
@@ -60,7 +57,6 @@ const Login = () => {
         }
         catch (e)
         {
-            console.log(e);
             alert(e.toString());
             return;
         }
