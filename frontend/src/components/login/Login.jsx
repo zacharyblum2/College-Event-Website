@@ -23,7 +23,7 @@ const Login = () => {
     
     const doLogin = async event =>
     {
-        let obj = {email: loginEmail.value, password: loginPassword.value};
+        let obj = {user_id: loginEmail.value, password: loginPassword.value};
         let js = JSON.stringify(obj);
 
         // Use the API's here, we will pass it js. 
@@ -32,8 +32,8 @@ const Login = () => {
             const response = await 
             // Check if correct url for api.
             // How can I test this?
-            fetch('https://127.0.0.1:8000/api/login/',
-            {method:'POST', body:js, headers:{'Content-Type': 'application/json'}});
+            fetch('http://127.0.0.1:8000/api/login/',
+            {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
             
             let r = await response.text();
 

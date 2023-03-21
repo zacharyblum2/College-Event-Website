@@ -29,8 +29,8 @@ const Signup = () => {
     try
     {
       const response = await
-      fetch('http://127.0.0.1:8000/api/signup', 
-      {method: 'POST', body: js, headers: {'Content Type': 'application/json'}});
+      fetch('http://127.0.0.1:8000/api/signup/',
+            {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
       let r = await response.text();
 
