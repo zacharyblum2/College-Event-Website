@@ -98,12 +98,12 @@ const Login = () => {
                     <a href="#!" class="text-body">Forgot password?</a>
                 </div>
 
-                <div class="text-center text-lg-start mt-4 pt-2">
+                <div class="text-center text-lg-start mt-4 pt-2" id="login">
+                    <span id="loginResult">{message}</span>
                     <button class="btn btn-success btn-lg" onClick={doLogin}>Login</button>
                     <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#signupContainer"
                         style={{color: "#28a745"}}>Register</a></p>
                 </div>
-                <span id="loginResult">{message}</span>
                 </form>
             </div>
             </div>

@@ -5,3 +5,8 @@
 img {
     border-radius: 15px;
 }
+
+#login {
+    display: flex;
+    flex-direction: column;
+}
