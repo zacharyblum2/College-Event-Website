@@ -9,4 +9,10 @@ img {
 #login {
     display: flex;
     flex-direction: column;
+    gap: 14px;
+}
+
+#loginResult {
+    color: red;
+    font-weight: bold;
 }
