@@ -8,19 +8,6 @@ const Signup = () => {
 
   const [message, setMessage] = useState("");
 
-  function isJSON(str) {
-    try 
-    {
-        JSON.parse(str);
-    }
-    catch (e)
-    {
-        return false;
-    }
-
-    return true;
-  }
-
   const doSignup = async event =>
   {
     let obj = {user_id: 460, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
