@@ -27,8 +27,9 @@ class Users(models.Model):
     user_type = models.IntegerField()
 
 class RSOS(models.Model):
-    name = models.CharField(max_length=20, primary_key=True)
-    admin = models.ForeignKey('Users', on_delete=models.CASCADE)
+	id = models.IntegerField(primary_key=True)
+	name = models.CharField(max_length=20)
+	admin = models.ForeignKey('Users', on_delete=models.CASCADE)
 
 class Views(models.Model):
     user = models.ForeignKey('Users', on_delete=models.CASCADE, primary_key=True)
