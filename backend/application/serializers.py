@@ -9,4 +9,4 @@ class Users_serializer(serializers.ModelSerializer):
 class RSOS_serializer(serializers.ModelSerializer):
     class Meta:
         model = RSOS
-        fields = ('name', 'admin')
+        fields = ('rso_id', 'name', 'admin')

@@ -12,11 +12,11 @@ class Creates(models.Model):
 
 class Joins(models.Model):
     user = models.ForeignKey('Users', on_delete=models.CASCADE, primary_key=True)
-    name = models.ForeignKey('RSOS', null=True, on_delete=models.SET_NULL, max_length=20)
+    name = models.ForeignKey('RSOS', on_delete=models.CASCADE, max_length=20)
 
 class Belongs(models.Model):
     user = models.ForeignKey('Users', on_delete=models.CASCADE, primary_key=True)
-    name = models.ForeignKey('RSOS', null=True, on_delete=models.SET_NULL, max_length=20)
+    name = models.ForeignKey('RSOS', on_delete=models.CASCADE, max_length=20)
     uni_name = models.ForeignKey('Universities', on_delete=models.CASCADE, max_length=10)
 
 class Users(models.Model):
@@ -27,7 +27,7 @@ class Users(models.Model):
     user_type = models.IntegerField()
 
 class RSOS(models.Model):
-	id = models.IntegerField(primary_key=True)
+	rso_id = models.IntegerField(primary_key=True)
 	name = models.CharField(max_length=20)
 	admin = models.ForeignKey('Users', on_delete=models.CASCADE)
 
@@ -37,7 +37,7 @@ class Views(models.Model):
 
 class Created_By(models.Model):
     user = models.ForeignKey('Users', on_delete=models.CASCADE, primary_key=True)
-    name = models.ForeignKey('RSOS', null=True, on_delete=models.SET_NULL, max_length=20)
+    name = models.ForeignKey('RSOS', on_delete=models.CASCADE, max_length=20)
     event = models.ForeignKey('Events', null=True, on_delete=models.SET_NULL)
 
 class Comments(models.Model):
