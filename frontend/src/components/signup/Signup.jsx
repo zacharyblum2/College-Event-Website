@@ -8,9 +8,11 @@ const Signup = () => {
 
   const [message, setMessage] = useState("");
 
+  let unis = [];
+
   const doSignup = async event =>
   {
-    let obj = {user_id: 460, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
+    let obj = {user_id: 5, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
     let js = JSON.stringify(obj);
     console.log(obj);
 
@@ -53,8 +55,23 @@ const Signup = () => {
     }
 }
 
+const searchUnis = async event =>
+{
+  // Blank get request of 'http://127.0.0.1:8000/api/universities/'
+  // Store results inside unis
+  // Map unis results as options.
+  const response = await fetch('http://127.0.0.1:8000/api/universities/',
+            {method:'GET', headers: {'Content-Type': 'application/json'}});
+
+  let r = await response.text();
+
+  let res = JSON.parse(r);
+
+  console.log(res);
+}
+
   return (
-    <section class="vh-100">
+    <section class="vh-100" onLoad={searchUnis}>
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-11">
@@ -69,22 +86,34 @@ const Signup = () => {
 
                       <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
-                          <input type="text" id="form3Example1c" class="form-control" required ref={(c) => signupName = c}/>
                           <label class="form-label" for="form3Example1c">Your Name</label>
+                          <input type="text" id="form3Example1c" class="form-control" required ref={(c) => signupName = c}/>
                         </div>
                       </div>
 
                       <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
-                          <input type="email" id="form3Example3c" class="form-control" required ref={(c) => signupEmail = c}/>
                           <label class="form-label" for="form3Example3c">Your Email</label>
+                          <input type="email" id="form3Example3c" class="form-control" required ref={(c) => signupEmail = c}/> 
+                        </div>
+                      </div>
+                      
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                          <label class="form-label" for="form3Example3c">Your University</label>
+                          <select class="form-control" name="universities" id="universities" required>
+                            <option value="UA">University of Alabama</option>
+                            <option value="UF">University of Florida</option>
+                            <option value="OSU">Ohio State University</option>
+                            <option value="UMich">University of Michigan</option>
+                          </select>
                         </div>
                       </div>
 
                       <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
-                          <input type="password" minlength="5" id="form3Example4c" class="form-control" required ref={(c) => signupPassword = c}/>
                           <label class="form-label" for="form3Example4c">Password</label>
+                          <input type="password" minlength="5" id="form3Example4c" class="form-control" required ref={(c) => signupPassword = c}/>
                         </div>
                       </div>
                       
