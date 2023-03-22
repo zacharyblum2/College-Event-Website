@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CEW',
-		'USER': 'doadmin',
-		'PASSWORD': 'AVNS_Hh1Ykg43aAcw-DEMa3D',
-		'HOST': 'cew-mysql-server-do-user-13309544-0.b.db.ondigitalocean.com',
-		'PORT': '25060'
+        'NAME': 'cew',
+		'USER': 'root',
+		'PASSWORD': 'password',
+		'HOST': '127.0.0.1',
+		'PORT': '3306'
     }
 }
 
