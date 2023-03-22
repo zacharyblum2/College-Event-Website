@@ -99,7 +99,7 @@ const Login = () => {
                 </div>
 
                 <div class="text-center text-lg-start mt-4 pt-2">
-                    <a class="btn btn-success btn-lg" onClick={doLogin}>Login</a>
+                    <button class="btn btn-success btn-lg" onClick={doLogin}>Login</button>
                     <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#signupContainer"
                         style={{color: "#28a745"}}>Register</a></p>
                 </div>

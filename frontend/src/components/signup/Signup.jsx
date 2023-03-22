@@ -111,7 +111,7 @@ const Signup = () => {
 
                       <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4" id="result">
                         <span id="signupResult">{message}</span>
-                        <a class="btn btn-success btn-lg" onClick={doSignup}>Register</a>
+                        <button class="btn btn-success btn-lg" onClick={doSignup}>Register</button>
                       </div>
                       
                     </form>
