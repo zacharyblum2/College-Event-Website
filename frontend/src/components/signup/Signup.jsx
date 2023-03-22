@@ -23,38 +23,45 @@ const Signup = () => {
 
   const doSignup = async event =>
   {
-    let obj = {name: signupName.value, email: signupEmail.value, password: signupPassword.value};
+    let obj = {user_id: 460, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
     let js = JSON.stringify(obj);
+    console.log(obj);
 
     try
     {
-      const response = await
-      fetch('http://127.0.0.1:8000/api/signup/',
+      const response = await fetch('http://127.0.0.1:8000/api/users/',
             {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+        
+      console.log('called');
 
       let r = await response.text();
 
-      if (!isJSON(r))
+      console.log("await response");
+      let res = JSON.parse(r);
+
+      console.log(Object.keys(res).length);
+
+      // Then we have an error
+      if ((Object.keys(res).length) === 1)
       {
-        setMessage(r);
+        console.log(res.user_id[0]);
+        setMessage(res.user_id[0]);
       }
       else
       {
-          let res = JSON.parse(r);
+        // Add university to this later.
+        let user = {name: res.name[0], id: res.user_id[0], type: res.user_type[0]}
+            
+        // Store information in local storage to be accessed by other windows.
+        localStorage.setItem('user_data', JSON.stringify(user));
 
-          // Add university to this later.
-          let user = {name: res.data.name, id: res.data.id, type: res.data.type}
-          
-          // Store information in local storage to be accessed by other windows.
-          localStorage.setItem('user_data', JSON.stringify(user));
-
-          setMessage('');
-          window.location.href='/user';
-        }
+        setMessage('');
+        window.location.href='/user';
+      }
     }
     catch (e)
     {
-      alert(e.toString());
+      console.log(e.toString());
       return;
     }
 }
@@ -74,7 +81,6 @@ const Signup = () => {
                     <form class="mx-1 mx-md-4">
 
                       <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                           <input type="text" id="form3Example1c" class="form-control" required ref={(c) => signupName = c}/>
                           <label class="form-label" for="form3Example1c">Your Name</label>
@@ -82,7 +88,6 @@ const Signup = () => {
                       </div>
 
                       <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                           <input type="email" id="form3Example3c" class="form-control" required ref={(c) => signupEmail = c}/>
                           <label class="form-label" for="form3Example3c">Your Email</label>
@@ -90,7 +95,6 @@ const Signup = () => {
                       </div>
 
                       <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                           <input type="password" minlength="5" id="form3Example4c" class="form-control" required ref={(c) => signupPassword = c}/>
                           <label class="form-label" for="form3Example4c">Password</label>
@@ -98,24 +102,18 @@ const Signup = () => {
                       </div>
 
                       <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                           <input type="password" id="form3Example4cd" class="form-control" required/>
                           <label class="form-label" for="form3Example4cd">Repeat your password</label>
                         </div>
+                        
                       </div>
 
-                      <div class="form-check d-flex justify-content-center mb-5">
-                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                        <label class="form-check-label" for="form2Example3">
-                          I agree all statements in <a href="#!">Terms of service</a>
-                        </label>
+                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4" id="result">
+                        <span id="signupResult">{message}</span>
+                        <a class="btn btn-success btn-lg" onClick={doSignup}>Register</a>
                       </div>
-
-                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <a href="/user" class="btn btn-success btn-lg" onClick={doSignup}>Register</a>
-                      </div>
-                      <span id="signupResult">{message}</span>
+                      
                     </form>
 
                   </div>

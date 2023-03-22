@@ -40,6 +40,7 @@ const Login = () => {
             // If not JSON, it is an error, set message to it.
             if (!isJSON(r))
             {
+                console.log(r);
                 setMessage(r);
             }
             else 
@@ -68,10 +69,8 @@ const Login = () => {
     <section class="">
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-md-9 col-lg-6 col-xl-5">
-                {/** This image can be removed and replaced with a stock university image*/}
-                <img src="C:\Users\zach\College-Event-Website\frontend\public\login.jpg"
-                class="img-fluid" alt="Sample image"/>
+            <div class="col-md-9 col-lg-6 col-xl-5" id="image">
+                <img src="./stock.jpeg" class="img-fluid" alt="Sample image"/>
             </div>
             <div class="col-md-8 col-lg-6 col-xl-3 offset-xl-1">
                 <form>
