@@ -5,6 +5,7 @@ const Signup = () => {
   let signupName;
   let signupEmail;
   let signupPassword;
+  let signupUni;
 
   const [message, setMessage] = useState("");
 
@@ -12,7 +13,7 @@ const Signup = () => {
 
   const doSignup = async event =>
   {
-    let obj = {user_id: 5, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
+    let obj = {name: signupName.value, password: signupPassword.value, uni: signupUni.value, email: signupEmail.value, user_type: 0};
     let js = JSON.stringify(obj);
     console.log(obj);
 
@@ -101,7 +102,7 @@ const searchUnis = async event =>
                       <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                           <label class="form-label" for="form3Example3c">Your University</label>
-                          <select class="form-control" name="universities" id="universities" required>
+                          <select class="form-control" name="universities" id="universities" required ref={(c) => signupUni = c}>
                             <option value="UA">University of Alabama</option>
                             <option value="UF">University of Florida</option>
                             <option value="OSU">Ohio State University</option>
