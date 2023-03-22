@@ -1,0 +1,10 @@
+#result {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#signupResult {
+    color: red;
+    font-weight: bold;
+}

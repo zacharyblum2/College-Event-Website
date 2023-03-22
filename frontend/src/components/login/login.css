@@ -1,0 +1,18 @@
+#image {
+    margin: 50px;
+}
+
+img {
+    border-radius: 15px;
+}
+
+#login {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#loginResult {
+    color: red;
+    font-weight: bold;
+}
