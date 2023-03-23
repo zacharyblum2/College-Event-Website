@@ -36,7 +36,7 @@ const Signup = () => {
       else
       {
         // Add university to this later.
-        let user = {name: res.name, id: res.user_id, type: res.user_type}
+        let user = {name: res.name, id: res.user_id, type: res.user_type, uni: signupUni}
             
         // Store information in local storage to be accessed by other windows.
         localStorage.setItem('user_data', JSON.stringify(user));

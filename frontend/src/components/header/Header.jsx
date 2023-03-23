@@ -5,11 +5,12 @@ import './header.css';
 
 const Header = () => {
     const [key, setKey] = useState('home');
+    let user_data = JSON.parse(localStorage.getItem("user_data"));
   
     return (
         <>
             <div className="hText">
-                <h2>EventsAt *University Name*</h2>
+                <h2>EventsAt: {user_data.uni}</h2>
             </div>
             <div className="container">
                 <div className="bot">
