@@ -46,9 +46,10 @@ const Login = () => {
             else 
             {
                 let res = JSON.parse(r)
+                alert(r);
 
                 // Add university to this later.
-                let user = {name: res.data.name, id: res.data.id, type: res.data.type}
+                let user = {name: res.data.name, id: res.data.user_id, type: res.data.user_type}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
                 // Pass to new page.
