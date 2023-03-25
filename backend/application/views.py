@@ -35,12 +35,12 @@ def Users_login(request):
 
         body_unicode = request.body.decode("utf-8")
         body = json.loads(body_unicode)
-        req_user_id = str(body["user_id"])
+        req_email = str(body["email"])
         req_password = str(body["password"])
 
         try:
             #try pulling out the user and if you get it then creating the return json body
-            user = Users.objects.get(user_id=req_user_id)
+            user = Users.objects.get(email=req_email)
             
             if(req_password != str(user.password)):
                 raise IncorrectPassword
