@@ -4,6 +4,8 @@ import './comments.css';
 import { Comment } from '../../components';
 
 
+// Load all information in regarding comments, including user_id. 
+// For each comment, check if localStorage(user).user_id == comment.id, if so display edit or delete.
 const comments = [
     { name: 'Martha Stewart', description: 'It was alright', rating: '2'},
     { name: 'LeBron James', description: 'It was okay', rating: '3'},

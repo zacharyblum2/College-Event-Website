@@ -4,6 +4,9 @@ import './comment.css';
 // Get data from an api.
 // Create a card for each data point. Display card. 
 
+// Store user_id of who made the comment, if this matches the logged in user
+// display an edit and delete comment button. 
+
 export default class Comments extends React.Component {
     
     constructor(props) {
