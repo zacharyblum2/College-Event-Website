@@ -7,6 +7,8 @@ import './comment.css';
 // Store user_id of who made the comment, if this matches the logged in user
 // display an edit and delete comment button. 
 
+/// If user_id == commenter_id, unhide edit and delete.
+
 export default class Comments extends React.Component {
     
     constructor(props) {
@@ -32,8 +34,8 @@ export default class Comments extends React.Component {
                             <p class="small text-muted mb-0">Rating: </p>
                             <p class="small text-muted mb-0">{this.state.rating}</p>
                         </div>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-primary">Delete</button>
+                        <button class="btn btn-primary hidden">Edit</button>
+                        <button class="btn btn-primary hidden">Delete</button>
                     </div>
                 </div>  
             </div>  
