@@ -32,6 +32,8 @@ export default class Comments extends React.Component {
                             <p class="small text-muted mb-0">Rating: </p>
                             <p class="small text-muted mb-0">{this.state.rating}</p>
                         </div>
+                        <button class="btn btn-primary">Edit</button>
+                        <button class="btn btn-primary">Delete</button>
                     </div>
                 </div>  
             </div>  

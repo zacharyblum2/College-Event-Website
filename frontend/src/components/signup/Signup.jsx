@@ -13,7 +13,7 @@ const Signup = () => {
   {
     // Correct object, change later.
     // let obj = {name: signupName.value, password: signupPassword.value, uni: signupUni.value, email: signupEmail.value, user_type: 0};
-    let obj = {user_id: 26, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
+    let obj = {user_id: 1, name: signupName.value, password: signupPassword.value, email: signupEmail.value, uni: signupUni.value, user_type: 0};
     let js = JSON.stringify(obj);
 
     try
@@ -36,7 +36,7 @@ const Signup = () => {
       else
       {
         // Add university to this later.
-        let user = {name: res.name, id: res.user_id, type: res.user_type, uni: signupUni}
+        let user = {name: res.name, id: res.user_id, type: res.user_type, uni: signupUni.value}
             
         // Store information in local storage to be accessed by other windows.
         localStorage.setItem('user_data', JSON.stringify(user));
