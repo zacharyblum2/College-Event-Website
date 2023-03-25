@@ -34,9 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'corsheaders',
-	'rest_framework',
-	'application'
+    'corsheaders',
+    'rest_framework',
+    'application'
 ]
 
 MIDDLEWARE = [
@@ -47,12 +47,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'corsheaders.middleware.CorsMiddleware',
-	'django.middleware.common.CommonMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 # Allowing CORS for all since we're using localhost
-CORS_ORIGIN_ALLOW_ALL= True
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -82,10 +82,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cew',
-		'USER': 'root',
-		'PASSWORD': 'password',
-		'HOST': '127.0.0.1',
-		'PORT': '3306'
+                'USER': 'root',
+                'PASSWORD': 'pword231*1',
+                'HOST': '127.0.0.1',
+                'PORT': '3306'
     }
 }
 
@@ -134,5 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Allow CORS for localhost
 
 CORS_ORIGIN_WHITELIST = [
-	'http://localhost:3000'
+    'http://localhost:3000'
 ]

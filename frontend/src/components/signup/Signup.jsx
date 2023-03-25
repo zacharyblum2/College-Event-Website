@@ -5,27 +5,24 @@ const Signup = () => {
   let signupName;
   let signupEmail;
   let signupPassword;
+  let signupUni;
 
   const [message, setMessage] = useState("");
 
-  let unis = [];
-
   const doSignup = async event =>
   {
-    let obj = {user_id: 5, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
+    // Correct object, change later.
+    // let obj = {name: signupName.value, password: signupPassword.value, uni: signupUni.value, email: signupEmail.value, user_type: 0};
+    let obj = {user_id: 26, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
     let js = JSON.stringify(obj);
-    console.log(obj);
 
     try
     {
       const response = await fetch('http://127.0.0.1:8000/api/users/',
             {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
         
-      console.log('called');
 
       let r = await response.text();
-
-      console.log("await response");
       let res = JSON.parse(r);
 
       console.log(Object.keys(res).length);
@@ -39,7 +36,7 @@ const Signup = () => {
       else
       {
         // Add university to this later.
-        let user = {name: res.name[0], id: res.user_id[0], type: res.user_type[0]}
+        let user = {name: res.name, id: res.user_id, type: res.user_type, uni: signupUni}
             
         // Store information in local storage to be accessed by other windows.
         localStorage.setItem('user_data', JSON.stringify(user));
@@ -71,7 +68,7 @@ const searchUnis = async event =>
 }
 
   return (
-    <section class="vh-100" onLoad={searchUnis}>
+    <section class="vh-100">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-11">
@@ -101,7 +98,7 @@ const searchUnis = async event =>
                       <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                           <label class="form-label" for="form3Example3c">Your University</label>
-                          <select class="form-control" name="universities" id="universities" required>
+                          <select class="form-control" name="universities" id="universities" required ref={(c) => signupUni = c}>
                             <option value="UA">University of Alabama</option>
                             <option value="UF">University of Florida</option>
                             <option value="OSU">Ohio State University</option>
@@ -113,7 +110,7 @@ const searchUnis = async event =>
                       <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                           <label class="form-label" for="form3Example4c">Password</label>
-                          <input type="password" minlength="5" id="form3Example4c" class="form-control" required ref={(c) => signupPassword = c}/>
+                          <input type="password" minLength="5" id="form3Example4c" class="form-control" required ref={(c) => signupPassword = c}/>
                         </div>
                       </div>
                       
