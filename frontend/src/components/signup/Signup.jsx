@@ -13,7 +13,7 @@ const Signup = () => {
   {
     // Correct object, change later.
     // let obj = {name: signupName.value, password: signupPassword.value, uni: signupUni.value, email: signupEmail.value, user_type: 0};
-    let obj = {user_id: 22, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
+    let obj = {user_id: 26, name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0};
     let js = JSON.stringify(obj);
 
     try
