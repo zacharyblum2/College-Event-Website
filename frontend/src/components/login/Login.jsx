@@ -23,7 +23,7 @@ const Login = () => {
     
     const doLogin = async event =>
     {
-        let obj = {user_id: loginEmail.value, password: loginPassword.value};
+        let obj = {email: loginEmail.value, password: loginPassword.value};
         let js = JSON.stringify(obj);
 
         // Use the API's here, we will pass it js. 
