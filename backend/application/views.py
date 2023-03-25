@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, BadRequest
 import json
 from .customExceptions import IncorrectPassword
+from django.views.generic.edit import DeleteView
 
 #Sample for how to parse data out of a request body
     # returnBody = str(request.body) + "\n" + str(request.scheme) + "\n" + str(request.path) + "\n" + str(request.content_type)
@@ -19,10 +20,6 @@ from .customExceptions import IncorrectPassword
 class Users_view(viewsets.ModelViewSet):
     serializer_class = Users_serializer
     queryset = Users.objects.all()
-
-class RSOS_view(viewsets.ModelViewSet):
-    serializer_class = RSOS_serializer
-    queryset = RSOS.objects.all()
 
 @csrf_exempt
 def Users_login(request):
@@ -67,3 +64,18 @@ def Users_login(request):
                                       format(request.method), status=401)
 
     return JsonResponse(ret)
+
+class RSOS_view(viewsets.ModelViewSet):
+    serializer_class = RSOS_serializer
+    queryset = RSOS.objects.all()
+
+class Comments_view(viewsets.ModelViewSet):
+    serializer_class = Comments_serializer
+    queryset = Comments.objects.all()
+
+class Events_view(viewsets.ModelViewSet):
+    serializer_class = Events_serializer
+    queryset = Events.objects.all()
+
+
+

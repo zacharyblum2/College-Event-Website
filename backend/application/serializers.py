@@ -10,3 +10,14 @@ class RSOS_serializer(serializers.ModelSerializer):
     class Meta:
         model = RSOS
         fields = ('rso_id', 'name', 'admin')
+
+class Comments_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = ('event', 'user', 'comment_id', 'body')
+
+class Events_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Events
+        fields = ('event_id', 'creator', 'host_rso', 'date', 'time', 'email', 'event_type', 
+        'phone', 'longitude', 'latitude', 'loc_name')

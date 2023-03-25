@@ -45,7 +45,7 @@ class Comments(models.Model):
     user = models.ForeignKey('Users', on_delete=models.CASCADE)
     comment_id = models.IntegerField(primary_key=True)
     body = models.CharField(max_length=240)
-    rating = models.IntegerField()
+    rating = models.IntegerField(default='0')
 
 class Events(models.Model):
     event_id = models.IntegerField(primary_key=True)
