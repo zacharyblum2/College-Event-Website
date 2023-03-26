@@ -32,15 +32,15 @@ const Leftv = () => {
           <Route exact path='/rsos'>
             <div className="rsos">
               <div className="public">
-                <h2 class="h5">RSOs</h2>
+                <h2 class="h5">Joinable RSOs</h2>
                 {
-                rsos.map((rso) => <Rso name={rso.name} description={rso.description}/>)
+                rsos.map((rso) => <Rso name={rso.name} description={rso.description} part={false}/>)
                 }
               </div>
               <div className="your">
                 <h2 class="h5">Your RSOs</h2>
                 {
-                rsos.map((rso) => <Rso name={rso.name} description={rso.description}/>)
+                rsos.map((rso) => <Rso name={rso.name} description={rso.description} part={true}/>)
                 }
               </div>
             </div>
