@@ -17,10 +17,7 @@ const Event = () => {
   return (
       <>
         <Usernav/>
-        {
-          event.map((event) => <Ievent name={event.name} organizer={event.organizer} description={event.description} date={event.date} 
-                                time={event.time} email={event.email} phone={event.phone} location={event.loc_name}/>)
-        }
+        <Ievent/>
         <Comments/>
         <Userfoot/>
       </>

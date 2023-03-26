@@ -3,22 +3,9 @@ import * as Icon from 'react-bootstrap-icons';
 import './ievent.css';
 
 // export default class Ievent extends React.Component { render() { return ( )}}
-export default class Ievent extends React.Component {
+const Ievent = () => {
+    let eventInfo = JSON.parse(localStorage.getItem("eventInfo"));
 
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: props.name,
-            organizer: props.organizer,
-            description: props.description,
-            date: props.date,
-            time: props.time,
-            location: props.location
-        }
-    }
-
-    render() {
         return (
             <div class="container">
                 <div class="row">
@@ -28,46 +15,39 @@ export default class Ievent extends React.Component {
                     </a>
                 </div>
                 <div class="row">
-                    {this.state.name}
-                </div>
-                <div class="row">
-                    {this.state.date} at {this.state.time}
-                </div>
-                <div class="row">
+                    
                     <div class="col-lg-8" id="event-single">
-                    {this.state.description}
+                        <div class="row">
+                            <p class="h3">{eventInfo.name}</p>
+                        </div>
+                        <div class="row">
+                            <p class="h5">{eventInfo.date} at {eventInfo.time}</p>
+                        </div>
+                        <p>{eventInfo.description}</p>
                     </div>
                     <aside class="col-lg-4">
                         <div class="event-location hidden-md-down">
-                            <h2 class="h5">Locations:</h2>
+                            <h2 class="h5">Location</h2>
                         </div>
                         <div class="location-type-container d-flex mb-3">
-                            <span class="h5 font-weigth-normal d-block"> <Icon.PinMap/> {this.state.location}</span>
+                            <span class="h5 font-weigth-normal d-block"> <Icon.PinMap/> {eventInfo.location}</span>
                             <span class="event-location-url">
-                                <a href="https://goo.gl/maps/oT5mkQHCNKSZLCBu6">[ View Website ]</a>
+                                <a href="https://goo.gl/maps/oT5mkQHCNKSZLCBu6">[ View Location ]</a>
                             </span>
-                        </div>
-                        <div class="location-type-container d-flex mb-3">
-                            <span class="h5 font-weight-normal">Virtual</span>
-                            <span><a href="https://floridafolkloresociety.org" target="_blank">[ Open Virtual Location Link ]</a></span>
                         </div>
                         <div class="event-registration hidden-md-down card card-outline-primary my-4">
                             <div class="card-block">
                                 <h2 class="h5">Event Registration</h2>
-                                <p class="card-text">
-                                https://www.eventbrite.com/e/florida-folklore-society-annual-meeting-2023-virtual-in-person-tickets-422845059957 
-                                </p>
                             </div>
-                            <a href="https://floridafolkloresociety.org" class="btn btn-primary w-100"
-                            target="_blank" rel="noopener">Register Now
-                            <Icon.BoxArrowUpRight/>
-                            </a>
+                            <button id="register" class="btn btn-primary" target="_blank" rel="noopener">
+                                <p>Register Now <Icon.BoxArrowUpRight/></p>
+                            </button>
                         </div>
                         <div class="event-contact vcard hidden-md-down">
                             <h2 class="h5">Contact:</h2>
                             <div class="event-contact-info">
-                                <p class="h5 font-weight-normal">{this.state.organizer}</p>
-                                <a class="ga-event" href="mailto:Natalie.Underberg-Goode@ucf.edu">{this.state.email}</a>
+                                <p class="h5 font-weight-normal">{eventInfo.organizer}</p>
+                                <a class="ga-event" href="mailto:Natalie.Underberg-Goode@ucf.edu">{eventInfo.email}</a>
                             </div>
                         </div>
                         <div class="social mb-3">
@@ -86,5 +66,6 @@ export default class Ievent extends React.Component {
                 </div>
             </div>
           )
-    } 
 }
+
+export default Ievent

@@ -15,16 +15,25 @@ export default class Card extends React.Component {
       phone: props.phone,
       part: props.part
     }
+
+    // Allows functions to access this.state properties.
+    this.storeInformation = this.storeInformation.bind(this);
   }
 
   // Function to store event information locally, for individual event page to load it.
   storeInformation() {
+    console.log(this.state.name);
     let obj = {name: this.state.name, description: this.state.description, date: this.state.date, 
                time: this.state.time, location: this.state.location, email: this.state.email,
                phone: this.state.phone, part: this.state.part}
-
+    
+    console.log(JSON.stringify(obj));
+    localStorage.removeItem("eventInfo");
     localStorage.setItem("eventInfo", JSON.stringify(obj));
-  }
+
+    window.location.href='/event';
+  };;
+
   render() {
     return (
       <div>
@@ -36,7 +45,7 @@ export default class Card extends React.Component {
                   <p class="card-text">{this.state.description}</p>
                   
                   {/* This should link to a page with all of the event information */}
-                  <a href="/event" class="btn btn-success stretched-link" onClick={this.storeInformation()}>More Information</a>
+                  <button class="btn btn-success stretched-link" onClick={this.storeInformation}>More Information</button>
               </div>
           </div>
       </div>
