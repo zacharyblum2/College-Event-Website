@@ -29,4 +29,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/login/', views.Users_login),
+    path('api/register/', views.Users_register),
+    path('api/get_user_rsos/', views.get_user_rsos),
+    path('api/register_rso/', views.RSOS_register),
+    path('api/join_rso/', views.join_rso),
 ]

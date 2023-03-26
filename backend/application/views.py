@@ -6,7 +6,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, BadRequest
 import json
-from .customExceptions import IncorrectPassword
+from .customExceptions import IncorrectPassword, ObjectAlreadyExists, OutOfUniversity
 from django.views.generic.edit import DeleteView
 
 #Sample for how to parse data out of a request body
@@ -22,10 +22,44 @@ class Users_view(viewsets.ModelViewSet):
     queryset = Users.objects.all()
 
 @csrf_exempt
-def Users_login(request):
-    #Frontend give me username and password
-    #if exists return user_id, name, university name, user_type
+def Users_register(request):
+    
+        if request.method == "POST":
+            ret = {}
+            ret ["error"] = ""
+            ret["data"] = {}
 
+            body_unicode = request.body.decode("utf-8")
+            body = json.loads(body_unicode)
+            
+            req_name = str(body["name"])
+            req_password = str(body["password"])
+            req_email = str(body["email"])
+            req_university = str(body["university"])
+            req_user_type = str(body["user_type"])
+
+            try:
+                
+                if Users.objects.filter(email=req_email).exists():
+                    raise ObjectAlreadyExists
+
+                user = Users(name=req_name,
+                             password=req_password,
+                             email=req_email,
+                             user_type=req_user_type,
+                             university=Universities.objects.get(uni_name=req_university))
+                user.save()
+
+                ret["data"]['user_id'] = int(Users.objects.get(email=req_email).user_id)
+                
+            except ObjectAlreadyExists:
+                return HttpResponseBadRequest('Sorry, that email address is already taken'.\
+                                      format(request.method), status=400)
+
+            return JsonResponse(ret)
+
+@csrf_exempt
+def Users_login(request):
     #TODO: Return the University that the user belongs to
 
     if request.method == "POST":
@@ -35,6 +69,7 @@ def Users_login(request):
 
         body_unicode = request.body.decode("utf-8")
         body = json.loads(body_unicode)
+
         req_email = str(body["email"])
         req_password = str(body["password"])
 
@@ -45,9 +80,13 @@ def Users_login(request):
             if(req_password != str(user.password)):
                 raise IncorrectPassword
             
-            ret["data"]['user_id'] = str(user.user_id)
             ret["data"]['name'] = str(user.name)
+            ret["data"]['user_id'] = str(user.user_id)
             ret["data"]['user_type'] = int(user.user_type)
+            if(int(user.user_type) == 2):
+                ret["data"]['university'] = ""
+            else:
+                ret["data"]['university'] = str(user.university.uni_name)
         
         except ValueError:
             return HttpResponseBadRequest('Please enter a valid User ID and password.'.\
@@ -63,7 +102,130 @@ def Users_login(request):
             return HttpResponseBadRequest('Wrong password.'.\
                                       format(request.method), status=401)
 
-    return JsonResponse(ret)
+        return JsonResponse(ret)
+
+@csrf_exempt
+def get_user_rsos(request):
+
+    if request.method == "GET":
+        ret = {}
+        ret["error"] = ""
+        ret["data"] = {}
+        ret["data"]["joined"] = []
+        ret["data"]["not_joined"] = []
+
+        body_unicode = request.body.decode("utf-8")
+        body = json.loads(body_unicode)
+
+        req_user_id = int(body["user_id"])
+
+        try:
+            user = Users.objects.get(user_id=req_user_id)
+
+            for rso in RSOS.objects.all():
+                if rso.members.filter(user_id=user.user_id).exists():
+                    ret["data"]["joined"].append(rso.name)
+                else:
+                    ret["data"]["not_joined"].append(rso.name)    
+        
+        except ObjectDoesNotExist:
+            return HttpResponseBadRequest('User not found.'.\
+                                        format(request.method), status=401)
+        
+        return JsonResponse(ret)
+
+@csrf_exempt
+def RSOS_register(request):
+
+    if request.method == "POST":
+        ret = {}
+        ret["error"] = ""
+        ret["data"] = {}
+        ret["data"]["members"] = []
+
+        body_unicode = request.body.decode("utf-8")
+        body = json.loads(body_unicode)
+
+        req_name = str(body["name"])
+        req_admin = int(body["admin"])
+        req_university = str(body["university"])
+        req_members = []
+        for i in range(4):
+            req_members.append(str(body["members"][i]))
+
+        try:
+            if(RSOS.objects.filter(name=req_name).exists()):
+                raise ObjectAlreadyExists
+            
+            university = Universities.objects.get(uni_name=req_university)
+
+            admin = Users.objects.get(user_id=req_admin)
+
+            #check if all the member users exist
+            for i in range(4):
+                if(not Users.objects.filter(email=req_members[i]).exists()):
+                    raise ObjectDoesNotExist
+
+            rso = RSOS(name=req_name,
+                       admin=admin.user_id,
+                       university=university)
+            rso.save()
+
+            rso.members.add(admin)
+            ret["data"]["members"].append(admin.name)
+            ret["data"]["university"] = university.uni_name
+
+            #add members to rso
+            for i in range(4):
+                user = Users.objects.get(email=req_members[i])
+                rso.members.add(user)
+                ret["data"]["members"].append(user.name)
+
+            rso.save()
+
+            ret["data"]["name"] = req_name
+            
+        except ObjectDoesNotExist:
+            return HttpResponseBadRequest('Admin, member, or university not found.'.\
+                                        format(request.method), status=401)
+        except ObjectAlreadyExists:
+            return HttpResponseBadRequest('An RSO with this name already exists'.\
+                                        format(request.method), status=401)
+        
+        return JsonResponse(ret)
+
+@csrf_exempt
+def join_rso(request):
+    if request.method == "POST":
+        ret = {}
+        ret["error"] = ""
+        ret["data"] = {}
+
+        body_unicode = request.body.decode("utf-8")
+        body = json.loads(body_unicode)
+
+        req_id = str(body["user_id"])
+        req_rso = str(body["rso"])
+
+        try:
+            user = Users.objects.get(user_id=req_id)
+            rso = RSOS.objects.get(name=req_rso)
+            user_university = user.university
+            rso_university = rso.university
+
+            if(user_university.uni_name != rso_university.uni_name):
+                raise OutOfUniversity
+            
+            rso.members.add(user)
+        except OutOfUniversity:
+            return HttpResponseBadRequest('A user cannot join an RSO from another university'.\
+                                        format(request.method), status=401)
+        except ObjectDoesNotExist:
+            return HttpResponseBadRequest('User, RSO, or University not found.'.\
+                                        format(request.method), status=401)
+        
+        return JsonResponse(ret)
+
 
 class RSOS_view(viewsets.ModelViewSet):
     serializer_class = RSOS_serializer
