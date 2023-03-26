@@ -21,3 +21,8 @@ class Events_serializer(serializers.ModelSerializer):
         model = Events
         fields = ('event_id', 'creator', 'host_rso', 'date', 'time', 'email', 'event_type', 
         'phone', 'longitude', 'latitude', 'loc_name')
+
+class Universities_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Universities
+        fields = ('uni_name', 'description', 'longitude', 'latitude', 'num_stu', 'num_rsos')

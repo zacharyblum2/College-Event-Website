@@ -23,6 +23,7 @@ router.register(r'users', views.Users_view, 'Users')
 router.register(r'rsos', views.RSOS_view, 'Rsos')
 router.register(r'comments', views.Comments_view, 'Comments')
 router.register(r'events', views.Events_view, 'Events')
+router.register(r'universities', views.Universities_view, 'Universities')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

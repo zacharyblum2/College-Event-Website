@@ -77,5 +77,6 @@ class Events_view(viewsets.ModelViewSet):
     serializer_class = Events_serializer
     queryset = Events.objects.all()
 
-
-
+class Universities_view(viewsets.ModelViewSet):
+    serializer_class = Universities_serializer
+    queryset = Universities.objects.all()
