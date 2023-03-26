@@ -4,11 +4,22 @@ import './comments.css';
 import { Comment } from '../../components';
 
 
+// Load all information in regarding comments, including user_id. 
+// For each comment, check if localStorage(user).user_id == comment.id, if so display edit or delete.
 const comments = [
     { name: 'Martha Stewart', description: 'It was alright', rating: '2'},
     { name: 'LeBron James', description: 'It was okay', rating: '3'},
     { name: 'Martha Steward', description: 'I loved it!', rating: '4'},
 ]
+
+// When we click on an event, store the event id in local storage.
+
+// Call search comments, passing event id we have clicked on. 
+// const comments = await fetch (fetch('http://127.0.0.1:8000/api/comments/',
+//            {method:'GET', body: EVENT_ID, headers: {'Content-Type': 'application/json'}});
+
+// comments.map((element)), I want to receive, name, description, rating and commenter id
+
 
 const Comments = () => {
   return (

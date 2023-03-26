@@ -4,6 +4,11 @@ import './comment.css';
 // Get data from an api.
 // Create a card for each data point. Display card. 
 
+// Store user_id of who made the comment, if this matches the logged in user
+// display an edit and delete comment button. 
+
+/// If user_id == commenter_id, unhide edit and delete.
+
 export default class Comments extends React.Component {
     
     constructor(props) {
@@ -11,7 +16,9 @@ export default class Comments extends React.Component {
         this.state = {
             name: props.name,
             description: props.description,
-            rating: props.rating
+            rating: props.rating,
+            // This is where we store the user who creates the comment id. 
+            uid: props.id
         }
     }
 
@@ -29,6 +36,8 @@ export default class Comments extends React.Component {
                             <p class="small text-muted mb-0">Rating: </p>
                             <p class="small text-muted mb-0">{this.state.rating}</p>
                         </div>
+                        <button class="btn btn-primary hidden">Edit</button>
+                        <button class="btn btn-primary hidden">Delete</button>
                     </div>
                 </div>  
             </div>  

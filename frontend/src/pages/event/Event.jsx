@@ -11,6 +11,8 @@ const event = [
     longitude: '123', latitude: '1231', loc_name: 'HEC 103'}
 ]
 
+// When clicking on an event, add information to localStorage, 
+// on /event load, search for all information regarding that event and load it.
 const Event = () => {
   return (
       <>
