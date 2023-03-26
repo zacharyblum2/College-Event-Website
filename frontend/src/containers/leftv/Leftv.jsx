@@ -34,7 +34,7 @@ const Leftv = () => {
               <div className="public">
                 <h2 class="h5">Events</h2>
                 {
-                  events.map((events) => <Card name={events.name} description={events.description} date={events.date} 
+                  events.map((events) => <Card id={events.id} name={events.name} description={events.description} date={events.date} 
                   time={events.time} location={events.loc_name} email={events.email} phone={events.phone} organizer={events.organizer} part={false}/>)
                 }
               </div>
@@ -42,7 +42,7 @@ const Leftv = () => {
                 {/* These are the events that you are scheduled for. Should make two different calls*/}
                 <h2 class="h5">Events Registered</h2>
                 {
-                  events.map((events) => <Card name={events.name} description={events.description} date={events.date} 
+                  events.map((events) => <Card id={events.id} name={events.name} description={events.description} date={events.date} 
                   time={events.time} location={events.loc_name} email={events.email} phone={events.phone} organizer={events.organizer} part={true}/>)
                 }
               </div>

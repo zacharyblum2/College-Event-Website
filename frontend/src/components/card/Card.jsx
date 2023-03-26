@@ -6,6 +6,7 @@ export default class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: props.id,
       name: props.name,
       description: props.description,
       date: props.date,
@@ -24,7 +25,7 @@ export default class Card extends React.Component {
   // Function to store event information locally, for individual event page to load it.
   storeInformation() {
     console.log(this.state.name);
-    let obj = {name: this.state.name, description: this.state.description, date: this.state.date, 
+    let obj = {id: this.state.id, name: this.state.name, description: this.state.description, date: this.state.date, 
                time: this.state.time, location: this.state.location, organizer: this.state.organizer, 
                email: this.state.email, phone: this.state.phone, part: this.state.part}
     

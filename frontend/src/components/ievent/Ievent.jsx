@@ -6,6 +6,8 @@ import './ievent.css';
 const Ievent = () => {
     let eventInfo = JSON.parse(localStorage.getItem("eventInfo"));
 
+    // Using eventInfo.id, load comments for that specific event.
+
         return (
             <div class="container">
                 <div class="row">

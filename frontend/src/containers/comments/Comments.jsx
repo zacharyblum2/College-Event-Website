@@ -22,28 +22,33 @@ const comments = [
 
 
 const Comments = () => {
-  return (
-    <div className="containerComment">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-8 col-lg-6">
-            <div class="card shadow-0 border" style={{backgroundColor: "#f0f2f5"}}>
-                <div class="card-body p-4">
-                <div class="form-outline mb-4">
-                    <input type="text" id="addANote" class="form-control" placeholder="Type comment..." />
-                    <label class="form-label" for="addANote">+ Add a note</label>
-                </div>
+    let eventInfo = JSON.parse(localStorage.getItem("eventInfo"));
 
-                {
-                comments.map((element) => <Comment name={element.name} description={element.description} rating={element.rating}/>)
-                }   
+    // Use eventInfo.id to search for all of the comments, store them in an array called comments
+    // similar to above.
 
+    return (
+        <div className="containerComment">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                <div class="card shadow-0 border" style={{backgroundColor: "#f0f2f5"}}>
+                    <div class="card-body p-4">
+                    <div class="form-outline mb-4">
+                        <input type="text" id="addANote" class="form-control" placeholder="Type comment..." />
+                        <label class="form-label" for="addANote">+ Add a note</label>
+                    </div>
+
+                    {
+                    comments.map((element) => <Comment name={element.name} description={element.description} rating={element.rating}/>)
+                    }   
+
+                    </div>
+                
                 </div>
-            
-            </div>
+                </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default Comments
