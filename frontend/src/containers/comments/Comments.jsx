@@ -12,6 +12,15 @@ const comments = [
     { name: 'Martha Steward', description: 'I loved it!', rating: '4'},
 ]
 
+// When we click on an event, store the event id in local storage.
+
+// Call search comments, passing event id we have clicked on. 
+// const comments = await fetch (fetch('http://127.0.0.1:8000/api/comments/',
+//            {method:'GET', body: EVENT_ID, headers: {'Content-Type': 'application/json'}});
+
+// comments.map((element)), I want to receive, name, description, rating and commenter id
+
+
 const Comments = () => {
   return (
     <div>

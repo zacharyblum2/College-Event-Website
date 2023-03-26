@@ -16,7 +16,9 @@ export default class Comments extends React.Component {
         this.state = {
             name: props.name,
             description: props.description,
-            rating: props.rating
+            rating: props.rating,
+            // This is where we store the user who creates the comment id. 
+            uid: props.id
         }
     }
 
