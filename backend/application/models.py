@@ -25,6 +25,7 @@ class Users(models.Model):
     password = models.TextField(max_length=512)
     email = models.TextField(max_length=512)
     user_type = models.IntegerField()
+    university = models.ForeignKey('Universities', on_delete=models.CASCADE)
 
 class RSOS(models.Model):
 	rso_id = models.AutoField(primary_key=True, blank=True)
