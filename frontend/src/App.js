@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 // Import all components directly, using index.js inside components.
-import { HomePage, LoginPage, SignupPage, User, Event, Unis, Rso} from './pages';
+import { HomePage, LoginPage, SignupPage, User, Event, Unis, Rso, MakeEvent} from './pages';
 
 // Import router.
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -35,6 +35,9 @@ function App() {
           </Route>
           <Route exact path='/universities'>
             <Unis/>
+          </Route>
+          <Route exact path='/createEvent'>
+            <MakeEvent/>
           </Route>
         </Switch>
     </div>
