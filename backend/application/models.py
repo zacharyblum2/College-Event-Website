@@ -61,10 +61,9 @@ class Events(models.Model):
     loc_name = models.TextField(max_length=20)
 
 class Universities(models.Model):
-    uni_name = models.CharField(max_length=10, primary_key=True)
-    num_rsos = models.IntegerField()
+    uni_name = models.CharField(max_length=20, primary_key=True)
+    num_rsos = models.IntegerField(blank=True, default=0)
     description = models.CharField(max_length=140)
-    num_stu = models.IntegerField()
+    num_stu = models.IntegerField(blank=True, default=0)
     longitude = models.IntegerField()
     latitude = models.IntegerField()
-    loc_name = models.TextField(max_length=20)
