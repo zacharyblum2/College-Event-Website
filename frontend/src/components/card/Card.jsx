@@ -31,7 +31,7 @@ export default class Card extends React.Component {
     
     console.log(JSON.stringify(obj));
     localStorage.removeItem("eventInfo");
-    localStorage.setItem("eventInfo", JSON.stringify(obj));
+    localStorage.setItem("event_info", JSON.stringify(obj));
 
     window.location.href='/event';
   };;
