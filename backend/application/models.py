@@ -27,10 +27,18 @@ class Users(models.Model):
     user_type = models.IntegerField()
     university = models.ForeignKey('Universities', on_delete=models.CASCADE)
 
+# class RSOS(models.Model):
+# 	rso_id = models.AutoField(primary_key=True, blank=True)
+# 	name = models.CharField(max_length=20)
+# 	admin = models.ForeignKey('Users', on_delete=models.CASCADE)
+    
 class RSOS(models.Model):
-	rso_id = models.AutoField(primary_key=True, blank=True)
-	name = models.CharField(max_length=20)
-	admin = models.ForeignKey('Users', on_delete=models.CASCADE)
+    rso_id = models.AutoField(primary_key=True, blank=True)
+    name = models.CharField(max_length=20)
+    pending = models.IntegerField(default=0) #0 for awaiting approval, 1 for approved
+    admin = models.IntegerField()
+    members = models.ManyToManyField(Users)
+    university = models.ForeignKey('Universities', on_delete=models.CASCADE)
 
 class Views(models.Model):
     user = models.ForeignKey('Users', on_delete=models.CASCADE, primary_key=True)
