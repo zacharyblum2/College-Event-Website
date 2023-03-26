@@ -19,7 +19,7 @@ export default class Card extends React.Component {
   render() {
     return (
       <div>
-          <div class="card" style={{width: "650px"}}>
+          <div class="card" style={{width: "500px"}}>
               <h5 class="card-header">{this.state.name}</h5>
               <div class="card-body">
                   <h5 class="card-title">at {this.state.time}</h5>

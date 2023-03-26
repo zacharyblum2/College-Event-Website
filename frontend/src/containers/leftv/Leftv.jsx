@@ -24,10 +24,22 @@ const Leftv = () => {
     <Router>
         <div className="cards">
           <Route exact path='/user'>
-            {
-              events.map((events) => <Card name={events.name} description={events.description} date={events.date} 
-              time={events.time} location={events.loc_name} email={events.email} phone={events.phone} />)
-            }
+            <div className="rsos">
+              <div className="public">
+                <h2 class="h5">Events</h2>
+                {
+                  events.map((events) => <Card name={events.name} description={events.description} date={events.date} 
+                  time={events.time} location={events.loc_name} email={events.email} phone={events.phone} />)
+                }
+              </div>
+              <div className="your">
+                <h2 class="h5">Events Scheduled</h2>
+                {
+                  events.map((events) => <Card name={events.name} description={events.description} date={events.date} 
+                  time={events.time} location={events.loc_name} email={events.email} phone={events.phone} />)
+                }
+              </div>
+            </div>
           </Route>
           <Route exact path='/rsos'>
             <div className="rsos">
