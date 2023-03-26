@@ -4,9 +4,9 @@ import './ievent.css';
 
 // export default class Ievent extends React.Component { render() { return ( )}}
 const Ievent = () => {
-    let eventInfo = JSON.parse(localStorage.getItem("eventInfo"));
+    let event_info = JSON.parse(localStorage.getItem("event_info"));
 
-    // Using eventInfo.id, load comments for that specific event.
+    // Using event_info.id, load comments for that specific event.
 
         return (
             <div class="container">
@@ -20,19 +20,19 @@ const Ievent = () => {
                     
                     <div class="col-lg-8" id="event-single">
                         <div class="row">
-                            <p class="h3">{eventInfo.name}</p>
+                            <p class="h3">{event_info.name}</p>
                         </div>
                         <div class="row">
-                            <p class="h5">{eventInfo.date} at {eventInfo.time}</p>
+                            <p class="h5">{event_info.date} at {event_info.time}</p>
                         </div>
-                        <p>{eventInfo.description}</p>
+                        <p>{event_info.description}</p>
                     </div>
                     <aside class="col-lg-4">
                         <div class="event-location hidden-md-down">
                             <h2 class="h5">Location</h2>
                         </div>
                         <div class="location-type-container d-flex mb-3">
-                            <span class="h5 font-weigth-normal d-block"> <Icon.PinMap/> {eventInfo.location}</span>
+                            <span class="h5 font-weigth-normal d-block"> <Icon.PinMap/> {event_info.location}</span>
                             <span class="event-location-url">
                                 <a href="https://goo.gl/maps/oT5mkQHCNKSZLCBu6">[ View Location ]</a>
                             </span>
@@ -48,9 +48,9 @@ const Ievent = () => {
                         <div class="event-contact vcard hidden-md-down">
                             <h2 class="h5">Contact:</h2>
                             <div class="event-contact-info">
-                                <p class="h5 font-weight-normal">{eventInfo.organizer}</p>
-                                <p class="ga-event">Email: {eventInfo.email}</p>
-                                <p class="ga-event">Phone: {eventInfo.phone}</p>
+                                <p class="h5 font-weight-normal">{event_info.organizer}</p>
+                                <p class="ga-event">Email: {event_info.email}</p>
+                                <p class="ga-event">Phone: {event_info.phone}</p>
                             </div>
                         </div>
                         <div class="social mb-3">
