@@ -30,10 +30,20 @@ const Leftv = () => {
             }
           </Route>
           <Route exact path='/rsos'>
-            <h2 class="h5">RSOS</h2>
-            {
-              rsos.map((rso) => <Rso name={rso.name} description={rso.description}/>)
-            }
+            <div className="rsos">
+              <div className="public">
+                <h2 class="h5">RSOs</h2>
+                {
+                rsos.map((rso) => <Rso name={rso.name} description={rso.description}/>)
+                }
+              </div>
+              <div className="your">
+                <h2 class="h5">Your RSOs</h2>
+                {
+                rsos.map((rso) => <Rso name={rso.name} description={rso.description}/>)
+                }
+              </div>
+            </div>
           </Route>
         </div>
     </Router>

@@ -3,3 +3,9 @@
     flex-direction: column;
     gap: 15px;
 }
+
+.rsos {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
