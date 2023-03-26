@@ -14,7 +14,7 @@ export default class RSO extends React.Component {
   render() {
     return (
       <div>
-          <div class="card" style={{width: "650px"}}>
+          <div class="card" style={{width: "500px"}}>
               <h5 class="card-header">{this.state.name}</h5>
               <div class="card-body">
                   <p class="card-text">{this.state.description}</p>

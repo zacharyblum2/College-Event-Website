@@ -47,7 +47,7 @@ const Login = () => {
             {
                 let res = JSON.parse(r)
 
-                // Add university to this later.
+                // RESPONSE SHOULD RETURN UNIVERSITY NAME AS WELL
                 let user = {name: res.data.name, id: res.data.user_id, type: res.data.user_type, uni: "blank"}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
