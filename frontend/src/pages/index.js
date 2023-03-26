@@ -5,3 +5,4 @@ export {default as User} from './user/User';
 export {default as Event} from './event/Event';
 export {default as Unis} from './unis/Unis';
 export {default as Rso} from './rso/Rso';
+export {default as MakeEvent} from './makeEvent/MakeEvent';

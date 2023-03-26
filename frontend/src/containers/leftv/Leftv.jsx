@@ -26,10 +26,12 @@ const rsos = [
 ]
 
 const Leftv = () => {
+  let user_data = JSON.parse(localStorage.getItem("user_data"));
   return (
     <Router>
         <div className="cards">
           <Route exact path='/user'>
+          <a href="/createEvent" id="createBtn" class={user_data.type === 0 ? "btn btn-primary" : "btn btn-primary"}>Create Event</a>
             <div className="rsos">
               <div className="public">
                 <h2 class="h5">Events</h2>

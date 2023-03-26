@@ -5,6 +5,7 @@ import { LocationPickerE } from '../../components';
 
 // export default class Ievent extends React.Component { render() { return ( )}}
 const Ievent = () => {
+    let user_data = JSON.parse(localStorage.getItem("user_data"));
     let event_info = JSON.parse(localStorage.getItem("event_info"));
     console.log(event_info.location);
 
@@ -15,7 +16,7 @@ const Ievent = () => {
                 <div class="row">
                     <a href="/user" class="back">
                         <Icon.HouseAddFill/>
-                        Events at *University Name*
+                        Events at {user_data.uni}
                     </a>
                 </div>
                 <div class="row">
