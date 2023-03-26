@@ -168,7 +168,7 @@ def RSOS_register(request):
 
             rso = RSOS(name=req_name,
                        admin=admin.user_id,
-                       university=university.uni_name)
+                       university=university)
             rso.save()
 
             rso.members.add(admin)
@@ -215,12 +215,16 @@ def join_rso(request):
 
             if(user_university.uni_name != rso_university.uni_name):
                 raise OutOfUniversity
+            
+            rso.members.add(user)
         except OutOfUniversity:
             return HttpResponseBadRequest('A user cannot join an RSO from another university'.\
                                         format(request.method), status=401)
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('User, RSO, or University not found.'.\
                                         format(request.method), status=401)
+        
+        return JsonResponse(ret)
 
 
 class RSOS_view(viewsets.ModelViewSet):
