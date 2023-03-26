@@ -47,10 +47,12 @@ const Ievent = () => {
                             <h2 class="h5">Contact:</h2>
                             <div class="event-contact-info">
                                 <p class="h5 font-weight-normal">{eventInfo.organizer}</p>
-                                <a class="ga-event" href="mailto:Natalie.Underberg-Goode@ucf.edu">{eventInfo.email}</a>
+                                <p class="ga-event">Email: {eventInfo.email}</p>
+                                <p class="ga-event">Phone: {eventInfo.phone}</p>
                             </div>
                         </div>
                         <div class="social mb-3">
+                            {/* Discover how to create custom links to social media */}
                             <a class="btn btn-sm btn-primary ga-event mr-1" target="_blank" 
                             href="https://www.facebook.com/sharer.php?u=https://events.ucf.edu/event/2780625/florida-folklore-society-annual-meeting/"> 
                             <Icon.Facebook/>

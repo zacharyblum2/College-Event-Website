@@ -11,6 +11,7 @@ export default class Card extends React.Component {
       date: props.date,
       time: props.time,
       location: props.location,
+      organizer: props.organizer,
       email: props.email,
       phone: props.phone,
       part: props.part
@@ -24,8 +25,8 @@ export default class Card extends React.Component {
   storeInformation() {
     console.log(this.state.name);
     let obj = {name: this.state.name, description: this.state.description, date: this.state.date, 
-               time: this.state.time, location: this.state.location, email: this.state.email,
-               phone: this.state.phone, part: this.state.part}
+               time: this.state.time, location: this.state.location, organizer: this.state.organizer, 
+               email: this.state.email, phone: this.state.phone, part: this.state.part}
     
     console.log(JSON.stringify(obj));
     localStorage.removeItem("eventInfo");
