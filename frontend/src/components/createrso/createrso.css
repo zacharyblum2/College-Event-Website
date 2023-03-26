@@ -1,7 +1,11 @@
 #create {
+    position: relative;
+    left: 30%;
+    height: 68.3vh;
     margin: 40px;
     display: flex;
     flex-direction: column;
+    width: 600px;
 }
 
 .but {
