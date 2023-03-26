@@ -1,10 +1,12 @@
 import React from 'react';
 import * as Icon from 'react-bootstrap-icons';
 import './ievent.css';
+import { LocationPickerE } from '../../components';
 
 // export default class Ievent extends React.Component { render() { return ( )}}
 const Ievent = () => {
     let event_info = JSON.parse(localStorage.getItem("event_info"));
+    console.log(event_info.location);
 
     // Using event_info.id, load comments for that specific event.
 
@@ -35,6 +37,7 @@ const Ievent = () => {
                             <span class="h5 font-weigth-normal d-block"> <Icon.PinMap/> {event_info.location}</span>
                             <span class="event-location-url">
                                 <a href="https://goo.gl/maps/oT5mkQHCNKSZLCBu6">[ View Location ]</a>
+                                <LocationPickerE address={event_info.location[0]} longitude={event_info.location[1]} latitude={event_info.location[2]}/>
                             </span>
                         </div>
                         <div class="event-registration hidden-md-down card card-outline-primary my-4">
