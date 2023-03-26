@@ -21,7 +21,10 @@ export default class RSO extends React.Component {
                   <p class="card-text">{this.state.description}</p>
                   
                   {/* Hidden if the user is already a part of the RSO*/}
-                  <a href="/rso" id="join" class={this.state.part ? "btn btn-success stretched-link hidden" : "btn btn-success stretched-link"}>Join Now</a>
+                  <div class="buttons">
+                    <button id="join" class={this.state.part ? "btn btn-success stretched-link hidden" : "btn btn-success stretched-link"}>Join RSO</button>
+                    <button id="leave" class={this.state.part ? "btn btn-success stretched-link" : "btn btn-success stretched-link hidden"}>Leave RSO</button>
+                  </div>
               </div>
           </div>
       </div>
