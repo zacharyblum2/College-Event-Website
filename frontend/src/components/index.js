@@ -15,3 +15,4 @@ export {default as Rso} from './rso/Rso';
 export {default as Ievent} from './ievent/Ievent';
 export {default as Createrso} from './createrso/Createrso';
 export {default as Comment} from './comment/Comment';
+export {default as LocationPickerE} from './locationPickerExample/LocationPickerExample';

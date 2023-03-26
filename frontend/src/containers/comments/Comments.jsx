@@ -27,11 +27,17 @@ const Comments = () => {
     let comment;
     let rating;
 
+    // Create object to later pass. 
+    // let obj = {user_id: user_data.id, event_id: event_info.id, comment: comment.value, rating: rating.value};
+
     // Use eventInfo.id to search for all of the comments, store them in an array called comments
     // similar to above.
 
     function addComment() {
-        alert(rating.value)
+        alert(rating.value);
+        alert(comment.value);
+        alert(user_data.id);
+        alert(event_info.id);
     }
 
     return (
