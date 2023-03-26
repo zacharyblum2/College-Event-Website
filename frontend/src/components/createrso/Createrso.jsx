@@ -13,8 +13,10 @@ const Createrso = () => {
 
     const makeRSO = async event => {
         // Create object with incremental rso_id value, name of RSO and admin id. 
+        let emailList = [email1.value, email2.value, email3.value, email4.value]
+        
         let obj = {rso_id: 1, name: rsoName.value, admin_id: user_data.id, 
-            emails: [email1.value, email2.value, email3.value, email4.value]};
+            emails: emailList};
         
         let js = JSON.stringify(obj);
         alert(js);
@@ -22,6 +24,13 @@ const Createrso = () => {
         // const response = await
         //     fetch('http://127.0.0.1:8000/api/rsos/',
         //     {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+
+        // 1. Check if all of the emails belong to users at the same University. 
+        //    Response: Yes
+        //        a. Create RSO, with status pending
+        //        b. Add all users (including creator) to RSO
+        //    Response: No
+        //        a. Send back error message, which users are not belonging to the university 
 
         // let r = await response.text();
 
