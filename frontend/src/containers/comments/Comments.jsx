@@ -23,7 +23,7 @@ const comments = [
 
 const Comments = () => {
   return (
-    <div>
+    <div className="containerComment">
         <div class="row d-flex justify-content-center">
             <div class="col-md-8 col-lg-6">
             <div class="card shadow-0 border" style={{backgroundColor: "#f0f2f5"}}>
