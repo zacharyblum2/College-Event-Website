@@ -57,13 +57,11 @@ const Ievent = () => {
                             {/* Discover how to create custom links to social media */}
                             <a class="btn btn-sm btn-primary ga-event mr-1" target="_blank" 
                             href="https://www.facebook.com/sharer.php?u=https://events.ucf.edu/event/2780625/florida-folklore-society-annual-meeting/"> 
-                            <Icon.Facebook/>
-                            Share 
+                            <p className="social"><Icon.Facebook/> Share </p>
                             </a>
                             <a class="btn btn-sm btn-primary ga-event mr-1" target="_blank" 
                             href="https://twitter.com/intent/tweet?text=UCF+Events%3A+Florida+Folklore+Society+annual+meeting&url=https://events.ucf.edu/event/2780625/florida-folklore-society-annual-meeting"> 
-                            <Icon.Twitter/>
-                            Tweet 
+                            <p className="social"><Icon.Twitter/> Tweet</p>
                             </a>
                         </div>
                     </aside>
