@@ -20,14 +20,14 @@ class Belongs(models.Model):
     uni_name = models.ForeignKey('Universities', on_delete=models.CASCADE, max_length=10)
 
 class Users(models.Model):
-    user_id = models.IntegerField(primary_key=True)
+    user_id = models.AutoField(primary_key=True, blank=True)
     name = models.TextField(max_length=512, default='00000000')
     password = models.TextField(max_length=512)
     email = models.TextField(max_length=512)
     user_type = models.IntegerField()
 
 class RSOS(models.Model):
-	rso_id = models.IntegerField(primary_key=True)
+	rso_id = models.AutoField(primary_key=True, blank=True)
 	name = models.CharField(max_length=20)
 	admin = models.ForeignKey('Users', on_delete=models.CASCADE)
 
@@ -43,12 +43,12 @@ class Created_By(models.Model):
 class Comments(models.Model):
     event = models.ForeignKey('Events', on_delete=models.CASCADE)
     user = models.ForeignKey('Users', on_delete=models.CASCADE)
-    comment_id = models.IntegerField(primary_key=True)
+    comment_id = models.AutoField(primary_key=True, blank=True)
     body = models.CharField(max_length=240)
     rating = models.IntegerField(default='0')
 
 class Events(models.Model):
-    event_id = models.IntegerField(primary_key=True)
+    event_id = models.AutoField(primary_key=True, blank=True)
     creator = models.ForeignKey('Users', on_delete=models.CASCADE)
     host_rso = models.ForeignKey('RSOS', on_delete=models.CASCADE)
     date = models.DateField()
