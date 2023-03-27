@@ -42,14 +42,14 @@ const Createrso = () => {
 
             if(!isJSON(r))
             {
-                // document.getElementById('message').classList.remove('pass');
-                // document.getElementById('message').classList.add('fail');
+                document.getElementById('message').classList.remove('pass');
+                document.getElementById('message').classList.add('fail');
                 setMessage(r);
             }
             else
             {
-                // document.getElementById('message').classList.remove('fail');
-                // document.getElementById('message').classList.add('pass');
+                document.getElementById('message').classList.remove('fail');
+                document.getElementById('message').classList.add('pass');
                 setMessage("Your club has been successfully created!");
             }
 
