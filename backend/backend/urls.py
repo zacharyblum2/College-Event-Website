@@ -33,4 +33,5 @@ urlpatterns = [
     path('api/get_user_rsos/', views.get_user_rsos),
     path('api/register_rso/', views.RSOS_register),
     path('api/join_rso/', views.join_rso),
+    path('api/leave_rso/', views.leave_rso),
 ]

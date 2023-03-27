@@ -37,6 +37,7 @@ class RSOS(models.Model):
     name = models.CharField(max_length=20)
     pending = models.IntegerField(default=0) #0 for awaiting approval, 1 for approved
     admin = models.IntegerField()
+    active = models.IntegerField(default=0) #0 for not active rso, 1 for active rso
     members = models.ManyToManyField(Users)
     university = models.ForeignKey('Universities', on_delete=models.CASCADE)
 

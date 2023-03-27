@@ -50,6 +50,11 @@ def Users_register(request):
                              university=Universities.objects.get(uni_name=req_university))
                 user.save()
 
+                #Update the university student count
+                university = user.university
+                university.num_stu += 1
+                university.save()
+
                 ret["data"]['user_id'] = int(Users.objects.get(email=req_email).user_id)
                 
             except ObjectAlreadyExists:
@@ -122,7 +127,7 @@ def get_user_rsos(request):
         try:
             user = Users.objects.get(user_id=req_user_id)
 
-            for rso in RSOS.objects.all():
+            for rso in RSOS.objects.filter(university=user.university):
                 if rso.members.filter(user_id=user.user_id).exists():
                     ret["data"]["joined"].append(rso.name)
                 else:
@@ -141,7 +146,6 @@ def RSOS_register(request):
         ret = {}
         ret["error"] = ""
         ret["data"] = {}
-        ret["data"]["members"] = []
 
         body_unicode = request.body.decode("utf-8")
         body = json.loads(body_unicode)
@@ -149,9 +153,6 @@ def RSOS_register(request):
         req_name = str(body["name"])
         req_admin = int(body["admin"])
         req_university = str(body["university"])
-        req_members = []
-        for i in range(4):
-            req_members.append(str(body["members"][i]))
 
         try:
             if(RSOS.objects.filter(name=req_name).exists()):
@@ -161,27 +162,17 @@ def RSOS_register(request):
 
             admin = Users.objects.get(user_id=req_admin)
 
-            #check if all the member users exist
-            for i in range(4):
-                if(not Users.objects.filter(email=req_members[i]).exists()):
-                    raise ObjectDoesNotExist
-
             rso = RSOS(name=req_name,
                        admin=admin.user_id,
                        university=university)
             rso.save()
 
-            rso.members.add(admin)
-            ret["data"]["members"].append(admin.name)
+            #Update the university num_rsos count
+            university.num_rsos += 1
+            university.save()
+
+
             ret["data"]["university"] = university.uni_name
-
-            #add members to rso
-            for i in range(4):
-                user = Users.objects.get(email=req_members[i])
-                rso.members.add(user)
-                ret["data"]["members"].append(user.name)
-
-            rso.save()
 
             ret["data"]["name"] = req_name
             
@@ -217,6 +208,11 @@ def join_rso(request):
                 raise OutOfUniversity
             
             rso.members.add(user)
+
+            if (rso.members.count() > 4):
+                rso.active = 1
+
+            rso.save()
         except OutOfUniversity:
             return HttpResponseBadRequest('A user cannot join an RSO from another university'.\
                                         format(request.method), status=401)
@@ -226,6 +222,42 @@ def join_rso(request):
         
         return JsonResponse(ret)
 
+@csrf_exempt
+def leave_rso(request):
+    if request.method == "POST":
+        ret = {}
+        ret["error"] = ""
+        ret["data"] = {}
+
+        body_unicode = request.body.decode("utf-8")
+        body = json.loads(body_unicode)
+
+        req_id = str(body["user_id"])
+        req_rso = str(body["rso"])
+
+        try:
+            user = Users.objects.get(user_id=req_id)
+            rso = RSOS.objects.get(name=req_rso)
+            user_university = user.university
+            rso_university = rso.university
+
+            if(user_university.uni_name != rso_university.uni_name):
+                raise OutOfUniversity
+            
+            rso.members.remove(user)
+
+            if (rso.members.count() < 5):
+                rso.active = 0
+            
+            rso.save()
+        except OutOfUniversity:
+            return HttpResponseBadRequest('A user cannot join an RSO from another university'.\
+                                        format(request.method), status=401)
+        except ObjectDoesNotExist:
+            return HttpResponseBadRequest('User, RSO, or University not found.'.\
+                                        format(request.method), status=401)
+        
+        return JsonResponse(ret)
 
 class RSOS_view(viewsets.ModelViewSet):
     serializer_class = RSOS_serializer
