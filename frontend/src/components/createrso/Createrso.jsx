@@ -87,30 +87,6 @@ const Createrso = () => {
                     required ref={ (c) => rsoName = c}/>
                 </div>
 
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email1">Person 1 Email</label>
-                    <input type="email" id="email1" class="form-control" placeholder="123@gmail.com"
-                    required ref={ (c) => email1 = c}/>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email2">Person 2 Email</label>
-                    <input type="email" id="email2" class="form-control" placeholder="123@gmail.com"
-                    required ref={ (c) => email2 = c}/>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email3">Person 3 Email</label>
-                    <input type="email" id="email3" class="form-control" placeholder="123@gmail.com"
-                    required ref={ (c) => email3 = c}/>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email4">Person 4 Email</label>
-                    <input type="email" id="email4" class="form-control" placeholder="123@gmail.com"
-                    required ref={ (c) => email4 = c}/>
-                </div>
-
                 {/* Onclick will submit data to database and return to "/rso" */}
                 <div class="form-outline mb-4 but">
                     <button type="submit" class="btn btn-success" onClick={makeRSO}>Submit</button>
