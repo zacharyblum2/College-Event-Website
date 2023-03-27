@@ -15,3 +15,15 @@
     width: 200px;
     align-self: flex-start;
 }
+
+.public {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.your {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

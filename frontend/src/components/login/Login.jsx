@@ -32,7 +32,7 @@ const Login = () => {
             const response = await 
             // Check if correct url for api.
             // How can I test this?
-            fetch('http://127.0.0.1:8000/api/login/',
+            fetch('http://localhost:8000/api/login/',
             {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
             
             let r = await response.text();
@@ -48,7 +48,7 @@ const Login = () => {
                 let res = JSON.parse(r)
 
                 // RESPONSE SHOULD RETURN UNIVERSITY NAME AS WELL
-                let user = {name: res.data.name, id: res.data.user_id, type: res.data.user_type, uni: "blank"}
+                let user = {name: res.data.name, id: res.data.user_id, type: res.data.user_type, uni: res.data.university}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
                 // Pass to new page.
