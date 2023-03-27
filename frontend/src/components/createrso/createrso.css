@@ -12,4 +12,11 @@
     align-self: center;
 }
 
+.pass {
+    color: green;
+}
 
+
+.fail {
+    color: red;
+}

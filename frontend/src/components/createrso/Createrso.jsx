@@ -16,6 +16,7 @@ const Createrso = () => {
         }
         catch (e)
         {
+            setMessage(str);
             return false;
         }
 
@@ -23,8 +24,9 @@ const Createrso = () => {
     }
 
     const makeRSO = async event => {
+        event.preventDefault();
         // Create object with incremental rso_id value, name of RSO and admin id. 
-        
+        setMessage('');
         let obj = {name: rsoName.value, university: user_data.uni, admin: user_data.id};
         
         let js = JSON.stringify(obj);
@@ -40,13 +42,17 @@ const Createrso = () => {
 
             if(!isJSON(r))
             {
-                console.log(r);
+                // document.getElementById('message').classList.remove('pass');
+                // document.getElementById('message').classList.add('fail');
                 setMessage(r);
             }
             else
             {
-                setMessage('');
+                // document.getElementById('message').classList.remove('fail');
+                // document.getElementById('message').classList.add('pass');
+                setMessage("Your club has been successfully created!");
             }
+
         }
         catch (e)
         {
@@ -84,8 +90,9 @@ const Createrso = () => {
                 {/* Onclick will submit data to database and return to "/rso" */}
                 <div class="form-outline mb-4 but">
                     <button type="submit" class="btn btn-success" onClick={makeRSO}>Submit</button>
+                    <p id="message" className='pass'>{message}</p>
                 </div>
-                <p>{message}</p>
+                
             </form>
         </>
     )

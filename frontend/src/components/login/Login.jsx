@@ -23,6 +23,8 @@ const Login = () => {
     
     const doLogin = async event =>
     {
+        event.preventDefault();
+        
         let obj = {email: loginEmail.value, password: loginPassword.value};
         let js = JSON.stringify(obj);
 

@@ -25,6 +25,7 @@ const Signup = () => {
 
   const doSignup = async event =>
   {
+    event.preventDefault();
     // Correct object, change later.
     // let obj = {name: signupName.value, password: signupPassword.value, uni: signupUni.value, email: signupEmail.value, user_type: 0};
     let obj = {name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0, university: signupUni.value };
