@@ -60,7 +60,6 @@ const Createrso = () => {
             return;
         }
         
-
         // 1. Check if all of the emails belong to users at the same University. 
         //    Response: Yes
         //        a. Create RSO, with status pending
@@ -68,7 +67,6 @@ const Createrso = () => {
         //    Response: No
         //        a. Send back error message, which users are not belonging to the university 
 
-        
 
         // Check for error in response
 

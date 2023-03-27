@@ -9,6 +9,8 @@ const Ievent = () => {
     let event_info = JSON.parse(localStorage.getItem("event_info"));
     console.log(event_info.location);
 
+    let tweet = `https://twitter.com/intent/tweet?text=${user_data.uni} Events: Come hangout at ${event_info.name}!`;
+
     // Using event_info.id, load comments for that specific event.
 
         return (
@@ -58,13 +60,9 @@ const Ievent = () => {
                             </div>
                         </div>
                         <div class="social mb-3">
-                            {/* Discover how to create custom links to social media */}
+                            {/* Create twitter sharing link, cannot do other social media*/}
                             <a class="btn btn-sm btn-primary ga-event mr-1" target="_blank" 
-                            href="https://www.facebook.com/sharer.php?u=https://events.ucf.edu/event/2780625/florida-folklore-society-annual-meeting/"> 
-                            <p className="social"><Icon.Facebook/> Share </p>
-                            </a>
-                            <a class="btn btn-sm btn-primary ga-event mr-1" target="_blank" 
-                            href="https://twitter.com/intent/tweet?text=UCF+Events%3A+Florida+Folklore+Society+annual+meeting&url=https://events.ucf.edu/event/2780625/florida-folklore-society-annual-meeting"> 
+                            href={tweet}> 
                             <p className="social"><Icon.Twitter/> Tweet</p>
                             </a>
                         </div>
