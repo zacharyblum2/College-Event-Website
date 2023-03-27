@@ -3,3 +3,27 @@
     flex-direction: column;
     gap: 15px;
 }
+
+.rsos {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+#createBtn
+{
+    width: 200px;
+    align-self: flex-start;
+}
+
+.public {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.your {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

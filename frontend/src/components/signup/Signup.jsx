@@ -8,36 +8,48 @@ const Signup = () => {
   let signupUni;
 
   const [message, setMessage] = useState("");
+  const [unis, setUnis] = useState("");
+
+  function isJSON(str) {
+    try 
+    {
+        JSON.parse(str);
+    }
+    catch (e)
+    {
+        return false;
+    }
+
+    return true;
+}
 
   const doSignup = async event =>
   {
     // Correct object, change later.
     // let obj = {name: signupName.value, password: signupPassword.value, uni: signupUni.value, email: signupEmail.value, user_type: 0};
-    let obj = {user_id: 1, name: signupName.value, password: signupPassword.value, email: signupEmail.value, uni: signupUni.value, user_type: 0};
+    let obj = {name: signupName.value, password: signupPassword.value, email: signupEmail.value, user_type: 0, university: signupUni.value };
     let js = JSON.stringify(obj);
 
     try
     {
-      const response = await fetch('http://127.0.0.1:8000/api/users/',
-            {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+      const response = await fetch('http://127.0.0.1:8000/api/register/',
+            {method:'POST', body:js, headers: {accept: 'application/json'}});
         
 
       let r = await response.text();
-      let res = JSON.parse(r);
-
-      console.log(Object.keys(res).length);
 
       // Then we have an error
-      if ((Object.keys(res).length) === 1)
+      if (!isJSON(r))
       {
-        console.log(res.user_id[0]);
-        setMessage(res.user_id[0]);
+        console.log(r);
+        setMessage(r);
       }
       else
       {
+        let res = JSON.parse(r);
+
         // Add university to this later.
-        let user = {name: res.name, id: res.user_id, type: res.user_type, uni: signupUni.value}
-            
+        let user = {name: signupName.value, email: signupEmail.value, id: res.data.user_id, type: 0, uni: signupUni.value}
         // Store information in local storage to be accessed by other windows.
         localStorage.setItem('user_data', JSON.stringify(user));
 
@@ -47,9 +59,11 @@ const Signup = () => {
     }
     catch (e)
     {
-      console.log(e.toString());
+      alert(e.toString());
       return;
     }
+
+    console.log('do it ' + signupEmail.value + ' ' + signupPassword.value);
 }
 
 const searchUnis = async event =>
@@ -57,18 +71,18 @@ const searchUnis = async event =>
   // Blank get request of 'http://127.0.0.1:8000/api/universities/'
   // Store results inside unis
   // Map unis results as options.
-  const response = await fetch('http://127.0.0.1:8000/api/universities/',
+  const response = await fetch('http://localhost:8000/api/universities/',
             {method:'GET', headers: {'Content-Type': 'application/json'}});
 
   let r = await response.text();
 
   let res = JSON.parse(r);
-
-  console.log(res);
+  setUnis(res);
+  // {uni_name: name, description: description..}, {uni_name: name, description: description}
 }
 
   return (
-    <section class="vh-100">
+    <section class="vh-100" onLoad={searchUnis}>
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-11">
@@ -99,10 +113,7 @@ const searchUnis = async event =>
                         <div class="form-outline flex-fill mb-0">
                           <label class="form-label" for="form3Example3c">Your University</label>
                           <select class="form-control" name="universities" id="universities" required ref={(c) => signupUni = c}>
-                            <option value="UA">University of Alabama</option>
-                            <option value="UF">University of Florida</option>
-                            <option value="OSU">Ohio State University</option>
-                            <option value="UMich">University of Michigan</option>
+                            {unis.map((uni) => <option value={uni.uni_name}>{uni.description}</option>)}
                           </select>
                         </div>
                       </div>
@@ -118,7 +129,6 @@ const searchUnis = async event =>
                         <span id="signupResult">{message}</span>
                         <button class="btn btn-success btn-lg" onClick={doSignup}>Register</button>
                       </div>
-                      
                     </form>
 
                   </div>
