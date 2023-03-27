@@ -32,21 +32,30 @@ export default class RSO extends React.Component {
     let obj = {user_id: user_data.id, rso: this.state.name};
     let js = JSON.stringify(obj);
 
-    const response = await fetch('http://localhost:8000/api/join_rso/',
-    {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
-
-    let r = await response.text();
-
-    if (!this.isJSON(r))
+    try
     {
-        console.log(r);
-        this.state.message.setState(r);
+      const response = await fetch('http://localhost:8000/api/join_rso/',
+      {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+  
+      let r = await response.text();
+  
+      if (!this.isJSON(r))
+      {
+          console.log(r);
+          this.setState({message: r});
+      }
+      else
+      {
+          this.setState({message: ''});
+      }
     }
-    else
+    catch (e)
     {
-
+      alert(e.toString());
+      return;
     }
 
+    window.location.reload(true);
   }
 
   render() {
