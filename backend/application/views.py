@@ -168,6 +168,8 @@ def RSOS_register(request):
             rso = RSOS(name=req_name,
                        admin=admin.user_id,
                        university=university)
+            rso.members.add(admin)
+            
             rso.save()
 
             #Update the university num_rsos count
