@@ -5,10 +5,6 @@ import * as Icon from 'react-bootstrap-icons';
 const Createrso = () => {
 
     let rsoName;
-    let email1;
-    let email2;
-    let email3;
-    let email4;
     let user_data = JSON.parse(localStorage.getItem("user_data"));
 
     const [message, setMessage] = useState("");
@@ -28,10 +24,8 @@ const Createrso = () => {
 
     const makeRSO = async event => {
         // Create object with incremental rso_id value, name of RSO and admin id. 
-        let emailList = [email1.value, email2.value, email3.value, email4.value]
         
-        let obj = {name: rsoName.value, university: user_data.uni, 
-            members: emailList, admin: user_data.id};
+        let obj = {name: rsoName.value, university: user_data.uni, admin: user_data.id};
         
         let js = JSON.stringify(obj);
         console.log(js);
