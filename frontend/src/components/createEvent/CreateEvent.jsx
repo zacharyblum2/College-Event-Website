@@ -38,43 +38,66 @@ const CreateEvent = () => {
     return (
         <>
             {/* Store RSO name, and admin id (who creates it) */}
-            <form id='create' action="">
-                <div class="form-outline mb-4">
-                    <a href="/rsos" class="btn btn-outline-success"><Icon.ArrowLeft/></a>
-                </div>
+            <form id='build' action="">
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="rsoName">RSO Name</label>
-                    <input type="text" id="rsoName" class="form-control" placeholder="Something Club"
-                    required/>
+                    <a href="/user" class="btn btn-outline-success"><Icon.ArrowLeft/></a>
                 </div>
 
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email1">Person 1 Email</label>
-                    <input type="email" id="email1" class="form-control" placeholder="123@gmail.com"
-                    required/>
-                </div>
+                <div id="containForm">
+                    <div id="left" class="form-outline mb-4">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="rsoName">Event Name</label>
+                            <input type="text" id="eventName" class="form-control" placeholder="Something Club"
+                            required/>
+                        </div>
 
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email2">Person 2 Email</label>
-                    <input type="email" id="email2" class="form-control" placeholder="123@gmail.com"
-                    required/>
-                </div>
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="email1">Event Type: </label>
+                            <select class="form-control">
+                                <option value="0">Public</option>
+                                <option value="1">Private</option>
+                                <option value="2">RSO</option>
+                            </select>
+                        </div>
 
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email3">Person 3 Email</label>
-                    <input type="email" id="email3" class="form-control" placeholder="123@gmail.com"
-                    required/>
-                </div>
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="description">Description</label>
+                            <input type="text" id="description" class="form-control" placeholder="Describe your event"
+                            required/>
+                        </div>
+                    </div>
 
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email4">Person 4 Email</label>
-                    <input type="email" id="email4" class="form-control" placeholder="123@gmail.com"
-                    required />
+                    <div id="right" class="form-outline mb-4">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="datetime">Date and Time</label>
+                            <input type="datetime-local" id="datetime" name="datetime" class="form-control"/>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="address">Address</label>
+                            <input type="text" id="address" class="form-control" placeholder="123 Street"
+                            required />
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="phone">Contact Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="123-456-789"
+                            pattern="[0-9]{3}-[0-9]{3]-[0-9]{3}"
+                            required />
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="email">Contact Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="123@gmail.com"
+                            required />
+                        </div>
+                    </div>
                 </div>
+                
 
                 {/* Onclick will submit data to database and return to "/rso" */}
-                <div class="form-outline mb-4 but">
+                <div id="makeEvent" class="form-outline mb-4 but">
                     <button type="submit" class="btn btn-success" onClick={makeEvent}>Submit</button>
                 </div>
             </form>
