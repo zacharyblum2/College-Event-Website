@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './createEvent.css';
 import * as Icon from 'react-bootstrap-icons';
+import { Map } from '../../components';
 
 const CreateEvent = () => {
+
     let user_data = JSON.parse(localStorage.getItem("user_data"));
-    let de
+    // let de
 
     const makeEvent = async event => {
         
@@ -40,7 +42,7 @@ const CreateEvent = () => {
             {/* Store RSO name, and admin id (who creates it) */}
             <form id='build' action="">
 
-                <div class="form-outline mb-4">
+                <div class="form-outline mb-4" id="back">
                     <a href="/user" class="btn btn-outline-success"><Icon.ArrowLeft/></a>
                 </div>
 
@@ -93,8 +95,11 @@ const CreateEvent = () => {
                             required />
                         </div>
                     </div>
-                </div>
-                
+                    <div className="map">
+                        <h5>Pick your event location</h5>
+                        <Map />
+                    </div>
+                </div>                
 
                 {/* Onclick will submit data to database and return to "/rso" */}
                 <div id="makeEvent" class="form-outline mb-4 but">

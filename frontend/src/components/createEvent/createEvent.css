@@ -20,3 +20,12 @@
 #right {
     width: 600px;
 }
+
+#back {
+    align-self: flex-start;
+    margin: 0px 120px 0px;
+}
+
+.map {
+    width: 60%;
+}
