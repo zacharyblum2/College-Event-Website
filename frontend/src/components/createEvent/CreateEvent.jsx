@@ -97,7 +97,7 @@ const CreateEvent = () => {
                     </div>
                     <div className="map">
                         <h5>Pick your event location</h5>
-                        <Map />
+                        <Map create={true}/>
                     </div>
                 </div>                
 
