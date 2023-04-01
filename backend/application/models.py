@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -66,19 +67,9 @@ class Events(models.Model):
     name = models.CharField(max_length=40)
     description = models.CharField(max_length=250)
     time = models.DateTimeField()
-    def clean_time(self):
-        time = self.cleaned_data['time']
-        if time < datetime.time.today():
-            raise forms.ValidationError("The time cannot be in the past!")
-        return time
     creator = models.ForeignKey('Users', on_delete=models.CASCADE)
     host_rso = models.ForeignKey('RSOS', on_delete=models.CASCADE)
-    date = models.DateField()
-    def clean_date(self):
-        date = self.cleaned_data['date']
-        if date < datetime.date.today():
-            raise forms.ValidationError("The date cannot be in the past!")
-        return date
+    date = models.DateField(validators=[MinValueValidator(datetime.date.today)])
     email = models.TextField(max_length=30)
     event_type = models.IntegerField(validators=[
             MaxValueValidator(3),
