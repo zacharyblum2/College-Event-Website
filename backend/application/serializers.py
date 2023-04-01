@@ -14,12 +14,12 @@ class RSOS_serializer(serializers.ModelSerializer):
 class Comments_serializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields = ('event', 'user', 'comment_id', 'body')
+        fields = ('event', 'user', 'comment_id', 'body', 'rating')
 
 class Events_serializer(serializers.ModelSerializer):
     class Meta:
         model = Events
-        fields = ('event_id', 'creator', 'host_rso', 'date', 'time', 'email', 'event_type', 
+        fields = ('event_id', 'name', 'description', 'creator', 'host_rso', 'date', 'time', 'email', 'event_type', 
         'phone', 'longitude', 'latitude', 'loc_name')
 
 class Universities_serializer(serializers.ModelSerializer):
