@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -55,16 +56,34 @@ class Comments(models.Model):
     user = models.ForeignKey('Users', on_delete=models.CASCADE)
     comment_id = models.AutoField(primary_key=True, blank=True)
     body = models.CharField(max_length=240)
-    rating = models.IntegerField(default='0')
+    rating = models.IntegerField(validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ])
 
 class Events(models.Model):
     event_id = models.AutoField(primary_key=True, blank=True)
+    name = models.CharField(max_length=40)
+    description = models.CharField(max_length=250)
+    time = models.DateTimeField()
+    def clean_time(self):
+        time = self.cleaned_data['time']
+        if time < datetime.time.today():
+            raise forms.ValidationError("The time cannot be in the past!")
+        return time
     creator = models.ForeignKey('Users', on_delete=models.CASCADE)
     host_rso = models.ForeignKey('RSOS', on_delete=models.CASCADE)
     date = models.DateField()
-    time = models.DateTimeField()
+    def clean_date(self):
+        date = self.cleaned_data['date']
+        if date < datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the past!")
+        return date
     email = models.TextField(max_length=30)
-    event_type = models.IntegerField()
+    event_type = models.IntegerField(validators=[
+            MaxValueValidator(3),
+            MinValueValidator(0)
+        ])
     phone = models.CharField(max_length=10)
     longitude = models.IntegerField()
     latitude = models.IntegerField()
