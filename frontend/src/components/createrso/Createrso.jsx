@@ -5,10 +5,6 @@ import * as Icon from 'react-bootstrap-icons';
 const Createrso = () => {
 
     let rsoName;
-    let email1;
-    let email2;
-    let email3;
-    let email4;
     let user_data = JSON.parse(localStorage.getItem("user_data"));
 
     const [message, setMessage] = useState("");
@@ -20,6 +16,7 @@ const Createrso = () => {
         }
         catch (e)
         {
+            setMessage(str);
             return false;
         }
 
@@ -27,11 +24,10 @@ const Createrso = () => {
     }
 
     const makeRSO = async event => {
+        event.preventDefault();
         // Create object with incremental rso_id value, name of RSO and admin id. 
-        let emailList = [email1.value, email2.value, email3.value, email4.value]
-        
-        let obj = {name: rsoName.value, university: user_data.uni, 
-            members: emailList, admin: user_data.id};
+        setMessage('');
+        let obj = {name: rsoName.value, university: user_data.uni, admin: user_data.id};
         
         let js = JSON.stringify(obj);
         console.log(js);
@@ -46,13 +42,17 @@ const Createrso = () => {
 
             if(!isJSON(r))
             {
-                console.log(r);
+                document.getElementById('message').classList.remove('pass');
+                document.getElementById('message').classList.add('fail');
                 setMessage(r);
             }
             else
             {
-                setMessage('');
+                document.getElementById('message').classList.remove('fail');
+                document.getElementById('message').classList.add('pass');
+                setMessage("Your club has been successfully created!");
             }
+
         }
         catch (e)
         {
@@ -87,35 +87,12 @@ const Createrso = () => {
                     required ref={ (c) => rsoName = c}/>
                 </div>
 
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email1">Person 1 Email</label>
-                    <input type="email" id="email1" class="form-control" placeholder="123@gmail.com"
-                    required ref={ (c) => email1 = c}/>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email2">Person 2 Email</label>
-                    <input type="email" id="email2" class="form-control" placeholder="123@gmail.com"
-                    required ref={ (c) => email2 = c}/>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email3">Person 3 Email</label>
-                    <input type="email" id="email3" class="form-control" placeholder="123@gmail.com"
-                    required ref={ (c) => email3 = c}/>
-                </div>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="email4">Person 4 Email</label>
-                    <input type="email" id="email4" class="form-control" placeholder="123@gmail.com"
-                    required ref={ (c) => email4 = c}/>
-                </div>
-
                 {/* Onclick will submit data to database and return to "/rso" */}
                 <div class="form-outline mb-4 but">
                     <button type="submit" class="btn btn-success" onClick={makeRSO}>Submit</button>
+                    <p id="message" className='pass'>{message}</p>
                 </div>
-                <p>{message}</p>
+                
             </form>
         </>
     )

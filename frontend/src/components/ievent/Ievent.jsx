@@ -39,8 +39,8 @@ const Ievent = () => {
                         <div class="location-type-container d-flex mb-3">
                             <span class="h5 font-weigth-normal d-block"> <Icon.PinMap/> {event_info.location}</span>
                             <span class="event-location-url">
-                                <a href="https://goo.gl/maps/oT5mkQHCNKSZLCBu6">[ View Location ]</a>
-                                <LocationPickerE address={event_info.location[0]} longitude={event_info.location[1]} latitude={event_info.location[2]}/>
+                                {/* <a href="https://goo.gl/maps/oT5mkQHCNKSZLCBu6">[ View Location ]</a>
+                                <LocationPickerE address={event_info.location[0]} longitude={event_info.location[1]} latitude={event_info.location[2]}/> */}
                             </span>
                         </div>
                         <div class="event-registration hidden-md-down card card-outline-primary my-4">
