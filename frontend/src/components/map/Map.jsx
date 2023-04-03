@@ -28,11 +28,15 @@ const Map = (props) => {
         (response) => {
             const address = response.results[0].formatted_address;
             setAddress(address);
+            
+            // Add to local storage.
+            let location = {address: address, lat: lat, lng: lng};
+            localStorage.setItem('loc_data', JSON.stringify(location)); 
         },
         (error) => {
             console.log(error);
         }
-    )
+    ) 
   }
   
   function handleChangeZoom (newZoom){
