@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './comment.css';
 
 // Get data from an api.
@@ -8,6 +8,10 @@ import './comment.css';
 // display an edit and delete comment button. 
 
 /// If user_id == commenter_id, unhide edit and delete.
+let user_data = JSON.parse(localStorage.getItem('user_data'));
+alert(user_data);
+
+
 
 export default class Comments extends React.Component {
     
@@ -20,6 +24,9 @@ export default class Comments extends React.Component {
             // This is where we store the user who creates the comment id. 
             uid: props.id
         }
+
+        // Update this state if user_data.id = commentor_id
+        this.same = false;
     }
 
     render() {
@@ -35,8 +42,11 @@ export default class Comments extends React.Component {
                             <p class="small text-muted mb-0">Rating: {this.state.rating}</p>
                         </div>
                         <div class="btns">
+                            {this.same ? <>
                             <button class="btn btn-primary ">Edit</button>
                             <button class="btn btn-primary ">Delete</button>
+                            </> : <></>}
+                            
                         </div>
                     </div>
                 </div>  

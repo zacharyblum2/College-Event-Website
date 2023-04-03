@@ -33,11 +33,21 @@ const Comments = () => {
     // Use eventInfo.id to search for all of the comments, store them in an array called comments
     // similar to above.
 
-    function addComment() {
-        alert(rating.value);
-        alert(comment.value);
-        alert(user_data.id);
-        alert(event_info.id);
+    const addComment = async event => {
+        event.preventDefault();
+        
+        let obj = {event: event_info.id, user: user_data.id, body: comment.value, rating: rating.value}
+        let js = JSON.stringify(obj);
+
+        const response = await
+        fetch('http://127.0.0.1:8000/api/comments/',
+        {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+
+        let r= await response.text();
+
+        let res = JSON.parse(r);
+
+        console.log(res);
     }
 
     return (
