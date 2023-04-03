@@ -21,7 +21,8 @@ const CreateEvent = () => {
     let user_data = JSON.parse(localStorage.getItem("user_data"));
     console.log(user_data.id);
 
-    let admin_rso;
+    let loc_data = JSON.parse(localStorage.getItem("loc_data"));
+    console.log(loc_data);
 
     const getAdmin = async event => {
         event.preventDefault();
@@ -42,14 +43,14 @@ const CreateEvent = () => {
         // Grab just date from eventDate.value;
         let obj = {name: eventName.value, description: eventDesc.value, creator: user_data.id, host_rso: eventRSO.value,
                    date: eventTime.value.substr(0, 9), time: eventTime.value, email: eventEmail.value, event_type: eventType.value,
-                   phone: eventPhone.value, longitude: 0, latitude: 0, loc_name: 0};
+                   phone: eventPhone.value, longitude: loc_data.lng, latitude: loc_data.lat, loc_name: loc_data.address};
         
         let js = JSON.stringify(obj);
         alert(js);
 
-        // const response = await
-        //     fetch('http://127.0.0.1:8000/api/rsos/',
-        //     {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+        const response = await
+            fetch('http://127.0.0.1:8000/api/events/',
+            {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
         // 1. Check if all of the emails belong to users at the same University. 
         //    Response: Yes
@@ -58,7 +59,18 @@ const CreateEvent = () => {
         //    Response: No
         //        a. Send back error message, which users are not belonging to the university 
 
-        // let r = await response.text();
+        let r = await response.text();
+
+        let res = JSON.parse(r);
+        
+        if (Object.keys(r).length != 12)
+        {
+            console.log(res);
+        }
+        else
+        {
+            alert("Hello!");
+        }
 
         // Check for error in response
 
@@ -78,7 +90,7 @@ const CreateEvent = () => {
                     <div class="form-outline mb-4" id="back">
                         <a href="/user" class="btn btn-outline-success"><Icon.ArrowLeft/></a>
                     </div>
-                    
+
                     <div id="left" class="form-outline mb-4">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="rsoName">Event Name</label>
