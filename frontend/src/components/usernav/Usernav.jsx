@@ -3,8 +3,12 @@ import './usernav.css';
 
 // How can I pass the user, user_id and their university name to each page? 
 
+
 const Usernav = () => {
   let user_data = JSON.parse(localStorage.getItem('user_data'));
+  function clear() {
+    localStorage.clear();
+  }
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark justify-content-between">
@@ -17,7 +21,7 @@ const Usernav = () => {
         <div className="navbar-nav">
           <a className="nav-item nav-link" href='/user'>Events <span className="sr-only">(current)</span></a>
           <a className="nav-item nav-link" href='/rsos'>RSOs <span className="sr-only">(current)</span></a>
-          <a className="nav-item nav-link" href="/">Log out <span className="sr-only">(current)</span></a>
+          <a className="nav-item nav-link" href="/" onClick={clear}>Log out <span className="sr-only">(current)</span></a>
         </div>
       </div>
     </nav>

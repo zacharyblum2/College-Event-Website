@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Icon from 'react-bootstrap-icons';
 import './ievent.css';
-import { LocationPickerE } from '../../components';
+import { Map } from '../../components';
 
 // export default class Ievent extends React.Component { render() { return ( )}}
 const Ievent = () => {
@@ -31,18 +31,7 @@ const Ievent = () => {
                             <p class="h5">{event_info.date} at {event_info.time}</p>
                         </div>
                         <p>{event_info.description}</p>
-                    </div>
-                    <aside class="col-lg-4">
-                        <div class="event-location hidden-md-down">
-                            <h2 class="h5">Location</h2>
-                        </div>
-                        <div class="location-type-container d-flex mb-3">
-                            <span class="h5 font-weigth-normal d-block"> <Icon.PinMap/> {event_info.location}</span>
-                            <span class="event-location-url">
-                                {/* <a href="https://goo.gl/maps/oT5mkQHCNKSZLCBu6">[ View Location ]</a>
-                                <LocationPickerE address={event_info.location[0]} longitude={event_info.location[1]} latitude={event_info.location[2]}/> */}
-                            </span>
-                        </div>
+
                         <div class="event-registration hidden-md-down card card-outline-primary my-4">
                             <div class="card-block">
                                 <h2 class="h5">Event Registration</h2>
@@ -65,6 +54,16 @@ const Ievent = () => {
                             href={tweet}> 
                             <p className="social"><Icon.Twitter/> Tweet</p>
                             </a>
+                        </div>
+                    </div>
+                    <aside class="col-lg-4">
+                        <div class="event-location hidden-md-down">
+                            <h2 class="h5">Location</h2>
+                        </div>
+                        <div class="location-type-container d-flex mb-3">
+                            <span class="event-location-url">
+                            <Map create={false} location={{name: event_info.location[0], lat: event_info.location[1], lng: event_info.location[2]}}/>
+                            </span>
                         </div>
                     </aside>
                 </div>
