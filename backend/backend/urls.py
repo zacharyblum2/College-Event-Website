@@ -34,4 +34,9 @@ urlpatterns = [
     path('api/register_rso/', views.RSOS_register),
     path('api/join_rso/', views.join_rso),
     path('api/leave_rso/', views.leave_rso),
+    path('api/get_user_events/', views.get_user_events),
+    path('api/get_user_admin_rsos/', views.get_user_admin_rsos),
+    path('api/get_event_comments/', views.get_event_comments),
+    path('api/delete_comment/', views.delete_comment),
+    path('api/edit_comment/', views.edit_comment)
 ]
