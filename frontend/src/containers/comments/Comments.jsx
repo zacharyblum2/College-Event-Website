@@ -33,6 +33,25 @@ const Comments = () => {
     // Use eventInfo.id to search for all of the comments, store them in an array called comments
     // similar to above.
 
+    const getComments = async event => {
+        event.preventDefault();
+
+        let obj = {event_id: event_info.id};
+        let js = JSON.stringify(obj);
+
+        const response = await 
+        fetch ('http://127.0.0.1:8000/api/get_event_comments/', 
+        {method:'GET', body:js, headers: {'Content-Type': 'application/json'}});
+
+        let r = await response.text();
+        let res = JSON.parse(r);
+
+        // What does an error return?
+
+        // Given response, assign it to array comments.
+        comments = res;
+    }
+
     const addComment = async event => {
         event.preventDefault();
         
@@ -51,7 +70,7 @@ const Comments = () => {
     }
 
     return (
-        <div className="containerComment">
+        <div className="containerComment" onLoad={getComments}>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-8 col-lg-6">
                 <div class="card shadow-0 border" style={{backgroundColor: "#f0f2f5"}}>
