@@ -24,6 +24,9 @@ export default class Comments extends React.Component {
             // This is where we store the user who creates the comment id. 
             uid: props.id
         }
+        
+        if (uid == user_data.id)
+            this.same = true;
 
         // Update this state if user_data.id = commentor_id
         this.same = false;
@@ -43,8 +46,13 @@ export default class Comments extends React.Component {
                         </div>
                         <div class="btns">
                             {this.same ? <>
-                            <button class="btn btn-primary ">Edit</button>
-                            <button class="btn btn-primary ">Delete</button>
+                            {/* Edit should make popup to change information. 
+                                Close button will close and no update, update will call update. */}
+                            <button class="btn btn-primary">Edit</button>
+
+                            {/* Delete should pop confirmation box, if box click yes
+                                delete the comment. */}
+                            <button class="btn btn-primary">Delete</button>
                             </> : <></>}
                             
                         </div>
