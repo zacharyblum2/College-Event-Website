@@ -30,11 +30,14 @@ const CreateEvent = () => {
         let obj = {id: user_data.id};
         let js = JSON.stringify(obj);
 
-        // const response = await
-        //     fetch('http://127.0.0.1:8000/api/rsos/',
-        //     {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+        const response = await
+        fetch('http://127.0.0.1:8000/api/get_user_admin_rsos/',
+        {method:'GET', body:js, headers: {'Content-Type': 'application/json'}});
 
-        // Depending on response, setAdmin(true)
+        let res = response.text();
+
+        // If there is admin information, set admin = true.
+        // Save admin data to array. Map array in array selection section.
     }
 
     const makeEvent = async event => {
