@@ -16,8 +16,9 @@ export default class Comments extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: props.name,
-            description: props.description,
+            name: props.user,
+            c_id: props.comment_id,
+            body: props.body,
             rating: props.rating,
             // This is where we store the user who creates the comment id. 
             uid: props.id
@@ -30,6 +31,12 @@ export default class Comments extends React.Component {
         this.same = false;
     }
 
+    // Edit Function
+    // comment_id, body, rating
+
+    // Delete Function
+    // Pass comment_id to be deleted
+    
     render() {
         return (
             <div class="card mb-4">

@@ -62,7 +62,7 @@ const Comments = () => {
         fetch('http://127.0.0.1:8000/api/comments/',
         {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
-        let r= await response.text();
+        let r = await response.text();
 
         let res = JSON.parse(r);
 
@@ -90,7 +90,7 @@ const Comments = () => {
                         </form>
 
                     {
-                    comments.map((element) => <Comment name={element.name} description={element.description} rating={element.rating}/>)
+                    comments.map((element) => <Comment user={element.user.name} comment_id={element.comment_id} body={element.body} rating={element.rating}/>)
                     }   
 
                     </div>
