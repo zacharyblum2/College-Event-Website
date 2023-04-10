@@ -14,9 +14,11 @@ const CreateEvent = () => {
     let eventLon;
     let eventLat;
     let eventLoc;
+    let admins = [];
 
     // Call getAdmin, if the array is empty keep, otherwise change to false.
     const [admin, setAdmin] = useState(false);
+    const [message, setMessage] = useState("");
 
     let user_data = JSON.parse(localStorage.getItem("user_data"));
     console.log(user_data.id);
@@ -27,18 +29,32 @@ const CreateEvent = () => {
     const getAdmin = async event => {
         console.log("entered");
         
-        let obj = {id: user_data.id};
-        let js = JSON.stringify(obj);
+        try {
+            let obj = {id: user_data.id};
+            let js = JSON.stringify(obj);
+    
+            // SHOULD BE POST, CHANGE WHEN AVAILABLE.
+            // const response = await
+            // fetch('http://localhost:8000/api/get_user_admin_rsos/',
+            // {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+    
+            // let r = response.text();
+            // console.log(r);
+            
+            // let res = JSON.parse(r);
+            // admins = r.data.rsos;
 
-        const response = await
-        fetch('http://localhost:8000/api/get_user_admin_rsos/',
-        {method:'GET', body:js, headers: {'Content-Type': 'application/json'}});
-
-        let res = response.text();
-        console.log(res);
-
-        // If there is admin information, set admin = true.
-        // Save admin data to array. Map array in array selection section.
+            // If admins is empty, don't setAdmin(true);
+            // setAdmin(true);
+    
+            // If there is admin information, set admin = true.
+            // Save admin data to array. Map array in array selection section.
+        }
+        catch (e)
+        {
+            console.log(e);
+        }
+        
     }
 
     const makeEvent = async event => {
@@ -46,9 +62,11 @@ const CreateEvent = () => {
 
         // Grab just date from eventDate.value;
         let obj = {name: eventName.value, description: eventDesc.value, creator: user_data.id, host_rso: eventRSO.value,
-                   date: eventTime.value.substr(0, 9), time: eventTime.value, email: eventEmail.value, event_type: eventType.value,
+                   date: eventTime.value.substr(0, 10), time: eventTime.value, email: eventEmail.value, event_type: eventType.value,
                    phone: eventPhone.value, longitude: loc_data.lng, latitude: loc_data.lat, loc_name: loc_data.address};
         
+        console.log(eventTime.value.substr(0, 10));
+
         let js = JSON.stringify(obj);
         alert(js);
 
@@ -70,10 +88,11 @@ const CreateEvent = () => {
         if (Object.keys(r).length !== 12)
         {
             console.log(res);
+            setMessage("Some of your information entered was incorrect, please try again.")
         }
         else
         {
-            alert("Hello!");
+            setMessage("added");
         }
 
         // Check for error in response
@@ -148,13 +167,15 @@ const CreateEvent = () => {
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="email">RSO</label>
                                     <select class="form-control" ref={ (c) => eventRSO = c}>
-                                        <option value="0">RSO1</option>
-                                        <option value="1">RSO2</option>
-                                        <option value="2">RSO3</option>
+                                        {
+                                            admins.map((admin) => <option value={admin}>{admin}</option>)
+                                        }
                                     </select>
                                 </div>  
                             </>
                         : <></>}
+
+                        <p>{message}</p>
 
                     </div>
                     
