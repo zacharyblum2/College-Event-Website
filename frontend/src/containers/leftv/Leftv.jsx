@@ -25,6 +25,7 @@ const Leftv = () => {
   // const [events, setEvents] = useState("");
   const [joined, setJoined] = useState("");
   const [unjoined, setUnJoined] = useState("");
+  const [events, setEvents] = useState("");
   const [userLoaded, setUserLoaded] = useState(false);
 
   let user_data = JSON.parse(localStorage.getItem("user_data"));
@@ -33,6 +34,7 @@ const Leftv = () => {
     let data = {user_id: user_data.id};
     let js = JSON.stringify(data);
 
+    // Does reading the errors work?
     try
     {
       const response = await fetch('http://localhost:8000/api/get_user_rsos/',
@@ -44,6 +46,25 @@ const Leftv = () => {
       setJoined(res.data.joined);
       setUnJoined(res.data.not_joined);
       return {success: true}
+    }
+    catch (e)
+    {
+      alert(e.toString());
+      return {success: false};
+    }
+
+    console.log("Hello"); 
+    
+    try 
+    {
+      // Should this be a post or a get?
+      const response = await 
+      fetch('http://localhost:8000/api/get_user_events/',
+      {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+
+      let r = await response.text();
+      setEvents(res.data);
+      return {success: true};
     }
     catch (e)
     {
