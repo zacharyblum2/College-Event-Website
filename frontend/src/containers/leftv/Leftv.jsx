@@ -30,13 +30,14 @@ const Leftv = () => {
 
   let user_data = JSON.parse(localStorage.getItem("user_data"));
 
-  const getRSOs = async event => {
+  const getInfo = async event => {
     let data = {user_id: user_data.id};
     let js = JSON.stringify(data);
 
     // Does reading the errors work?
     try
     {
+      // Get RSO information.
       const response = await fetch('http://localhost:8000/api/get_user_rsos/',
       {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
@@ -45,30 +46,20 @@ const Leftv = () => {
       let res = JSON.parse(r);
       setJoined(res.data.joined);
       setUnJoined(res.data.not_joined);
+
+      // Get event information.
+      const response2 = await 
+      fetch('http://localhost:8000/api/get_user_events/',
+      {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+      
+      let r2 = await response.text();
+      setEvents(r2.data);
+
       return {success: true}
     }
     catch (e)
     {
-      alert(e.toString());
-      return {success: false};
-    }
-
-    console.log("Hello"); 
-    
-    try 
-    {
-      // Should this be a post or a get?
-      const response = await 
-      fetch('http://localhost:8000/api/get_user_events/',
-      {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
-
-      let r = await response.text();
-      setEvents(res.data);
-      return {success: true};
-    }
-    catch (e)
-    {
-      alert(e.toString());
+      console.log(e.toString());
       return {success: false};
     }
   }
@@ -76,7 +67,7 @@ const Leftv = () => {
   useEffect(() => {
     (async() => {
       setUserLoaded(false);
-      let res = await getRSOs();
+      let res = await getInfo();
       // Wait on res2 as well, if either fail throw error of some sort. 
       // let res2 = await getEvents();
       if (res.success) {

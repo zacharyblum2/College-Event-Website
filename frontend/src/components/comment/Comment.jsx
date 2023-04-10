@@ -9,8 +9,6 @@ import './comment.css';
 
 /// If user_id == commenter_id, unhide edit and delete.
 let user_data = JSON.parse(localStorage.getItem('user_data'));
-alert(user_data);
-
 
 
 export default class Comments extends React.Component {
@@ -25,7 +23,7 @@ export default class Comments extends React.Component {
             uid: props.id
         }
         
-        if (uid == user_data.id)
+        if (this.uid === user_data.id)
             this.same = true;
 
         // Update this state if user_data.id = commentor_id

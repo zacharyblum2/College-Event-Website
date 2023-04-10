@@ -60,7 +60,7 @@ const Signup = () => {
     }
     catch (e)
     {
-      alert(e.toString());
+      console.log(e.toString());
       return;
     }
 
