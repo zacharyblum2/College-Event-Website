@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './createEvent.css';
 import * as Icon from 'react-bootstrap-icons';
 import { Map } from '../../components';
@@ -25,16 +25,17 @@ const CreateEvent = () => {
     console.log(loc_data);
 
     const getAdmin = async event => {
-        event.preventDefault();
+        console.log("entered");
         
         let obj = {id: user_data.id};
         let js = JSON.stringify(obj);
 
         const response = await
-        fetch('http://127.0.0.1:8000/api/get_user_admin_rsos/',
+        fetch('http://localhost:8000/api/get_user_admin_rsos/',
         {method:'GET', body:js, headers: {'Content-Type': 'application/json'}});
 
         let res = response.text();
+        console.log(res);
 
         // If there is admin information, set admin = true.
         // Save admin data to array. Map array in array selection section.
@@ -66,7 +67,7 @@ const CreateEvent = () => {
 
         let res = JSON.parse(r);
         
-        if (Object.keys(r).length != 12)
+        if (Object.keys(r).length !== 12)
         {
             console.log(res);
         }
@@ -80,6 +81,10 @@ const CreateEvent = () => {
         // Otherwise do nothing
     }
 
+    useEffect(() => {
+        getAdmin();
+    }, []);
+
     //name: 'Fun in the sun', description: 'OUTSIDE TIME', date: '12/2/2019', time: '12:00pm', 
     //organizer: 'Emily Blunt', email: 'emilyblunt@gmail.com', phone: '9545931896', 
     //location: ["HEC 103", 28.6024, -81.2001
@@ -87,7 +92,7 @@ const CreateEvent = () => {
     return (
         <>
             {/* Store RSO name, and admin id (who creates it) */}
-            <form id='build' action="" onLoad={getAdmin}>
+            <form id='build' action="">
 
                 <div id="containForm">
                     <div class="form-outline mb-4" id="back">

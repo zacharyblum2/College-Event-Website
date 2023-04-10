@@ -25,7 +25,7 @@ const Leftv = () => {
   // const [events, setEvents] = useState("");
   const [joined, setJoined] = useState("");
   const [unjoined, setUnJoined] = useState("");
-  const [events, setEvents] = useState("");
+  //const [events, setEvents] = useState("");
   const [userLoaded, setUserLoaded] = useState(false);
 
   let user_data = JSON.parse(localStorage.getItem("user_data"));
@@ -48,13 +48,16 @@ const Leftv = () => {
       setUnJoined(res.data.not_joined);
 
       // Get event information.
-      const response2 = await 
-      fetch('http://localhost:8000/api/get_user_events/',
-      {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+      // SHOULD BE POST, CHANGE WHEN AVAILABLE.
+      // const response2 = await 
+      // fetch('http://localhost:8000/api/get_user_events/',
+      // {method:'GET', body:js, headers: {'Content-Type': 'application/json'}});
       
-      let r2 = await response.text();
-      setEvents(r2.data);
+      // let r2 = await response2.text();
+      // console.log(r2);
+      // setEvents(r2.data);
 
+      // console.log(r2);
       return {success: true}
     }
     catch (e)
