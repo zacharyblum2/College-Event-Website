@@ -88,10 +88,17 @@ const CreateEvent = () => {
         if (Object.keys(r).length !== 12)
         {
             console.log(res);
+            // Set class to green.
+            console.log(document.querySelectorAll('p.eventMessage'));
+            document.querySelectorAll('eventMessage').classList.remove('green');
+            document.querySelectorAll('eventMessage').classList.add('red');
             setMessage("Some of your information entered was incorrect, please try again.")
         }
         else
         {
+            // Set class to green.
+            document.querySelectorAll('eventMessage').classList.remove('red');
+            document.querySelectorAll('eventMessage').classList.add('green');
             setMessage("added");
         }
 
@@ -175,7 +182,7 @@ const CreateEvent = () => {
                             </>
                         : <></>}
 
-                        <p>{message}</p>
+                        <p className="green eventMessage">{message}</p>
 
                     </div>
                     
