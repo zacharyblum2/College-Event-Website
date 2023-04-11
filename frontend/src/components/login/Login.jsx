@@ -60,7 +60,7 @@ const Login = () => {
         }
         catch (e)
         {
-            alert(e.toString());
+            console.log(e.toString());
             return;
         }
 

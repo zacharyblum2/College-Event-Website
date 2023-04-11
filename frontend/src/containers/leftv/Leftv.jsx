@@ -25,18 +25,19 @@ const Leftv = () => {
   // const [events, setEvents] = useState("");
   const [joined, setJoined] = useState("");
   const [unjoined, setUnJoined] = useState("");
-  const [events, setEvents] = useState("");
+  //const [events, setEvents] = useState("");
   const [userLoaded, setUserLoaded] = useState(false);
 
   let user_data = JSON.parse(localStorage.getItem("user_data"));
 
-  const getRSOs = async event => {
+  const getInfo = async event => {
     let data = {user_id: user_data.id};
     let js = JSON.stringify(data);
 
     // Does reading the errors work?
     try
     {
+      // Get RSO information.
       const response = await fetch('http://localhost:8000/api/get_user_rsos/',
       {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
@@ -53,12 +54,12 @@ const Leftv = () => {
       let r2 = await response.text();
       let res2 = JSON.parse(r2)
       setEvents(res2.data);
-
+      
       return {success: true}
     }
     catch (e)
     {
-      alert(e.toString());
+      console.log(e.toString());
       return {success: false};
     }
   }
@@ -66,7 +67,7 @@ const Leftv = () => {
   useEffect(() => {
     (async() => {
       setUserLoaded(false);
-      let res = await getRSOs();
+      let res = await getInfo();
       // Wait on res2 as well, if either fail throw error of some sort. 
       // let res2 = await getEvents();
       if (res.success) {

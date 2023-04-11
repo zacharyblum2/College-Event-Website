@@ -86,7 +86,7 @@ export default class RSO extends React.Component {
     }
     catch (e)
     {
-      alert(e.toString());
+      console.log(e.toString());
       return;
     }
 

@@ -13,7 +13,6 @@ const DefaultAddress = "12715 Pegasus Cir, Orlando, FL 32816, USA";
 const DefaultZoom = 16;
 
 const Map = (props) => {
-
   const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
   const [defaultAddress, setDefaultAddress] = useState(DefaultAddress);
   const [location, setLocation] = useState(defaultLocation);
@@ -44,7 +43,7 @@ const Map = (props) => {
   }
 
   function handleResetLocation(){
-    setDefaultLocation({ ... DefaultLocation});
+    setDefaultLocation({ ...DefaultLocation});
     setZoom(DefaultZoom);
   }
 
