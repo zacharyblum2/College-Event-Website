@@ -54,7 +54,7 @@ const Userfoot = () => {
             </div>
 
             <div class="text-center text-dark p-3">
-                © 2020 Copyright: Zachary Blum, Gabe Mousa, Enzo Romano
+                © 2023 Copyright: Zachary Blum, Gabe Mousa, Enzo Romano
             </div>
             </footer>
     </>

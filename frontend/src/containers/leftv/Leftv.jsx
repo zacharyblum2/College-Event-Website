@@ -45,26 +45,16 @@ const Leftv = () => {
       let res = JSON.parse(r);
       setJoined(res.data.joined);
       setUnJoined(res.data.not_joined);
-      return {success: true}
-    }
-    catch (e)
-    {
-      alert(e.toString());
-      return {success: false};
-    }
 
-    console.log("Hello"); 
-    
-    try 
-    {
-      // Should this be a post or a get?
-      const response = await 
+      const response2 = await 
       fetch('http://localhost:8000/api/get_user_events/',
       {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
-      let r = await response.text();
-      setEvents(res.data);
-      return {success: true};
+      let r2 = await response.text();
+      let res2 = JSON.parse(r2)
+      setEvents(res2.data);
+
+      return {success: true}
     }
     catch (e)
     {
