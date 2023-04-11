@@ -47,17 +47,14 @@ const Leftv = () => {
       setJoined(res.data.joined);
       setUnJoined(res.data.not_joined);
 
-      // Get event information.
-      // SHOULD BE POST, CHANGE WHEN AVAILABLE.
-      // const response2 = await 
-      // fetch('http://localhost:8000/api/get_user_events/',
-      // {method:'GET', body:js, headers: {'Content-Type': 'application/json'}});
-      
-      // let r2 = await response2.text();
-      // console.log(r2);
-      // setEvents(r2.data);
+      const response2 = await 
+      fetch('http://localhost:8000/api/get_user_events/',
+      {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
-      // console.log(r2);
+      let r2 = await response.text();
+      let res2 = JSON.parse(r2)
+      setEvents(res2.data);
+      
       return {success: true}
     }
     catch (e)

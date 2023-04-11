@@ -68,7 +68,7 @@ class Events(models.Model):
     description = models.CharField(max_length=250)
     time = models.DateTimeField()
     creator = models.ForeignKey('Users', on_delete=models.CASCADE)
-    host_rso = models.ForeignKey('RSOS', on_delete=models.CASCADE)
+    host_rso = models.ForeignKey('RSOS', on_delete=models.CASCADE, blank=True, null=True)
     date = models.DateField(validators=[MinValueValidator(datetime.date.today)])
     email = models.TextField(max_length=30)
     event_type = models.IntegerField(validators=[
@@ -78,7 +78,7 @@ class Events(models.Model):
     phone = models.CharField(max_length=10)
     longitude = models.FloatField()
     latitude = models.FloatField()
-    loc_name = models.TextField(max_length=20)
+    loc_name = models.TextField(max_length=80)
     
 class Universities(models.Model):
     uni_name = models.CharField(max_length=20, primary_key=True)

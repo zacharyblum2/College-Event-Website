@@ -24,8 +24,8 @@ export default class Comments extends React.Component {
             uid: props.id
         }
         
-        if (this.uid === user_data.id)
-            this.same = true;
+        // if (uid === user_data.id)
+        //     this.same = true;
 
         // Update this state if user_data.id = commentor_id
         this.same = false;
