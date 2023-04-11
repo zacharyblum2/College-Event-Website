@@ -270,13 +270,11 @@ def leave_rso(request):
 
 @csrf_exempt
 def get_user_events(request):
-    if request.method == "GET":
+    if request.method == "POST":
         ret = {}
         ret["error"] = ""
         ret["data"] = {}
-        ret["data"]['public_events'] = []
-        ret["data"]['private_events'] = []
-        ret["data"]['rso_events'] = []
+        ret["data"]["events"] = []
 
         body_unicode = request.body.decode("utf-8")
         body = json.loads(body_unicode)
@@ -294,15 +292,15 @@ def get_user_events(request):
             for event in Events.objects.all():
                 match event.event_type:
                     case 0:
-                        ret["data"]['public_events'].append(event.name)
+                        ret["data"]['events'].append(event.name)
                         break
                     case 1:
                         if(university == event.creator.university):
-                            ret["data"]['private_events'].append(event.name)
+                            ret["data"]['events'].append(event.name)
                         break
                     case 2:
                         if(event.host_rso.name in rsos):
-                            ret["data"]['rso_events'].append(event.name)
+                            ret["data"]['events'].append(event.name)
                         break
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('User, RSO, or University not found.'.\
@@ -312,7 +310,7 @@ def get_user_events(request):
 
 @csrf_exempt
 def get_user_admin_rsos(request):
-    if request.method == "GET":
+    if request.method == "POST":
         ret = {}
         ret["error"] = ""
         ret["data"] = {}
@@ -335,7 +333,7 @@ def get_user_admin_rsos(request):
 
 @csrf_exempt
 def get_event_comments(request):
-    if request.method == "GET":
+    if request.method == "POST":
         ret = {}
         ret["error"] = ""
         ret["data"] = {}
@@ -352,6 +350,7 @@ def get_event_comments(request):
             for comment in Comments.objects.filter(event=event.event_id):
                 temp = {}
                 temp["user"] = comment.user.name
+                temp["user_id"] = comment.user.user_id
                 temp["comment_id"] = comment.comment_id
                 temp["body"] = comment.body
                 temp["rating"] = comment.rating
