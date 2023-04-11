@@ -24,11 +24,14 @@ export default class Comments extends React.Component {
             uid: props.id
         }
         
-        // if (uid === user_data.id)
-        //     this.same = true;
+        if (this.uid === user_data.id)
+            this.same = true;
 
         // Update this state if user_data.id = commentor_id
-        this.same = false;
+        this.same = true;
+        this.edit = this.edit.bind(this);
+        this.done = this.done.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     // Edit Function
@@ -36,28 +39,66 @@ export default class Comments extends React.Component {
 
     // Delete Function
     // Pass comment_id to be deleted
+    edit()
+    {
+        let paragraph = document.getElementsByClassName(this.state.c_id);
+
+        paragraph[0].contentEditable = true;
+        paragraph[0].style.backgroundColor = "#dddbdb";
+
+        paragraph[1].contentEditable = true;
+        paragraph[1].style.backgroundColor = "#dddbdb";
+    }
+
+    done()
+    {
+        let paragraph = document.getElementsByClassName(this.state.c_id);
+
+        paragraph[0].contentEditable = false;
+        paragraph[0].style.backgroundColor = "white";
+
+        paragraph[1].contentEditable = false;
+        paragraph[1].style.backgroundColor = "white";
+    }
+
+    delete()
+    {
+        let obj = {comment_id: this.state.c_id};
+        let js = JSON.stringify(obj);
+
+        // Perform API call here.
+        const response = await 
+        fetch('http://localhost:8000/api/delete_comment/',
+        {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+
+        let r = response.text();
+
+        console.log("delete");
+    }
     
     render() {
         return (
             <div class="card mb-4">
                 <div class="card-body">
-                    <p>{this.state.description}</p>
+                    <p className={this.state.c_id}>{this.state.body}</p>
                     <div id="com" class="d-flex justify-content-between">
                         <div class="d-flex flex-row align-items-center">
                             <p class="small mb-0 ms-2">{this.state.name}</p>
                         </div>
                         <div class="d-flex flex-row align-items-center">
-                            <p class="small text-muted mb-0">Rating: {this.state.rating}</p>
+                            <p class="small text-muted mb-0">Rating: <p className={this.state.c_id}>{this.state.rating}</p></p>
                         </div>
                         <div class="btns">
                             {this.same ? <>
                             {/* Edit should make popup to change information. 
                                 Close button will close and no update, update will call update. */}
-                            <button class="btn btn-primary">Edit</button>
+                            <button type="submit" class="btn btn-primary" onClick={this.edit}>Edit</button>
 
                             {/* Delete should pop confirmation box, if box click yes
                                 delete the comment. */}
-                            <button class="btn btn-primary">Delete</button>
+                            <button type="submit" class="btn btn-primary" onClick={this.done}>Done</button>
+                            
+                            <button type="submit" class="btn btn-primary" onClick={this.delete}>Delete</button>
                             </> : <></>}
                             
                         </div>

@@ -22,10 +22,9 @@ const events = [
 
 const Leftv = () => {
 
-  // const [events, setEvents] = useState("");
   const [joined, setJoined] = useState("");
   const [unjoined, setUnJoined] = useState("");
-  //const [events, setEvents] = useState("");
+  // const [events, setEvents] = useState("");
   const [userLoaded, setUserLoaded] = useState(false);
 
   let user_data = JSON.parse(localStorage.getItem("user_data"));
@@ -46,19 +45,26 @@ const Leftv = () => {
       let res = JSON.parse(r);
       setJoined(res.data.joined);
       setUnJoined(res.data.not_joined);
+      console.log(joined);
+      console.log(unjoined);
 
       const response2 = await 
       fetch('http://localhost:8000/api/get_user_events/',
       {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
-      let r2 = await response.text();
+      let r2 = await response2.text();
       let res2 = JSON.parse(r2)
-      setEvents(res2.data);
+
+      console.log(res2.data);
+      // setEvents(res2.data);
       
+      setUserLoaded(true);
+
       return {success: true}
     }
     catch (e)
     {
+      console.log("ERROR");
       console.log(e.toString());
       return {success: false};
     }
@@ -66,12 +72,13 @@ const Leftv = () => {
 
   useEffect(() => {
     (async() => {
-      setUserLoaded(false);
       let res = await getInfo();
       // Wait on res2 as well, if either fail throw error of some sort. 
       // let res2 = await getEvents();
       if (res.success) {
         setUserLoaded(true);
+
+      console.log(userLoaded);
       }
     })();
   }, []);
@@ -86,8 +93,8 @@ const Leftv = () => {
               <div className="public">
                 <h2 class="h5">Events</h2>
                 {
-                  events.map((events) => <Card id={events.event_id} name={events.name} description={events.description} date={events.date} 
-                  time={events.time} location={events.location} email={events.email} phone={events.phone} organizer={events.organizer} part={false}/>)
+                  events.map((event) => <Card id={event.event_id} name={event.name} description={event.description} date={event.date} 
+                  time={event.time} location={event.location} email={event.email} phone={event.phone} organizer={event.organizer} part={false}/>)
                 }
               </div>
               <div className="your">
