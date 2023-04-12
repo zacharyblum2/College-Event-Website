@@ -29,6 +29,8 @@ export default class Comments extends React.Component {
 
         // Update this state if user_data.id = commentor_id
         this.same = true;
+        this.editMode = false;
+        this.message = '';
         this.edit = this.edit.bind(this);
         this.done = this.done.bind(this);
         //this.delete = this.delete.bind(this);
@@ -42,6 +44,7 @@ export default class Comments extends React.Component {
     edit()
     {
         let paragraph = document.getElementsByClassName(this.state.c_id);
+        this.editMode = true;
 
         paragraph[0].contentEditable = true;
         paragraph[0].style.backgroundColor = "#dddbdb";
@@ -50,31 +53,52 @@ export default class Comments extends React.Component {
         paragraph[1].style.backgroundColor = "#dddbdb";
     }
 
-    done()
+    async done()
     {
         let paragraph = document.getElementsByClassName(this.state.c_id);
+        this.editMode = false;
 
-        paragraph[0].contentEditable = false;
-        paragraph[0].style.backgroundColor = "white";
+        // Create object to pass. 
+        let obj = {comment_id: this.state.c_id, body: paragraph[0].text, rating: parseInt(paragraph[1].text)}
+        let js = JSON.stringify(obj);
 
-        paragraph[1].contentEditable = false;
-        paragraph[1].style.backgroundColor = "white";
+        const response = await
+        fetch('http://localhost:8000/api/edit_comment/', 
+        {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+
+        let r = response.text();
+        let res = JSON.stringify(r);
+
+        // Check if error message. If not, complete below.
+
+            paragraph[0].contentEditable = false;
+            paragraph[0].style.backgroundColor = "white";
+
+            paragraph[1].contentEditable = false;
+            paragraph[1].style.backgroundColor = "white";
+        
+        // If error. Print out error message. 
+        this.message = res;
     }
 
-    // delete()
-    // {
-    //     let obj = {comment_id: this.state.c_id};
-    //     let js = JSON.stringify(obj);
+    async delete()
+    {
+        console.log("delete");
 
-    //     // Perform API call here.
-    //     const response = await 
-    //     fetch('http://localhost:8000/api/delete_comment/',
-    //     {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+        // If we do want to delete, perform delete.
+        if (window.confirm("Do you wish to delete?") === true)
+        {
+            // let obj = {comment_id: this.state.c_id};
+            // let js = JSON.stringify(obj);
 
-    //     let r = response.text();
+            // // Perform API call here.
+            // const response = await 
+            // fetch('http://localhost:8000/api/delete_comment/',
+            // {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
-    //     console.log("delete");
-    // }
+            // let r = response.text();
+        }
+    }
     
     render() {
         return (
@@ -96,13 +120,15 @@ export default class Comments extends React.Component {
 
                             {/* Delete should pop confirmation box, if box click yes
                                 delete the comment. */}
-                            <button type="submit" class="btn btn-primary" onClick={this.done}>Done</button>
-                            
                             <button type="submit" class="btn btn-primary">Delete</button>
-                            </> : <></>}
-                            
+                            </> : <> </>
+                            }
                         </div>
                     </div>
+                    {this.editMode ? 
+                    <><button type="submit" class="btn btn-primary" onClick={this.done}>Done</button></>
+                    : <></>}
+                    {this.message}
                 </div>  
             </div>  
         )
