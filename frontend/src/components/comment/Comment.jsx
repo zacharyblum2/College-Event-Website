@@ -59,15 +59,15 @@ export default class Comments extends React.Component {
         this.editMode = false;
 
         // Create object to pass. 
-        let obj = {comment_id: this.state.c_id, body: paragraph[0].text, rating: parseInt(paragraph[1].text)}
-        let js = JSON.stringify(obj);
+        // let obj = {comment_id: this.state.c_id, body: paragraph[0].text, rating: parseInt(paragraph[1].text)}
+        // let js = JSON.stringify(obj);
 
-        const response = await
-        fetch('http://localhost:8000/api/edit_comment/', 
-        {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+        // const response = await
+        // fetch('http://localhost:8000/api/edit_comment/', 
+        // {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
-        let r = response.text();
-        let res = JSON.stringify(r);
+        // let r = response.text();
+        // let res = JSON.stringify(r);
 
         // Check if error message. If not, complete below.
 
@@ -78,7 +78,7 @@ export default class Comments extends React.Component {
             paragraph[1].style.backgroundColor = "white";
         
         // If error. Print out error message. 
-        this.message = res;
+        // this.message = res;
     }
 
     async delete()
