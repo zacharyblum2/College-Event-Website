@@ -9,7 +9,6 @@ const Signup = () => {
 
   const [message, setMessage] = useState("");
   const [unis, setUnis] = useState([]);
-  const [loaded, setLoaded] = useState("false");
 
   function isJSON(str) {
     try 
@@ -79,7 +78,6 @@ const Signup = () => {
     let r = await response.text();
 
     let res = JSON.parse(r);
-    setLoaded(true);
     console.log(res);
     setUnis(res);
     // {uni_name: name, description: description..}, {uni_name: name, description: description}
