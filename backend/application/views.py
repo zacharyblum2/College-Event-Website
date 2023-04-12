@@ -305,8 +305,8 @@ def get_user_events(request):
                 eventObject["event_id"] = event.event_id
                 eventObject["name"] = event.name
                 eventObject["description"] = event.description
-                eventObject["creator"] = event.creator
-                eventObject["host_rso"] = event.host_rso
+                eventObject["creator"] = event.creator.name
+                eventObject["host_rso"] = event.host_rso.name
                 eventObject["date"] = event.date
                 eventObject["time"] = event.time
                 eventObject["email"] = event.email
