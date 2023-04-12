@@ -6,18 +6,19 @@ export default class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.id,
+      event_id: props.id,
       name: props.name,
       description: props.description,
+      creator: props.creator,
+      rso: props.rso, 
       date: props.date,
       time: props.time,
-      location: props.location,
-      organizer: props.organizer,
       email: props.email,
       phone: props.phone,
-      part: props.part
+      lng: props.lng,
+      lat: props.lat,
+      loc: props.loc_name
     }
-
     // Allows functions to access this.state properties.
     this.storeInformation = this.storeInformation.bind(this);
   }
@@ -25,9 +26,9 @@ export default class Card extends React.Component {
   // Function to store event information locally, for individual event page to load it.
   storeInformation() {
     console.log(this.state.name);
-    let obj = {id: this.state.id, name: this.state.name, description: this.state.description, date: this.state.date, 
-               time: this.state.time, location: this.state.location, organizer: this.state.organizer, 
-               email: this.state.email, phone: this.state.phone, part: this.state.part}
+    let obj = {event_id: this.state.id, name: this.state.name, description: this.state.description, 
+               date: this.state.date, time: this.state.time, email: this.state.email, 
+               phone: this.state.phone, lng: this.state.lng, lat: this.state.lat, loc: this.state.loc}
     
     console.log(JSON.stringify(obj));
     localStorage.removeItem("eventInfo");

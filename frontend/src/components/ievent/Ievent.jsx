@@ -7,7 +7,7 @@ import { Map } from '../../components';
 const Ievent = () => {
     let user_data = JSON.parse(localStorage.getItem("user_data"));
     let event_info = JSON.parse(localStorage.getItem("event_info"));
-    console.log(event_info.location);
+    console.log(event_info);
 
     let tweet = `https://twitter.com/intent/tweet?text=${user_data.uni} Events: Come hangout at ${event_info.name}!`;
 
@@ -21,9 +21,9 @@ const Ievent = () => {
                         Events at {user_data.uni}
                     </a>
                 </div>
-                <div class="row">
+                <div class="row" id="ieventContent">
                     
-                    <div class="col-lg-8" id="event-single">
+                    <div class="col-md-4" id="event-single">
                         <div class="row">
                             <p class="h3">{event_info.name}</p>
                         </div>
@@ -31,15 +31,15 @@ const Ievent = () => {
                             <p class="h5">{event_info.date} at {event_info.time}</p>
                         </div>
                         <p>{event_info.description}</p>
-
-                        <div class="event-registration hidden-md-down card card-outline-primary my-4">
+                        <br></br>
+                        {/* <div class="event-registration hidden-md-down card card-outline-primary my-4">
                             <div class="card-block">
                                 <h2 class="h5">Event Registration</h2>
                             </div>
                             <button id="register" class="btn btn-primary" target="_blank" rel="noopener">
                                 <p>Register Now <Icon.BoxArrowUpRight/></p>
                             </button>
-                        </div>
+                        </div> */}
                         <div class="event-contact vcard hidden-md-down">
                             <h2 class="h5">Contact:</h2>
                             <div class="event-contact-info">

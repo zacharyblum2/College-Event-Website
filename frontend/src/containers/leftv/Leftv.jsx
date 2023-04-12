@@ -3,29 +3,28 @@ import './leftv.css';
 import {Card, Rso} from '../../components';
 
 // Import router.
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-const events = [
-  { event_id: '1', name: 'Fun in the sun', description: 'OUTSIDE TIME', date: '12/2/2019', time: '12:00pm', 
-    organizer: 'Emily Blunt', email: 'emilyblunt@gmail.com', phone: '9545931896', 
-    location: ["HEC 103", 28.6024, -81.2001]
-  },
-  { event_id: '2', name: 'Enjoy while lasts', description: 'we will be sulking', date: '12/34/12000', time: '11:00pm', 
-    organizer: 'Peanut Man', email: 'peanut@gmail.com', phone: '9545931896', 
-    location: ["HEC 103", 28.6024, -81.2001]
-  },
-  { event_id: '3', name: 'I hate it here', description: 'nothing', date: '100/100/100', time: '9:00pm', 
-    organizer: 'George Guy', email: 'george@gmail.com', phone: '9545931896',
-    location: ["HEC 103", 28.6024, -81.2001]
-  },
-]
+// const events2 = [
+//   { event_id: '1', name: 'Fun in the sun', description: 'OUTSIDE TIME', date: '12/2/2019', time: '12:00pm', 
+//     organizer: 'Emily Blunt', email: 'emilyblunt@gmail.com', phone: '9545931896', 
+//     location: ["HEC 103", 28.6024, -81.2001]
+//   },
+//   { event_id: '2', name: 'Enjoy while lasts', description: 'we will be sulking', date: '12/34/12000', time: '11:00pm', 
+//     organizer: 'Peanut Man', email: 'peanut@gmail.com', phone: '9545931896', 
+//     location: ["HEC 103", 28.6024, -81.2001]
+//   },
+//   { event_id: '3', name: 'I hate it here', description: 'nothing', date: '100/100/100', time: '9:00pm', 
+//     organizer: 'George Guy', email: 'george@gmail.com', phone: '9545931896',
+//     location: ["HEC 103", 28.6024, -81.2001]
+//   },
+// ]
 
 const Leftv = () => {
 
-  // const [events, setEvents] = useState("");
-  const [joined, setJoined] = useState("");
-  const [unjoined, setUnJoined] = useState("");
-  //const [events, setEvents] = useState("");
+  const [joined, setJoined] = useState([]);
+  const [unjoined, setUnJoined] = useState([]);
+  const [events, setEvents] = useState([]);
   const [userLoaded, setUserLoaded] = useState(false);
 
   let user_data = JSON.parse(localStorage.getItem("user_data"));
@@ -46,32 +45,38 @@ const Leftv = () => {
       let res = JSON.parse(r);
       setJoined(res.data.joined);
       setUnJoined(res.data.not_joined);
+      console.log(joined);
+      console.log(unjoined);
 
       const response2 = await 
       fetch('http://localhost:8000/api/get_user_events/',
       {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
-      let r2 = await response.text();
+      let r2 = await response2.text();
       let res2 = JSON.parse(r2)
-      setEvents(res2.data);
-      
+
+      console.log(res2.data.events);
+      setEvents(res2.data.events);
+
       return {success: true}
     }
     catch (e)
     {
+      console.log("ERROR");
       console.log(e.toString());
       return {success: false};
-    }
+    } 
   }
 
   useEffect(() => {
     (async() => {
-      setUserLoaded(false);
       let res = await getInfo();
       // Wait on res2 as well, if either fail throw error of some sort. 
       // let res2 = await getEvents();
       if (res.success) {
         setUserLoaded(true);
+
+      console.log(userLoaded);
       }
     })();
   }, []);
@@ -81,21 +86,17 @@ const Leftv = () => {
       { userLoaded ? (
           <div className="cards">
           <Route exact path='/user'>
-          <a href="/createEvent" id="createBtn" class={user_data.type === 0 ? "btn btn-primary" : "btn btn-primary"}>Create Event</a>
+            {/* If the user is type 1 or 2 display Create Event, otherwise do not. */}
+          <a href="/createEvent" id="createBtn" class={user_data.type !== 0 ? "btn btn-primary" : "btn btn-primary hidden"}>Create Event</a>
             <div className="rsos">
               <div className="public">
                 <h2 class="h5">Events</h2>
                 {
-                  events.map((events) => <Card id={events.event_id} name={events.name} description={events.description} date={events.date} 
-                  time={events.time} location={events.location} email={events.email} phone={events.phone} organizer={events.organizer} part={false}/>)
-                }
-              </div>
-              <div className="your">
-                {/* These are the events that you are scheduled for. Should make two different calls*/}
-                <h2 class="h5">Events Registered</h2>
-                {
-                  events.map((events) => <Card id={events.event_id} name={events.name} description={events.description} date={events.date} 
-                  time={events.time} location={events.location} email={events.email} phone={events.phone} organizer={events.organizer} part={true}/>)
+                  events.map((event) => 
+                  <Card id={event.event_id} name={event.name} description={event.description} 
+                  creator={event.creator} host_rso={event.host_rso} date={event.date} 
+                  time={event.time} email={event.email} phone={event.phone} lng={event.longitude} 
+                  lat={event.latitude} loc_name={event.loc_name}/>)
                 }
               </div>
             </div>

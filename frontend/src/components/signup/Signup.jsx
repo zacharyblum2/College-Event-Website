@@ -8,7 +8,7 @@ const Signup = () => {
   let signupUni;
 
   const [message, setMessage] = useState("");
-  const [unis, setUnis] = useState("");
+  const [unis, setUnis] = useState([]);
 
   function isJSON(str) {
     try 
@@ -21,7 +21,7 @@ const Signup = () => {
     }
 
     return true;
-}
+  }
 
   const doSignup = async event =>
   {
@@ -65,22 +65,23 @@ const Signup = () => {
     }
 
     console.log('do it ' + signupEmail.value + ' ' + signupPassword.value);
-}
+  }
 
-const searchUnis = async event =>
-{
-  // Blank get request of 'http://127.0.0.1:8000/api/universities/'
-  // Store results inside unis
-  // Map unis results as options.
-  const response = await fetch('http://localhost:8000/api/universities/',
-            {method:'GET', headers: {'Content-Type': 'application/json'}});
+  const searchUnis = async event =>
+  {
+    // Blank get request of 'http://127.0.0.1:8000/api/universities/'
+    // Store results inside unis
+    // Map unis results as options.
+    const response = await fetch('http://localhost:8000/api/universities/',
+              {method:'GET', headers: {'Content-Type': 'application/json'}});
 
-  let r = await response.text();
+    let r = await response.text();
 
-  let res = JSON.parse(r);
-  setUnis(res);
-  // {uni_name: name, description: description..}, {uni_name: name, description: description}
-}
+    let res = JSON.parse(r);
+    console.log(res);
+    setUnis(res);
+    // {uni_name: name, description: description..}, {uni_name: name, description: description}
+  }
 
   return (
     <section class="vh-100" onLoad={searchUnis}>
