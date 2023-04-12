@@ -31,15 +31,15 @@ const Ievent = () => {
                             <p class="h5">{event_info.date} at {event_info.time}</p>
                         </div>
                         <p>{event_info.description}</p>
-
-                        <div class="event-registration hidden-md-down card card-outline-primary my-4">
+                        <br></br>
+                        {/* <div class="event-registration hidden-md-down card card-outline-primary my-4">
                             <div class="card-block">
                                 <h2 class="h5">Event Registration</h2>
                             </div>
                             <button id="register" class="btn btn-primary" target="_blank" rel="noopener">
                                 <p>Register Now <Icon.BoxArrowUpRight/></p>
                             </button>
-                        </div>
+                        </div> */}
                         <div class="event-contact vcard hidden-md-down">
                             <h2 class="h5">Contact:</h2>
                             <div class="event-contact-info">
