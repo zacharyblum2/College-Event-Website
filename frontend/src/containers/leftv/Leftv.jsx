@@ -5,26 +5,26 @@ import {Card, Rso} from '../../components';
 // Import router.
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-const events = [
-  { event_id: '1', name: 'Fun in the sun', description: 'OUTSIDE TIME', date: '12/2/2019', time: '12:00pm', 
-    organizer: 'Emily Blunt', email: 'emilyblunt@gmail.com', phone: '9545931896', 
-    location: ["HEC 103", 28.6024, -81.2001]
-  },
-  { event_id: '2', name: 'Enjoy while lasts', description: 'we will be sulking', date: '12/34/12000', time: '11:00pm', 
-    organizer: 'Peanut Man', email: 'peanut@gmail.com', phone: '9545931896', 
-    location: ["HEC 103", 28.6024, -81.2001]
-  },
-  { event_id: '3', name: 'I hate it here', description: 'nothing', date: '100/100/100', time: '9:00pm', 
-    organizer: 'George Guy', email: 'george@gmail.com', phone: '9545931896',
-    location: ["HEC 103", 28.6024, -81.2001]
-  },
-]
+// const events = [
+//   { event_id: '1', name: 'Fun in the sun', description: 'OUTSIDE TIME', date: '12/2/2019', time: '12:00pm', 
+//     organizer: 'Emily Blunt', email: 'emilyblunt@gmail.com', phone: '9545931896', 
+//     location: ["HEC 103", 28.6024, -81.2001]
+//   },
+//   { event_id: '2', name: 'Enjoy while lasts', description: 'we will be sulking', date: '12/34/12000', time: '11:00pm', 
+//     organizer: 'Peanut Man', email: 'peanut@gmail.com', phone: '9545931896', 
+//     location: ["HEC 103", 28.6024, -81.2001]
+//   },
+//   { event_id: '3', name: 'I hate it here', description: 'nothing', date: '100/100/100', time: '9:00pm', 
+//     organizer: 'George Guy', email: 'george@gmail.com', phone: '9545931896',
+//     location: ["HEC 103", 28.6024, -81.2001]
+//   },
+// ]
 
 const Leftv = () => {
 
-  const [joined, setJoined] = useState("");
-  const [unjoined, setUnJoined] = useState("");
-  // const [events, setEvents] = useState("");
+  const [joined, setJoined] = useState([]);
+  const [unjoined, setUnJoined] = useState([]);
+  const [events, setEvents] = useState([]);
   const [userLoaded, setUserLoaded] = useState(false);
 
   let user_data = JSON.parse(localStorage.getItem("user_data"));
@@ -55,8 +55,8 @@ const Leftv = () => {
       let r2 = await response2.text();
       let res2 = JSON.parse(r2)
 
-      console.log(res2.data);
-      // setEvents(res2.data);
+      console.log(res2.data.events);
+      setEvents(res2.data.events);
       
       setUserLoaded(true);
 
