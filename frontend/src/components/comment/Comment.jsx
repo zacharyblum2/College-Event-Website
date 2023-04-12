@@ -31,7 +31,7 @@ export default class Comments extends React.Component {
         this.same = true;
         this.edit = this.edit.bind(this);
         this.done = this.done.bind(this);
-        this.delete = this.delete.bind(this);
+        //this.delete = this.delete.bind(this);
     }
 
     // Edit Function
@@ -61,20 +61,20 @@ export default class Comments extends React.Component {
         paragraph[1].style.backgroundColor = "white";
     }
 
-    delete()
-    {
-        let obj = {comment_id: this.state.c_id};
-        let js = JSON.stringify(obj);
+    // delete()
+    // {
+    //     let obj = {comment_id: this.state.c_id};
+    //     let js = JSON.stringify(obj);
 
-        // Perform API call here.
-        const response = await 
-        fetch('http://localhost:8000/api/delete_comment/',
-        {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+    //     // Perform API call here.
+    //     const response = await 
+    //     fetch('http://localhost:8000/api/delete_comment/',
+    //     {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
-        let r = response.text();
+    //     let r = response.text();
 
-        console.log("delete");
-    }
+    //     console.log("delete");
+    // }
     
     render() {
         return (
@@ -98,7 +98,7 @@ export default class Comments extends React.Component {
                                 delete the comment. */}
                             <button type="submit" class="btn btn-primary" onClick={this.done}>Done</button>
                             
-                            <button type="submit" class="btn btn-primary" onClick={this.delete}>Delete</button>
+                            <button type="submit" class="btn btn-primary">Delete</button>
                             </> : <></>}
                             
                         </div>
