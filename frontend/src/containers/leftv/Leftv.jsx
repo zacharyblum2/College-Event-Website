@@ -3,22 +3,22 @@ import './leftv.css';
 import {Card, Rso} from '../../components';
 
 // Import router.
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-const events2 = [
-  { event_id: '1', name: 'Fun in the sun', description: 'OUTSIDE TIME', date: '12/2/2019', time: '12:00pm', 
-    organizer: 'Emily Blunt', email: 'emilyblunt@gmail.com', phone: '9545931896', 
-    location: ["HEC 103", 28.6024, -81.2001]
-  },
-  { event_id: '2', name: 'Enjoy while lasts', description: 'we will be sulking', date: '12/34/12000', time: '11:00pm', 
-    organizer: 'Peanut Man', email: 'peanut@gmail.com', phone: '9545931896', 
-    location: ["HEC 103", 28.6024, -81.2001]
-  },
-  { event_id: '3', name: 'I hate it here', description: 'nothing', date: '100/100/100', time: '9:00pm', 
-    organizer: 'George Guy', email: 'george@gmail.com', phone: '9545931896',
-    location: ["HEC 103", 28.6024, -81.2001]
-  },
-]
+// const events2 = [
+//   { event_id: '1', name: 'Fun in the sun', description: 'OUTSIDE TIME', date: '12/2/2019', time: '12:00pm', 
+//     organizer: 'Emily Blunt', email: 'emilyblunt@gmail.com', phone: '9545931896', 
+//     location: ["HEC 103", 28.6024, -81.2001]
+//   },
+//   { event_id: '2', name: 'Enjoy while lasts', description: 'we will be sulking', date: '12/34/12000', time: '11:00pm', 
+//     organizer: 'Peanut Man', email: 'peanut@gmail.com', phone: '9545931896', 
+//     location: ["HEC 103", 28.6024, -81.2001]
+//   },
+//   { event_id: '3', name: 'I hate it here', description: 'nothing', date: '100/100/100', time: '9:00pm', 
+//     organizer: 'George Guy', email: 'george@gmail.com', phone: '9545931896',
+//     location: ["HEC 103", 28.6024, -81.2001]
+//   },
+// ]
 
 const Leftv = () => {
 
@@ -93,7 +93,7 @@ const Leftv = () => {
               <div className="public">
                 <h2 class="h5">Events</h2>
                 {
-                  events2.map((event) => <Card id={event.event_id} name={event.name} description={event.description} date={event.date} 
+                  events.map((event) => <Card id={event.event_id} name={event.name} description={event.description} date={event.date} 
                   time={event.time} location={event.location} email={event.email} phone={event.phone} organizer={event.organizer} part={false}/>)
                 }
               </div>

@@ -21,9 +21,9 @@ const Ievent = () => {
                         Events at {user_data.uni}
                     </a>
                 </div>
-                <div class="row">
+                <div class="row" id="ieventContent">
                     
-                    <div class="col-lg-8" id="event-single">
+                    <div class="col-md-4" id="event-single">
                         <div class="row">
                             <p class="h3">{event_info.name}</p>
                         </div>
