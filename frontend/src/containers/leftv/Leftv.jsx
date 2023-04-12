@@ -57,8 +57,6 @@ const Leftv = () => {
 
       console.log(res2.data.events);
       setEvents(res2.data.events);
-      
-      setUserLoaded(true);
 
       return {success: true}
     }
@@ -67,7 +65,7 @@ const Leftv = () => {
       console.log("ERROR");
       console.log(e.toString());
       return {success: false};
-    }
+    } 
   }
 
   useEffect(() => {
@@ -88,13 +86,17 @@ const Leftv = () => {
       { userLoaded ? (
           <div className="cards">
           <Route exact path='/user'>
-          <a href="/createEvent" id="createBtn" class={user_data.type === 0 ? "btn btn-primary" : "btn btn-primary"}>Create Event</a>
+            {/* If the user is type 1 or 2 display Create Event, otherwise do not. */}
+          <a href="/createEvent" id="createBtn" class={user_data.type !== 0 ? "btn btn-primary" : "btn btn-primary hidden"}>Create Event</a>
             <div className="rsos">
               <div className="public">
                 <h2 class="h5">Events</h2>
                 {
-                  events.map((event) => <Card id={event.event_id} name={event.name} description={event.description} date={event.date} 
-                  time={event.time} location={event.location} email={event.email} phone={event.phone} organizer={event.organizer} part={false}/>)
+                  events.map((event) => 
+                  <Card id={event.event_id} name={event.name} description={event.description} 
+                  creator={event.creator} host_rso={event.host_rso} date={event.date} 
+                  time={event.time} email={event.email} phone={event.phone} lng={event.longitude} 
+                  lat={event.latitude} loc_name={event.loc_name}/>)
                 }
               </div>
             </div>
