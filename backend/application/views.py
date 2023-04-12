@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, 
 import json
 from .customExceptions import IncorrectPassword, ObjectAlreadyExists, OutOfUniversity
 from django.views.generic.edit import DeleteView
+import random
 
 # Sample for how to parse data out of a request body
 # returnBody = str(request.body) + "\n" + str(request.scheme) + "\n" + str(request.path) + "\n" + str(request.content_type)
@@ -51,12 +52,13 @@ def Users_register(request):
                          university=Universities.objects.get(uni_name=req_university))
             user.save()
 
-            #Update the university student count
+            # Update the university student count
             university = user.university
             university.num_stu += 1
             university.save()
 
-            ret["data"]['user_id'] = int(Users.objects.get(email=req_email).user_id)
+            ret["data"]['user_id'] = int(
+                Users.objects.get(email=req_email).user_id)
         except ObjectAlreadyExists:
             return HttpResponseBadRequest('Sorry, that email address is already taken'.
                                           format(request.method), status=400)
@@ -168,17 +170,17 @@ def RSOS_register(request):
             rso = RSOS(name=req_name,
                        admin=admin.user_id,
                        university=university)
-            
-            rso.save()
 
+            rso.save()
             rso.members.add(admin)
-
             rso.save()
 
-            #Update the university num_rsos count
+            admin.user_type = 1
+            admin.save()
+
+            # Update the university num_rsos count
             university.num_rsos += 1
             university.save()
-
 
             ret["data"]["university"] = university.uni_name
 
@@ -231,6 +233,7 @@ def join_rso(request):
 
         return JsonResponse(ret)
 
+
 @csrf_exempt
 def leave_rso(request):
     if request.method == "POST":
@@ -250,23 +253,30 @@ def leave_rso(request):
             user_university = user.university
             rso_university = rso.university
 
-            if(user_university.uni_name != rso_university.uni_name):
+            if (user_university.uni_name != rso_university.uni_name):
                 raise OutOfUniversity
-            
+
             rso.members.remove(user)
+            rso.save()
+            
+            if ((user.user_id == rso.admin) and (rso.members.count > 0)):
+                members = list(rso.members)
+                randomMem = random.choice(members)
+                rso.admin = randomMem.user_id
 
             if (rso.members.count() < 5):
                 rso.active = 0
-            
+
             rso.save()
         except OutOfUniversity:
-            return HttpResponseBadRequest('A user cannot join an RSO from another university'.\
+            return HttpResponseBadRequest('A user cannot join an RSO from another university'.
                                         format(request.method), status=401)
         except ObjectDoesNotExist:
-            return HttpResponseBadRequest('User, RSO, or University not found.'.\
+            return HttpResponseBadRequest('User, RSO, or University not found.'.
                                         format(request.method), status=401)
-        
+
         return JsonResponse(ret)
+
 
 @csrf_exempt
 def get_user_events(request):
@@ -290,17 +300,33 @@ def get_user_events(request):
                     rsos.append(rso.name)
 
             for event in Events.objects.all():
+
+                eventObject = {}
+                eventObject["event_id"] = event.event_id
+                eventObject["name"] = event.name
+                eventObject["description"] = event.description
+                eventObject["creator"] = event.creator
+                eventObject["host_rso"] = event.host_rso
+                eventObject["date"] = event.date
+                eventObject["time"] = event.time
+                eventObject["email"] = event.email
+                eventObject["event_type"] = event.event_type
+                eventObject["phone"] = event.phone
+                eventObject["longitude"] = event.longitude
+                eventObject["latitude"] = event.latitude
+                eventObject["loc_name"] = event.loc_name
+
                 match event.event_type:
                     case 0:
-                        ret["data"]['events'].append(event.name)
+                        ret["data"]['events'].append(eventObject)
                         break
                     case 1:
                         if(university == event.creator.university):
-                            ret["data"]['events'].append(event.name)
+                            ret["data"]['events'].append(eventObject)
                         break
                     case 2:
                         if(event.host_rso.name in rsos):
-                            ret["data"]['events'].append(event.name)
+                            ret["data"]['events'].append(eventObject)
                         break
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('User, RSO, or University not found.'.\
