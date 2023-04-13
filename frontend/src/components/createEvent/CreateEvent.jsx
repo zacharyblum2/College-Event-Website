@@ -6,18 +6,14 @@ import { Map } from '../../components';
 const CreateEvent = () => {
     let eventName;
     let eventDesc;
-    let eventRSO = -1;
     let eventTime;
     let eventEmail;
     let eventType;
     let eventPhone;
-    let eventLon;
-    let eventLat;
-    let eventLoc;
-    let admins = [];
+    let eventRso;
 
     // Call getAdmin, if the array is empty keep, otherwise change to false.
-    const [admin, setAdmin] = useState(false);
+    const [admins, setAdmins] = useState([]);
     const [message, setMessage] = useState("");
 
     let user_data = JSON.parse(localStorage.getItem("user_data"));
@@ -30,22 +26,19 @@ const CreateEvent = () => {
         console.log("entered");
         
         try {
-            let obj = {id: user_data.id};
+            let obj = {user_id: user_data.id};
             let js = JSON.stringify(obj);
     
-            // SHOULD BE POST, CHANGE WHEN AVAILABLE.
-            // const response = await
-            // fetch('http://localhost:8000/api/get_user_admin_rsos/',
-            // {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+            const response = await
+            fetch('http://localhost:8000/api/get_user_admin_rsos/',
+            {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
     
-            // let r = response.text();
-            // console.log(r);
+            let r = await response.text();
             
-            // let res = JSON.parse(r);
-            // admins = r.data.rsos;
+            let res = JSON.parse(r);
 
-            // If admins is empty, don't setAdmin(true);
-            // setAdmin(true);
+            setAdmins(res.data.rsos)
+            console.log(admins);
     
             // If there is admin information, set admin = true.
             // Save admin data to array. Map array in array selection section.
@@ -59,52 +52,50 @@ const CreateEvent = () => {
 
     const makeEvent = async event => {
         event.preventDefault();
+        let eventMessage = document.querySelectorAll('p.eventMessage')[0];
 
-        // Grab just date from eventDate.value;
-        let obj = {name: eventName.value, description: eventDesc.value, creator: user_data.id, host_rso: eventRSO.value,
-                   date: eventTime.value.substr(0, 10), time: eventTime.value, email: eventEmail.value, event_type: eventType.value,
-                   phone: eventPhone.value, longitude: loc_data.lng, latitude: loc_data.lat, loc_name: loc_data.address};
-        
-        console.log(eventTime.value.substr(0, 10));
+        try {
+            // Grab just date from eventDate.value;
+            let obj = {name: eventName.value, description: eventDesc.value, creator: user_data.id, host_rso: eventRso.value,
+                date: eventTime.value.substr(0, 10), time: eventTime.value, email: eventEmail.value, event_type: eventType.value,
+                phone: eventPhone.value, longitude: loc_data.lng, latitude: loc_data.lat, loc_name: loc_data.address};
 
-        let js = JSON.stringify(obj);
-        alert(js);
+            console.log(eventTime.value.substr(0, 10));
 
-        const response = await
+            let js = JSON.stringify(obj);
+            alert(js);
+
+            const response = await
             fetch('http://127.0.0.1:8000/api/events/',
             {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
-        // 1. Check if all of the emails belong to users at the same University. 
-        //    Response: Yes
-        //        a. Create RSO, with status pending
-        //        b. Add all users (including creator) to RSO
-        //    Response: No
-        //        a. Send back error message, which users are not belonging to the university 
+            let r = await response.text();
 
-        let r = await response.text();
+            let res = JSON.parse(r);
+            console.log(r);
 
-        let res = JSON.parse(r);
-        
-        if (Object.keys(r).length !== 12)
-        {
-            console.log(res);
-            // Set class to green.
-            console.log(document.querySelectorAll('p.eventMessage'));
-            document.querySelectorAll('eventMessage').classList.remove('green');
-            document.querySelectorAll('eventMessage').classList.add('red');
-            setMessage("Some of your information entered was incorrect, please try again.")
+            // R.data does not exist.
+            if (r.data || r.non_field_errors)
+            {
+                console.log("ERROR HAS OCCURED");
+                eventMessage.classList.remove('green')
+                eventMessage.classList.add('red');
+                setMessage(r);
+            }
+            else
+            {
+                eventMessage.classList.remove('red')
+                eventMessage.classList.add('green');
+                setMessage("Event succesfully created");
+            }
+  
         }
-        else
+        catch (e)
         {
-            // Set class to green.
-            document.querySelectorAll('eventMessage').classList.remove('red');
-            document.querySelectorAll('eventMessage').classList.add('green');
-            setMessage("added");
+            eventMessage.classList.remove('green')
+            eventMessage.classList.add('red');
+            setMessage(e);
         }
-
-        // Check for error in response
-
-        // Otherwise do nothing
     }
 
     useEffect(() => {
@@ -128,7 +119,7 @@ const CreateEvent = () => {
                     <div id="left" class="form-outline mb-4">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="rsoName">Event Name</label>
-                            <input type="text" id="eventName" class="form-control" placeholder="Something Club"
+                            <input type="text" id="eventName" class="form-control" placeholder="Something Event"
                             required ref={ (c) => eventName = c}/>
                         </div>
 
@@ -137,7 +128,7 @@ const CreateEvent = () => {
                             <select class="form-control" ref={ (c) => eventType = c }>
                                 <option value="0">Public</option>
                                 <option value="1">Private</option>
-                                { admin ? <><option value="2">RSO</option></> : <></>}
+                                <option value="2">RSO</option>
                             </select>
                         </div>
 
@@ -169,18 +160,14 @@ const CreateEvent = () => {
                         </div>
 
                         {/* Only display if the user is admin of RSO */}
-                        { admin ? 
-                            <>
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="email">RSO</label>
-                                    <select class="form-control" ref={ (c) => eventRSO = c}>
-                                        {
-                                            admins.map((admin) => <option value={admin}>{admin}</option>)
-                                        }
-                                    </select>
-                                </div>  
-                            </>
-                        : <></>}
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="email">RSO</label>
+                            <select class="form-control" ref={ (c) => eventRso = c}>
+                                {
+                                    admins.map((admin) => <option value={admin.rso_id}>{admin.rso_name}</option>)
+                                }
+                            </select>
+                        </div>  
 
                         <p className="green eventMessage">{message}</p>
 
