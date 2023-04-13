@@ -23,11 +23,12 @@ export default class Card extends React.Component {
     }
     // Allows functions to access this.state properties.
     this.storeInformation = this.storeInformation.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
   }
 
   // Function to store event information locally, for individual event page to load it.
   storeInformation() {
-    console.log(this.state.name);
+    console.log(this.state.creator);
     let obj = {event_id: this.state.event_id, name: this.state.name, description: this.state.description, 
                date: this.state.date, time: this.state.time, email: this.state.email, 
                phone: this.state.phone, lng: this.state.lng, lat: this.state.lat, loc: this.state.loc}
@@ -37,7 +38,23 @@ export default class Card extends React.Component {
     localStorage.setItem("event_info", JSON.stringify(obj));
 
     window.location.href='/event';
-  };;
+  };
+
+  async deleteEvent() {
+    if (window.confirm("Delete event?"))
+    {
+      let obj = {event_id: this.state.event_id, name: this.state.name, description: this.state.description, 
+        date: this.state.date, time: this.state.time, email: this.state.email, 
+        phone: this.state.phone, lng: this.state.lng, lat: this.state.lat, loc: this.state.loc}
+
+      const response = await 
+      fetch('http://localhost:8000/api/events/',
+      {method:'POST', body: JSON.stringify(obj), headers: {'Content-Type': 'application/json'}});
+
+      let r = await response.text();
+      console.log(r);
+    }
+  }
 
   render() {
     return (
@@ -49,8 +66,14 @@ export default class Card extends React.Component {
                   <h6 class="card-text location"><Icon.Pin/> {this.state.loc}</h6>
                   <p class="card-text">{this.state.description}</p>
               </div>
-              <div>
-                <button class="btn btn-success stretched-link more" onClick={this.storeInformation}>More Information</button>
+              <div className="eventBtns">
+                <button class="btn btn-success more" onClick={this.storeInformation}>More Information</button>
+                {/* Check if the creator is viewing, only they are allowed to delete the event */}
+                {
+                  this.state.creator === localStorage.getItem('user_data').id ? 
+                  <button class="btn btn-warning more" onClick={this.deleteEvent}>Delete Event</button> 
+                  : <></>
+                }
                 
               </div>
           </div>
