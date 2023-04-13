@@ -115,28 +115,26 @@ def Users_login(request):
 
 
 # Making get type request
-# @csrf_exempt
-# def get_type(request):
-#     if request.method == "POST":
-#         ret = {}
-#         ret["error"] = ""
-#         ret["data"] = {}
+@csrf_exempt
+def get_type(request):
+    if request.method == "POST":
+        ret = {}
+        ret["error"] = ""
+        ret["data"] = {}
 
-#         body_unicode = request.body.decode("utf-8")
-#         body = json.loads(body_unicode)
+        body_unicode = request.body.decode("utf-8")
+        body = json.loads(body_unicode)
 
-#         req_id = str(body["user_id"])
+        req_id = str(body["user_id"])
 
-#         try:
-#             user = Users.objects.get(user_id=req_id)
+        try:
+            user = Users.objects.get(user_id=req_id)
 
-#             if (user.user_id == req_id):
-#                 ret["data"] = req_id
+            ret["data"]["user_type"] = int(user.user_type)
+        except ObjectDoesNotExist:
+            return HttpResponseBadRequest('User not found'.format(request.method), status=401)
 
-#         except ObjectDoesNotExist:
-#             return HttpResponseBadRequest('User not found'.format(request.method), status=401)
-
-#         return JsonResponse(ret)
+        return JsonResponse(ret)
 
 
 @csrf_exempt
