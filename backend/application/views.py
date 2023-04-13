@@ -339,6 +339,10 @@ def get_user_events(request):
                 eventObject["latitude"] = event.latitude
                 eventObject["loc_name"] = event.loc_name
 
+                # Print out the event object we are working on.
+                # Test that we are getting all possible events.
+                print(eventObject);
+
                 match event.event_type:
                     case 0:
                         ret["data"]['events'].append(eventObject)
