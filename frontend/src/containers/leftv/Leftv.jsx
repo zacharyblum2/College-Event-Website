@@ -48,6 +48,7 @@ const Leftv = () => {
       console.log(joined);
       console.log(unjoined);
 
+      // Get event information.
       const response2 = await 
       fetch('http://localhost:8000/api/get_user_events/',
       {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
@@ -57,6 +58,9 @@ const Leftv = () => {
 
       console.log(res2.data.events);
       setEvents(res2.data.events);
+
+      // Get userType information. Create endpoint for it. 
+      
 
       return {success: true}
     }

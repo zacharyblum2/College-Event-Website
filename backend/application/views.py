@@ -113,6 +113,31 @@ def Users_login(request):
         return JsonResponse(ret)
 
 
+# Making get type request
+# @csrf_exempt
+# def get_type(request):
+#     if request.method == "POST":
+#         ret = {}
+#         ret["error"] = ""
+#         ret["data"] = {}
+
+#         body_unicode = request.body.decode("utf-8")
+#         body = json.loads(body_unicode)
+
+#         req_id = str(body["user_id"])
+
+#         try:
+#             user = Users.objects.get(user_id=req_id)
+
+#             if (user.user_id == req_id):
+#                 ret["data"] = req_id
+
+#         except ObjectDoesNotExist:
+#             return HttpResponseBadRequest('User not found'.format(request.method), status=401)
+
+#         return JsonResponse(ret)
+
+
 @csrf_exempt
 def get_user_rsos(request):
 
@@ -258,7 +283,7 @@ def leave_rso(request):
 
             rso.members.remove(user)
             rso.save()
-            
+
             if ((user.user_id == rso.admin) and (rso.members.count > 0)):
                 members = list(rso.members)
                 randomMem = random.choice(members)
@@ -270,10 +295,10 @@ def leave_rso(request):
             rso.save()
         except OutOfUniversity:
             return HttpResponseBadRequest('A user cannot join an RSO from another university'.
-                                        format(request.method), status=401)
+                                          format(request.method), status=401)
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('User, RSO, or University not found.'.
-                                        format(request.method), status=401)
+                                          format(request.method), status=401)
 
         return JsonResponse(ret)
 
@@ -320,16 +345,17 @@ def get_user_events(request):
                     case 0:
                         ret["data"]['events'].append(eventObject)
                     case 1:
-                        if(university == event.creator.university):
+                        if (university == event.creator.university):
                             ret["data"]['events'].append(eventObject)
                     case 2:
-                        if(event.host_rso.name in rsos):
+                        if (event.host_rso.name in rsos):
                             ret["data"]['events'].append(eventObject)
         except ObjectDoesNotExist:
-            return HttpResponseBadRequest('User, RSO, or University not found.'.\
-                                        format(request.method), status=401)
+            return HttpResponseBadRequest('User, RSO, or University not found.'.
+                                          format(request.method), status=401)
 
         return JsonResponse(ret)
+
 
 @csrf_exempt
 def get_user_admin_rsos(request):
@@ -349,10 +375,11 @@ def get_user_admin_rsos(request):
                 if ((rso.admin == user.user_id) and rso.active == 1):
                     ret["data"]["rsos"].append(rso.name)
         except ObjectDoesNotExist:
-            return HttpResponseBadRequest('User, RSO, or University not found.'.\
-                                        format(request.method), status=401)
+            return HttpResponseBadRequest('User, RSO, or University not found.'.
+                                          format(request.method), status=401)
 
         return JsonResponse(ret)
+
 
 @csrf_exempt
 def get_event_comments(request):
@@ -369,7 +396,7 @@ def get_event_comments(request):
 
         try:
             event = Events.objects.get(event_id=req_event_id)
-            
+
             for comment in Comments.objects.filter(event=event.event_id):
                 temp = {}
                 temp["user"] = comment.user.name
@@ -378,12 +405,13 @@ def get_event_comments(request):
                 temp["body"] = comment.body
                 temp["rating"] = comment.rating
                 ret["data"]["comments"].append(temp)
-            
+
         except ObjectDoesNotExist:
-            return HttpResponseBadRequest('Event Not found'.\
-                                        format(request.method), status=401)
-    
+            return HttpResponseBadRequest('Event Not found'.
+                                          format(request.method), status=401)
+
         return JsonResponse(ret)
+
 
 @csrf_exempt
 def delete_comment(request):
@@ -402,12 +430,12 @@ def delete_comment(request):
 
             comment.delete()
 
-
         except ObjectDoesNotExist:
-            return HttpResponseBadRequest('Event Not found'.\
-                                        format(request.method), status=401)
-    
+            return HttpResponseBadRequest('Event Not found'.
+                                          format(request.method), status=401)
+
         return JsonResponse(ret)
+
 
 @csrf_exempt
 def edit_comment(request):
@@ -436,10 +464,11 @@ def edit_comment(request):
             ret["data"]["rating"] = comment.rating
 
         except ObjectDoesNotExist:
-            return HttpResponseBadRequest('Event Not found'.\
-                                        format(request.method), status=401)
-    
+            return HttpResponseBadRequest('Event Not found'.
+                                          format(request.method), status=401)
+
         return JsonResponse(ret)
+
 
 class RSOS_view(viewsets.ModelViewSet):
     serializer_class = RSOS_serializer
