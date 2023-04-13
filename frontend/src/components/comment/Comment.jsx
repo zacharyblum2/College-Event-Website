@@ -1,183 +1,93 @@
-import React, {useState} from 'react';
-import './comment.css';
-import * as Icon from 'react-bootstrap-icons';
+import React from 'react';
+import './card.css';
+import * as Icon from 'react-bootstrap-icons'
 
-// Get data from an api.
-// Create a card for each data point. Display card. 
+export default class Card extends React.Component {
 
-// Store user_id of who made the comment, if this matches the logged in user
-// display an edit and delete comment button. 
-
-/// If user_id == commenter_id, unhide edit and delete.
-let user_data = JSON.parse(localStorage.getItem('user_data'));
-
-
-export default class Comments extends React.Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: props.user,
-            comment_id: props.comment_id,
-            body: props.body,
-            rating: props.rating,
-            user_id: props.user_id
-        }
-        
-        this.same = true;
-        this.editMode = false;
-        this.message = '';
-        this.edit = this.edit.bind(this);
-        this.done = this.done.bind(this);
-        this.delete = this.delete.bind(this);
-
-        // Don't display edit if not your comment.
-        if (this.state.user_id !== parseInt(user_data.id))
-        {
-            this.same = false;
-        }
-
-        
+  constructor(props) {
+    super(props);
+    this.state = {
+      event_id: props.id,
+      name: props.name,
+      description: props.description,
+      creator: props.creator,
+      rso: props.rso, 
+      date: props.date,
+      time: props.time,
+      email: props.email,
+      phone: props.phone,
+      lng: props.lng,
+      lat: props.lat,
+      loc: props.loc_name,
+      sub_time: props.time.substring(12, 16)
     }
+    // Allows functions to access this.state properties.
+    this.storeInformation = this.storeInformation.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
+  }
 
-    // Edit Function
-    // comment_id, body, rating
+  // Function to store event information locally, for individual event page to load it.
+  storeInformation() {
+    console.log(this.state.creator);
+    let obj = {event_id: this.state.event_id, name: this.state.name, description: this.state.description, 
+               date: this.state.date, time: this.state.time, email: this.state.email, 
+               phone: this.state.phone, lng: this.state.lng, lat: this.state.lat, loc: this.state.loc}
+    
+    console.log(JSON.stringify(obj));
+    localStorage.removeItem("eventInfo");
+    localStorage.setItem("event_info", JSON.stringify(obj));
 
-    // Delete Function
-    // Pass comment_id to be deleted
-    edit()
+    window.location.href='/event';
+  };
+
+  async deleteEvent() {
+    if (window.confirm("Delete event?"))
     {
-        let paragraph = document.getElementsByClassName(this.state.comment_id);
-        let btns = document.querySelectorAll(`[id="${this.state.comment_id}"]`);
-        let donebtn = btns[1];
-        let editbtn = btns[0];
-        let deletebtn = btns[2];
+      try 
+      {
+        // Pass user id and host_id rather than names for both.
+        let obj = {name: this.state.name, description: this.state.description, time: this.state.time, 
+          creator: this.state.id, host_rso: this.state.rso, date: this.state.date, 
+          email: this.state.email, event_type: this.state.event_type, phone: this.state.phone,
+          longitude: this.state.lng, latitude: this.state.lat} 
 
-        paragraph[0].contentEditable = true;
-        paragraph[0].style.border = 'solid';
-        paragraph[0].style.borderWidth = '1px';
-        paragraph[0].style.borderColor = '#007bff';
+          const response = await 
+          fetch('http://localhost:8000/api/events/',
+          {method:'POST', body: JSON.stringify(obj), headers: {'Content-Type': 'application/json'}});
 
-        paragraph[1].contentEditable = true;
-        paragraph[1].style.border = 'solid';
-        paragraph[1].style.borderWidth = '1px';
-        paragraph[1].style.borderColor = '#007bff';
+          let r = await response.text();
+          console.log(r);
+      }
+      catch (e)
+      {
+        alert(e);
+      }
+    }  
+  }
+  
 
-        // Display done block.
-        donebtn.style.display="block";
-
-        // Hide edit block.
-        editbtn.style.display="none";
-
-        // Hide delete button.
-        deletebtn.style.display="none";
-    }
-
-    async done()
-    {
-        let paragraph = document.getElementsByClassName(this.state.comment_id);
-        let btns = document.querySelectorAll(`[id="${this.state.comment_id}"]`);
-        let donebtn = btns[1];
-        let editbtn = btns[0];
-        let deletebtn = btns[2];
-
-        if (parseInt(paragraph[0].textContent) < 1 || parseInt(paragraph[0].textContent) > 5)
-        {
-            document.getElementById('commentMessage').textContent = 'Rating must be between 1 and 5.';
-        }
-        else
-        {
-            document.getElementById('commentMessage').textContent = '';
-
-            // Create object to pass. 
-            try 
-            {
-                let obj = {comment_id: this.state.comment_id, body: paragraph[1].textContent, rating: paragraph[0].textContent}
-                let js = JSON.stringify(obj);
-                const response = await
-                fetch('http://localhost:8000/api/edit_comment/', 
-                {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
-    
-                let r = await response.text();
-                let res = JSON.parse(r);
-
-                paragraph[0].contentEditable = false;
-                paragraph[0].style.backgroundColor = "white";
-                paragraph[0].style.border = 'none';
-
-                paragraph[1].contentEditable = false;
-                paragraph[1].style.backgroundColor = "white";
-                paragraph[1].style.border = 'none';
-
-                donebtn.style.display="none";
-                editbtn.style.display="block";
-                deletebtn.style.display="block";
-            }
-            catch (e)
-            {
-                document.getElementById('commentMessage').textContent = e;
-            }
-        }
-    }
-
-    async delete()
-    {
-        console.log("delete");
-
-        // If we do want to delete, perform delete.
-        if (window.confirm("Do you wish to delete?"))
-        {
-            console.log("DELETING");
-
-            try
-            {
-                let obj = {comment_id: this.state.comment_id};
-                let js = JSON.stringify(obj);
-    
-                // // Perform API call here.
-                const response = await 
-                fetch('http://localhost:8000/api/delete_comment/',
-                {method:'DELETE', body:js, headers: {'Content-Type': 'application/json'}});
-                window.location.reload(true);
-
-            }
-            catch (e)
-            {
-                document.getElementById('commentMessage').textContent = e;
-            }
-            
-        }
-    }
-    
-    render() {
-        return (
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h6 class="mb-0 ms-2"><Icon.PersonCircle/> {this.state.name}</h6>
-                    <div id="com" class="d-flex justify-content-between">
-                        <div class="d-flex flex-row align-items-center">
-                            <p className={this.state.comment_id}>{this.state.rating}</p>
-                            <p>/5</p>
-                        </div>
-                        <div class="d-flex flex-row align-items-center">
-                            <p className={this.state.comment_id}>{this.state.body}</p>
-                        </div>
-                        <div class="btns">
-                            {this.same ? <>
-                            {/* Edit should make popup to change information. 
-                                Close button will close and no update, update will call update. */}
-                            <button type="submit" class="btn btn-primary" id={this.state.comment_id} onClick={this.edit}>Edit</button>
-                            <button type="submit" className="btn btn-primary" id={this.state.comment_id} style={{'display': 'none'}} onClick={this.done}>Done</button>
-
-                            <button type="submit" class="btn btn-primary" id={this.state.comment_id} onClick={this.delete}>Delete</button>
-                            </> : <></>
-                            }
-                        </div>
-                    </div>
-                    
-                    <p id='commentMessage' style={{'color': 'red'}}></p>
-                </div>  
-            </div>  
-        )
-    }
+  render() {
+    return (
+      <div>
+          <div class="card" style={{width: "500px"}}>
+              <h4 class="card-header">{this.state.name}</h4>
+              <div class="card-body">
+                  <h5 class="card-title">at {this.state.sub_time} on {this.state.date} </h5>
+                  <h6 class="card-text location"><Icon.Pin/> {this.state.loc}</h6>
+                  <p class="card-text">{this.state.description}</p>
+              </div>
+              <div className="eventBtns">
+                <button class="btn btn-success more" onClick={this.storeInformation}>More Information</button>
+                {/* Check if the creator is viewing, only they are allowed to delete the event */}
+                {
+                  this.state.creator === localStorage.getItem('user_data').id ? 
+                  <button class="btn btn-warning more" onClick={this.deleteEvent}>Delete Event</button> 
+                  : <></>
+                }
+                
+              </div>
+          </div>
+      </div>
+    )
+  }
 }
