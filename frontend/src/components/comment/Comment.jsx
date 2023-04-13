@@ -29,16 +29,12 @@ export default class Comments extends React.Component {
         this.message = '';
         this.edit = this.edit.bind(this);
         this.done = this.done.bind(this);
-        //this.delete = this.delete.bind(this);
-
-        console.log(this.state.user_id);
-        console.log(user_data.id);
+        this.delete = this.delete.bind(this);
 
         // Don't display edit if not your comment.
         if (this.state.user_id !== parseInt(user_data.id))
         {
             this.same = false;
-            console.log("Same: " + this.same);
         }
 
         
@@ -105,20 +101,6 @@ export default class Comments extends React.Component {
                 let r = await response.text();
                 let res = JSON.parse(r);
 
-                
-                console.log(r);
-                console.log(!res.error);
-            }
-            catch (e)
-            {
-                document.getElementById('commentMessage').textContent = e;
-            }
-            
-            
-            // Recieve response.
-
-
-            // Check if error message. If not, complete below.
                 paragraph[0].contentEditable = false;
                 paragraph[0].style.backgroundColor = "white";
                 paragraph[0].style.border = 'none';
@@ -130,11 +112,12 @@ export default class Comments extends React.Component {
                 donebtn.style.display="none";
                 editbtn.style.display="block";
                 deletebtn.style.display="block";
-            
-            // If error. Print out error message. 
-            // this.message = res;
+            }
+            catch (e)
+            {
+                document.getElementById('commentMessage').textContent = e;
+            }
         }
-        
     }
 
     async delete()
@@ -142,17 +125,27 @@ export default class Comments extends React.Component {
         console.log("delete");
 
         // If we do want to delete, perform delete.
-        if (window.confirm("Do you wish to delete?") === true)
+        if (window.confirm("Do you wish to delete?"))
         {
-            // let obj = {comment_id: this.state.c_id};
-            // let js = JSON.stringify(obj);
+            console.log("DELETING");
 
-            // // Perform API call here.
-            // const response = await 
-            // fetch('http://localhost:8000/api/delete_comment/',
-            // {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+            try
+            {
+                let obj = {comment_id: this.state.comment_id};
+                let js = JSON.stringify(obj);
+    
+                // // Perform API call here.
+                const response = await 
+                fetch('http://localhost:8000/api/delete_comment/',
+                {method:'DELETE', body:js, headers: {'Content-Type': 'application/json'}});
+                window.location.reload(true);
 
-            // let r = response.text();
+            }
+            catch (e)
+            {
+                document.getElementById('commentMessage').textContent = e;
+            }
+            
         }
     }
     
@@ -176,7 +169,7 @@ export default class Comments extends React.Component {
                             <button type="submit" class="btn btn-primary" id={this.state.comment_id} onClick={this.edit}>Edit</button>
                             <button type="submit" className="btn btn-primary" id={this.state.comment_id} style={{'display': 'none'}} onClick={this.done}>Done</button>
 
-                            <button type="submit" class="btn btn-primary" id={this.state.comment_id}>Delete</button>
+                            <button type="submit" class="btn btn-primary" id={this.state.comment_id} onClick={this.delete}>Delete</button>
                             </> : <></>
                             }
                         </div>
