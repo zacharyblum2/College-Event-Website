@@ -341,20 +341,20 @@ def get_user_events(request):
 
                 # Print out the event object we are working on.
                 # Test that we are getting all possible events.
-                print(eventObject);
 
                 match event.event_type:
                     case 0:
-                        ret["data"]['events'].append(eventObject)
+                        ret["data"]["events"].append(eventObject)
                         break
                     case 1:
                         if (university == event.creator.university):
-                            ret["data"]['events'].append(eventObject)
+                            ret["data"]["events"].append(eventObject)
                         break
                     case 2:
                         if (event.host_rso.name in rsos):
-                            ret["data"]['events'].append(eventObject)
+                            ret["data"]["events"].append(eventObject)
                         break
+
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('User, RSO, or University not found.'.
                                           format(request.method), status=401)
@@ -362,7 +362,7 @@ def get_user_events(request):
         return JsonResponse(ret)
 
 
-@csrf_exempt
+@ csrf_exempt
 def get_user_admin_rsos(request):
     if request.method == "POST":
         ret = {}
@@ -390,7 +390,7 @@ def get_user_admin_rsos(request):
         return JsonResponse(ret)
 
 
-@csrf_exempt
+@ csrf_exempt
 def get_event_comments(request):
     if request.method == "POST":
         ret = {}
@@ -422,7 +422,7 @@ def get_event_comments(request):
         return JsonResponse(ret)
 
 
-@csrf_exempt
+@ csrf_exempt
 def delete_comment(request):
     if request.method == "DELETE":
         ret = {}
@@ -446,7 +446,7 @@ def delete_comment(request):
         return JsonResponse(ret)
 
 
-@csrf_exempt
+@ csrf_exempt
 def edit_comment(request):
     if request.method == "POST":
         ret = {}
