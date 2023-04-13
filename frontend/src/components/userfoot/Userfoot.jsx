@@ -10,42 +10,35 @@ const Userfoot = () => {
                 <section class="mb-4">
                 <a
                     class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
+                    href="https://www.facebook.com/UCFCAB/"
                     role="button"
                     data-mdb-ripple-color="dark"
                     ><Icon.Facebook className='fab' style={{margin: "10px"}}/>
                 </a>
                 <a
                     class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
+                    href="https://twitter.com/ucf_cab?lang=en"
                     role="button"
                     data-mdb-ripple-color="dark"
                     ><Icon.Twitter className='fab' style={{margin: "10px"}}/>
                 </a>
                 <a
                     class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
-                    role="button"
-                    data-mdb-ripple-color="dark"
-                    ><Icon.Google className='fab' style={{margin: "10px"}}/>
-                </a>
-                <a
-                    class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
+                    href="https://www.instagram.com/ucf_cab/?hl=en"
                     role="button"
                     data-mdb-ripple-color="dark"
                     ><Icon.Instagram className='fab' style={{margin: "10px"}}/>
                 </a>
                 <a
                     class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
+                    href="https://www.linkedin.com/company/ucf-cab/"
                     role="button"
                     data-mdb-ripple-color="dark"
                     ><Icon.Linkedin className='fab' style={{margin: "10px"}}/>
                 </a>
                 <a
                     class="btn btn-link btn-floating btn-lg text-dark m-1"
-                    href="#!"
+                    href="https://github.com/zacharyblum2/College-Event-Website"
                     role="button"
                     data-mdb-ripple-color="dark"
                     ><Icon.Github className='fab' style={{margin: "10px"}}/>
