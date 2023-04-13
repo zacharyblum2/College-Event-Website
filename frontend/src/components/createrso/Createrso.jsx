@@ -25,6 +25,7 @@ const Createrso = () => {
 
     const makeRSO = async event => {
         event.preventDefault();
+
         // Create object with incremental rso_id value, name of RSO and admin id. 
         setMessage('');
         let obj = {name: rsoName.value, university: user_data.uni, admin: user_data.id};
