@@ -114,6 +114,31 @@ def Users_login(request):
         return JsonResponse(ret)
 
 
+# Making get type request
+# @csrf_exempt
+# def get_type(request):
+#     if request.method == "POST":
+#         ret = {}
+#         ret["error"] = ""
+#         ret["data"] = {}
+
+#         body_unicode = request.body.decode("utf-8")
+#         body = json.loads(body_unicode)
+
+#         req_id = str(body["user_id"])
+
+#         try:
+#             user = Users.objects.get(user_id=req_id)
+
+#             if (user.user_id == req_id):
+#                 ret["data"] = req_id
+
+#         except ObjectDoesNotExist:
+#             return HttpResponseBadRequest('User not found'.format(request.method), status=401)
+
+#         return JsonResponse(ret)
+
+
 @csrf_exempt
 def get_user_rsos(request):
 
