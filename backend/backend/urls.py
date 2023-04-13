@@ -38,5 +38,6 @@ urlpatterns = [
     path('api/get_user_admin_rsos/', views.get_user_admin_rsos),
     path('api/get_event_comments/', views.get_event_comments),
     path('api/delete_comment/', views.delete_comment),
-    path('api/edit_comment/', views.edit_comment)
+    path('api/edit_comment/', views.edit_comment),
+    path('api/get_type/', views.get_type)
 ]
