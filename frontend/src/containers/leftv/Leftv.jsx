@@ -68,11 +68,10 @@ const Leftv = () => {
       let res3 = JSON.parse(r3);
 
       let obj = {name: user_data.name, id: user_data.id, type: res3.data.user_type, uni: user_data.uni}
+      
       // update locally stored information.
-      // localStorage.setItem('user_data', JSON.stringify(obj))
-      console.log(JSON.stringify(obj));
-
-      // console.log(res3.data);
+      localStorage.setItem('user_data', JSON.stringify(obj));
+      user_data = JSON.parse(localStorage.getItem("user_data"));
 
       return {success: true}
     }

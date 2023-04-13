@@ -49,7 +49,10 @@ export default class Card extends React.Component {
                   <h6 class="card-text location"><Icon.Pin/> {this.state.loc}</h6>
                   <p class="card-text">{this.state.description}</p>
               </div>
-              <button class="btn btn-success stretched-link more" onClick={this.storeInformation}>More Information</button>
+              <div>
+                <button class="btn btn-success stretched-link more" onClick={this.storeInformation}>More Information</button>
+                
+              </div>
           </div>
       </div>
     )
