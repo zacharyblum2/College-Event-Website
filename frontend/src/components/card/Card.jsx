@@ -28,7 +28,7 @@ export default class Card extends React.Component {
   // Function to store event information locally, for individual event page to load it.
   storeInformation() {
     console.log(this.state.name);
-    let obj = {event_id: this.state.id, name: this.state.name, description: this.state.description, 
+    let obj = {event_id: this.state.event_id, name: this.state.name, description: this.state.description, 
                date: this.state.date, time: this.state.time, email: this.state.email, 
                phone: this.state.phone, lng: this.state.lng, lat: this.state.lat, loc: this.state.loc}
     
