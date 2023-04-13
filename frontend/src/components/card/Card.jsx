@@ -76,6 +76,7 @@ export default class Card extends React.Component {
                 }
                 
               </div>
+              <button class="btn btn-success stretched-link more" onClick={this.storeInformation}>More Information</button>
           </div>
       </div>
     )
