@@ -1,16 +1,16 @@
 .more {
-    color: white;
-    align-self: center;
+  color: white;
+  align-self: center;
 }
 
 button .btn-success:hover {
-    background-color: #11441d;;
+  background-color: #11441d;
 }
 
 .eventBtns {
-    display: flex;
-    gap: 3rem;
-    justify-content: space-between;
-    margin-left: 1rem;
-    margin-right: 1rem;
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }

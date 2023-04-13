@@ -10,19 +10,16 @@ const Footer = () => {
           <span>Get connected with us on social networks:</span>
         </div>
         <div>
-          <a href="#" class="me-4 text-reset">
+          <a href="https://www.facebook.com/UCFCAB/" class="me-4 text-reset">
             <Icon.Facebook className='fab' style={{margin: "10px"}}/>
           </a>
-          <a href="#" class="me-4 text-reset">
+          <a href="https://twitter.com/ucf_cab?lang=en" class="me-4 text-reset">
             <Icon.Twitter style={{margin: "10px"}}/>
           </a>
-          <a href="#" class="me-4 text-reset">
-            <Icon.Google style={{margin: "10px"}}/>
-          </a>
-          <a href="#" class="me-4 text-reset">
+          <a href="https://www.instagram.com/ucf_cab/?hl=en" class="me-4 text-reset">
             <Icon.Instagram style={{margin: "10px"}}/>
           </a>
-          <a href="#" class="me-4 text-reset">
+          <a href="https://www.linkedin.com/company/ucf-cab/" class="me-4 text-reset">
             <Icon.Linkedin style={{margin: "10px"}}/>
           </a>
         </div>
