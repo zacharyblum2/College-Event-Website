@@ -56,7 +56,7 @@ const Leftv = () => {
       let r2 = await response2.text();
       let res2 = JSON.parse(r2)
 
-      console.log(res2.data.events);
+      console.log("User events " + r2);
       setEvents(res2.data.events);
 
       // Get userType information. Create endpoint for it. 

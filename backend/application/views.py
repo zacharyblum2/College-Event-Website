@@ -360,7 +360,7 @@ def get_user_events(request):
         return JsonResponse(ret)
 
 
-@csrf_exempt
+@ csrf_exempt
 def get_user_admin_rsos(request):
     if request.method == "POST":
         ret = {}
@@ -388,7 +388,7 @@ def get_user_admin_rsos(request):
         return JsonResponse(ret)
 
 
-@csrf_exempt
+@ csrf_exempt
 def get_event_comments(request):
     if request.method == "POST":
         ret = {}
@@ -420,7 +420,7 @@ def get_event_comments(request):
         return JsonResponse(ret)
 
 
-@csrf_exempt
+@ csrf_exempt
 def delete_comment(request):
     if request.method == "DELETE":
         ret = {}
@@ -444,7 +444,7 @@ def delete_comment(request):
         return JsonResponse(ret)
 
 
-@csrf_exempt
+@ csrf_exempt
 def edit_comment(request):
     if request.method == "POST":
         ret = {}
