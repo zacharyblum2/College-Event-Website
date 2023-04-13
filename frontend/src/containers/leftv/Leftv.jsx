@@ -60,14 +60,17 @@ const Leftv = () => {
       setEvents(res2.data.events);
 
       // Get userType information. Create endpoint for it. 
-      // const response3 = await 
-      // fetch('http://localhost:8000/api/get_usertype/',
-      // {method:'POST', body: js, headers: {'Content-Type': 'application/json'}});
+      const response3 = await 
+      fetch('http://localhost:8000/api/get_type/',
+      {method:'POST', body: js, headers: {'Content-Type': 'application/json'}});
 
-      // let r3 = await response3.text();
-      // let res3 = JSON.parse(r3);
+      let r3 = await response3.text();
+      let res3 = JSON.parse(r3);
 
+      let obj = {name: user_data.name, id: user_data.id, type: res3.data.user_type, uni: user_data.uni}
       // update locally stored information.
+      // localStorage.setItem('user_data', JSON.stringify(obj))
+      console.log(JSON.stringify(obj));
 
       // console.log(res3.data);
 
