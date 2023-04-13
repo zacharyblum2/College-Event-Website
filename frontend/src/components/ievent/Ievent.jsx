@@ -12,7 +12,6 @@ const Ievent = () => {
     let tweet = `https://twitter.com/intent/tweet?text=${user_data.uni} Events: Come hangout at ${event_info.name}!`;
 
     // Using event_info.id, load comments for that specific event.
-
         return (
             <div class="container">
                 <div class="row">

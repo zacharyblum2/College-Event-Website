@@ -1,5 +1,6 @@
 import React from 'react';
 import './card.css';
+import * as Icon from 'react-bootstrap-icons'
 
 export default class Card extends React.Component {
 
@@ -17,7 +18,8 @@ export default class Card extends React.Component {
       phone: props.phone,
       lng: props.lng,
       lat: props.lat,
-      loc: props.loc_name
+      loc: props.loc_name,
+      sub_time: props.time.substring(12, 16)
     }
     // Allows functions to access this.state properties.
     this.storeInformation = this.storeInformation.bind(this);
@@ -41,15 +43,13 @@ export default class Card extends React.Component {
     return (
       <div>
           <div class="card" style={{width: "500px"}}>
-              <h5 class="card-header">{this.state.name}</h5>
+              <h4 class="card-header">{this.state.name}</h4>
               <div class="card-body">
-                  <h5 class="card-title">at {this.state.time}</h5>
-                  <p class="card-text">{this.state.location}</p>
+                  <h5 class="card-title">at {this.state.sub_time} on {this.state.date} </h5>
+                  <h6 class="card-text location"><Icon.Pin/> {this.state.loc}</h6>
                   <p class="card-text">{this.state.description}</p>
-                  
-                  {/* This should link to a page with all of the event information */}
-                  <button class="btn btn-success stretched-link" onClick={this.storeInformation}>More Information</button>
               </div>
+              <button class="btn btn-success stretched-link more" onClick={this.storeInformation}>More Information</button>
           </div>
       </div>
     )
