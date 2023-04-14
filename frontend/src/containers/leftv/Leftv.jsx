@@ -26,6 +26,7 @@ const Leftv = () => {
   const [unjoined, setUnJoined] = useState([]);
   const [events, setEvents] = useState([]);
   const [userLoaded, setUserLoaded] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   let user_data = JSON.parse(localStorage.getItem("user_data"));
 
@@ -73,12 +74,26 @@ const Leftv = () => {
       localStorage.setItem('user_data', JSON.stringify(obj));
       user_data = JSON.parse(localStorage.getItem("user_data"));
 
+      // Get user admin information    
+      const response4 = await
+      fetch('http://localhost:8000/api/get_user_admin_rsos/',
+      {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+    
+      let r4 = await response4.text();
+            
+      let res4 = JSON.parse(r4);
+
+      if (res.data.rsos)
+      if (Object.values(res4.data.rsos).length !== 0)
+        setAdmin(true);
+
       return {success: true}
     }
     catch (e)
     {
       console.log("ERROR");
       console.log(e.toString());
+
       return {success: false};
     } 
   }
@@ -102,7 +117,7 @@ const Leftv = () => {
           <div className="cards">
           <Route exact path='/user'>
             {/* If the user is type 1 or 2 display Create Event, otherwise do not. */}
-          <a href="/createEvent" id="createBtn" class={user_data.type !== 0 ? "btn btn-primary" : "btn btn-primary hidden"}>Create Event</a>
+            { admin ? <a href="/createEvent" id="createBtn" class={user_data.type !== 0 ? "btn btn-primary" : "btn btn-primary hidden"}>Create Event</a> : <></> }
             <div className="rsos">
               <div className="public">
                 <h2 class="h5">Events</h2>
