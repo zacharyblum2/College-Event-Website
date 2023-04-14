@@ -38,7 +38,6 @@ const CreateEvent = () => {
             let res = JSON.parse(r);
 
             setAdmins(res.data.rsos)
-            console.log(admins);
     
             // If there is admin information, set admin = true.
             // Save admin data to array. Map array in array selection section.
@@ -60,10 +59,8 @@ const CreateEvent = () => {
                 date: eventTime.value.substr(0, 10), time: eventTime.value, email: eventEmail.value, event_type: eventType.value,
                 phone: eventPhone.value, longitude: loc_data.lng, latitude: loc_data.lat, loc_name: loc_data.address};
 
-            console.log(eventTime.value.substr(0, 10));
-
             let js = JSON.stringify(obj);
-            alert(js);
+            // alert(js);
 
             const response = await
             fetch('http://127.0.0.1:8000/api/events/',
@@ -72,23 +69,21 @@ const CreateEvent = () => {
             let r = await response.text();
 
             let res = JSON.parse(r);
-            console.log(r);
 
-            // R.data does not exist.
-            if (r.data || r.non_field_errors)
+            if (!res.data)
             {
-                console.log("ERROR HAS OCCURED");
+                console.log("no data");
+                console.log(Object.keys(res)[0] + ":" + Object.values(res)[0]);
                 eventMessage.classList.remove('green')
                 eventMessage.classList.add('red');
-                setMessage(r);
+                setMessage(Object.keys(res)[0] + ": " + Object.values(res)[0]);
             }
             else
             {
                 eventMessage.classList.remove('red')
                 eventMessage.classList.add('green');
                 setMessage("Event succesfully created");
-            }
-  
+            }  
         }
         catch (e)
         {
@@ -162,7 +157,7 @@ const CreateEvent = () => {
                         {/* Only display if the user is admin of RSO */}
                         <div class="form-outline mb-4">
                             <label class="form-label" for="email">RSO</label>
-                            <select class="form-control" ref={ (c) => eventRso = c}>
+                            <select class="form-control" required ref={ (c) => eventRso = c}>
                                 {
                                     admins.map((admin) => <option value={admin.rso_id}>{admin.rso_name}</option>)
                                 }
