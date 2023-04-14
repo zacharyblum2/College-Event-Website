@@ -70,12 +70,21 @@ const Map = (props) => {
   else
   {
     // Given name, lat and long
+    Geocode.fromAddress(props.location.name).then(
+      (response) => {
+        const {lat, lng } = response.results[0].geometry.location;
+        setLocation({lat: lat, lng: lng})
+      },
+      (error) => {
+        console.log("ERROR " + error);
+      }
+    );
 
     return (
         <>
             <h6>Address: {props.location.name} </h6>
             <MapPicker 
-                defaultLocation={{lat: props.location.lat, lng: props.location.lng}}
+                defaultLocation={{lat: location.lat, lng: location.lng}}
                 zoom={18}
                 mapTypeId="roadmap"
                 style={{height:'700px'}}
