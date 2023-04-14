@@ -73,9 +73,7 @@ const Leftv = () => {
       // update locally stored information.
       localStorage.setItem('user_data', JSON.stringify(obj));
       user_data = JSON.parse(localStorage.getItem("user_data"));
-
       setAdmin(true);
-
       return {success: true}
     }
     catch (e)

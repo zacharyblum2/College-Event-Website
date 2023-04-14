@@ -38,7 +38,7 @@ const CreateEvent = () => {
             let res = JSON.parse(r);
 
             setAdmins(res.data.rsos)
-            console.log(res.data.rsos)
+            console.log(admins);
     
             // If there is admin information, set admin = true.
             // Save admin data to array. Map array in array selection section.
