@@ -38,6 +38,7 @@ const CreateEvent = () => {
             let res = JSON.parse(r);
 
             setAdmins(res.data.rsos)
+            console.log(res.data.rsos)
     
             // If there is admin information, set admin = true.
             // Save admin data to array. Map array in array selection section.
@@ -159,7 +160,7 @@ const CreateEvent = () => {
                             <label class="form-label" for="email">RSO</label>
                             <select class="form-control" required ref={ (c) => eventRso = c}>
                                 {
-                                    admins.map((admin) => <option value={admin.rso_id}>{admin.rso_name}</option>)
+                                    admins.map((admin) => <option value={admin.id}>{admin.name}</option>)
                                 }
                             </select>
                         </div>  
