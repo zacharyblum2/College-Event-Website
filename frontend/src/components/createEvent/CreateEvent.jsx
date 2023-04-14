@@ -70,8 +70,13 @@ const CreateEvent = () => {
             let r = await response.text();
 
             let res = JSON.parse(r);
+            console.log(res);
 
-            if (!res.data)
+            console.log("RES RESULT " +res.data);
+
+            console.log(res.data === undefined);
+
+            if (res.data !== undefined)
             {
                 console.log("no data");
                 console.log(Object.keys(res)[0] + ":" + Object.values(res)[0]);
