@@ -316,18 +316,15 @@ def get_user_events(request):
                 eventObject["latitude"] = event.latitude
                 eventObject["loc_name"] = event.loc_name
 
-                match event.event_type:
+                match int(event.event_type):
                     case 0:
                         ret["data"]['events'].append(eventObject)
-                        break
                     case 1:
                         if(university == event.creator.university):
                             ret["data"]['events'].append(eventObject)
-                        break
                     case 2:
                         if(event.host_rso.name in rsos):
                             ret["data"]['events'].append(eventObject)
-                        break
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('User, RSO, or University not found.'.\
                                         format(request.method), status=401)
