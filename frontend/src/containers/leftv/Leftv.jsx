@@ -74,18 +74,7 @@ const Leftv = () => {
       localStorage.setItem('user_data', JSON.stringify(obj));
       user_data = JSON.parse(localStorage.getItem("user_data"));
 
-      // Get user admin information    
-      const response4 = await
-      fetch('http://localhost:8000/api/get_user_admin_rsos/',
-      {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
-    
-      let r4 = await response4.text();
-            
-      let res4 = JSON.parse(r4);
-
-      if (res.data.rsos)
-      if (Object.values(res4.data.rsos).length !== 0)
-        setAdmin(true);
+      setAdmin(true);
 
       return {success: true}
     }
@@ -96,6 +85,35 @@ const Leftv = () => {
 
       return {success: false};
     } 
+  }
+
+  const createEvent = async event => {
+    try 
+    {
+      let obj = {user_id: user_data.id}
+      let js = JSON.stringify(obj)
+
+      // Get user admin information    
+      const response4 = await
+      fetch('http://localhost:8000/api/get_user_admin_rsos/',
+      {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+    
+      let r4 = await response4.text();
+            
+      let res4 = JSON.parse(r4);
+      console.log(res4);
+
+      if (Object.values(res4.data.rsos).length === 0)
+      {
+        alert("You do not have access to create events. Your RSOs must have at least 5 members to make events.")
+      }
+      else 
+        window.location.href = '/createEvent'
+    }
+    catch (e)
+    {
+      console.log(e);
+    }
   }
 
   useEffect(() => {
@@ -117,7 +135,7 @@ const Leftv = () => {
           <div className="cards">
           <Route exact path='/user'>
             {/* If the user is type 1 or 2 display Create Event, otherwise do not. */}
-            { admin ? <a href="/createEvent" id="createBtn" class={user_data.type !== 0 ? "btn btn-primary" : "btn btn-primary hidden"}>Create Event</a> : <></> }
+            <button id="createBtn" class={user_data.type !== 0 ? "btn btn-primary" : "btn btn-primary hidden"} onClick={createEvent}>Create Event</button>
             <div className="rsos">
               <div className="public">
                 <h2 class="h5">Events</h2>
