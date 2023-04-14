@@ -349,7 +349,10 @@ def get_user_admin_rsos(request):
             user = Users.objects.get(user_id=req_id)
             for rso in RSOS.objects.all():
                 if ((rso.admin == user.user_id) and rso.active == 1):
-                    ret["data"]["rsos"].append(rso.name)
+                    rsoObject = {}
+                    rsoObject["name"] = rso.name
+                    rsoObject["id"] = rso.rso_id
+                    ret["data"]["rsos"].append(rsoObject)
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('User, RSO, or University not found.'.
                                           format(request.method), status=401)
