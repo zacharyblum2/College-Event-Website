@@ -114,29 +114,6 @@ def Users_login(request):
         return JsonResponse(ret)
 
 
-# Making get type request
-@csrf_exempt
-def get_type(request):
-    if request.method == "POST":
-        ret = {}
-        ret["error"] = ""
-        ret["data"] = {}
-
-        body_unicode = request.body.decode("utf-8")
-        body = json.loads(body_unicode)
-
-        req_id = str(body["user_id"])
-
-        try:
-            user = Users.objects.get(user_id=req_id)
-
-            ret["data"]["user_type"] = int(user.user_type)
-        except ObjectDoesNotExist:
-            return HttpResponseBadRequest('User not found'.format(request.method), status=401)
-
-        return JsonResponse(ret)
-
-
 @csrf_exempt
 def get_user_rsos(request):
 
@@ -340,11 +317,7 @@ def get_user_events(request):
                 eventObject["latitude"] = event.latitude
                 eventObject["loc_name"] = event.loc_name
 
-                # Print out the event object we are working on.
-                # Test that we are getting all possible events.
-                print(eventObject)
-
-                match event.event_type:
+                match int(event.event_type):
                     case 0:
                         ret["data"]['events'].append(eventObject)
                     case 1:
@@ -360,7 +333,7 @@ def get_user_events(request):
         return JsonResponse(ret)
 
 
-@ csrf_exempt
+@csrf_exempt
 def get_user_admin_rsos(request):
     if request.method == "POST":
         ret = {}
@@ -375,20 +348,40 @@ def get_user_admin_rsos(request):
         try:
             user = Users.objects.get(user_id=req_id)
             for rso in RSOS.objects.all():
-                # Get the RSO name and RSO id
-                if (rso.admin == user.user_id):
-                    arso = {}
-                    arso["rso_name"] = rso.name
-                    arso["rso_id"] = rso.rso_id
-                    ret["data"]["rsos"].append(arso)
+                if ((rso.admin == user.user_id) and rso.active == 1):
+                    ret["data"]["rsos"].append(rso.name)
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('User, RSO, or University not found.'.
                                           format(request.method), status=401)
 
         return JsonResponse(ret)
 
+# Making get type request
 
-@ csrf_exempt
+
+@csrf_exempt
+def get_type(request):
+    if request.method == "POST":
+        ret = {}
+        ret["error"] = ""
+        ret["data"] = {}
+
+        body_unicode = request.body.decode("utf-8")
+        body = json.loads(body_unicode)
+
+        req_id = str(body["user_id"])
+
+        try:
+            user = Users.objects.get(user_id=req_id)
+
+            ret["data"]["user_type"] = int(user.user_type)
+        except ObjectDoesNotExist:
+            return HttpResponseBadRequest('User not found'.format(request.method), status=401)
+
+        return JsonResponse(ret)
+
+
+@csrf_exempt
 def get_event_comments(request):
     if request.method == "POST":
         ret = {}
@@ -420,7 +413,7 @@ def get_event_comments(request):
         return JsonResponse(ret)
 
 
-@ csrf_exempt
+@csrf_exempt
 def delete_comment(request):
     if request.method == "DELETE":
         ret = {}
@@ -444,7 +437,7 @@ def delete_comment(request):
         return JsonResponse(ret)
 
 
-@ csrf_exempt
+@csrf_exempt
 def edit_comment(request):
     if request.method == "POST":
         ret = {}
