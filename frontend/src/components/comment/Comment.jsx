@@ -81,13 +81,14 @@ export default class Comments extends React.Component {
         let editbtn = btns[0];
         let deletebtn = btns[2];
 
+        console.log(document.getElementsByClassName(this.state.comment_id));
         if (parseInt(paragraph[0].textContent) < 1 || parseInt(paragraph[0].textContent) > 5)
         {
-            document.getElementById('commentMessage').textContent = 'Rating must be between 1 and 5.';
+            document.getElementsByClassName(this.state.comment_id)[2].textContent = 'Rating must be between 1 and 5.';
         }
         else
         {
-            document.getElementById('commentMessage').textContent = '';
+            document.getElementsByClassName(this.state.comment_id)[2].textContent = '';
 
             // Create object to pass. 
             try 
@@ -115,7 +116,8 @@ export default class Comments extends React.Component {
             }
             catch (e)
             {
-                document.getElementById('commentMessage').textContent = e;
+                console.log(document.getElementsByClassName(this.state.comment_id));
+                document.getElementsByClassName(this.state.comment_id)[2].textContent = e;
             }
         }
     }
@@ -143,7 +145,9 @@ export default class Comments extends React.Component {
             }
             catch (e)
             {
-                document.getElementById('commentMessage').textContent = e;
+                console.log(document.getElementsByClassName(this.state.comment_id));
+                document.getElementsByClassName(this.state.comment_id)[2].textContent = e;
+                
             }
             
         }
@@ -175,7 +179,7 @@ export default class Comments extends React.Component {
                         </div>
                     </div>
                     
-                    <p id='commentMessage' style={{'color': 'red'}}></p>
+                    <p className={this.state.comment_id} style={{'color': 'red'}}></p>
                 </div>  
             </div>  
         )
