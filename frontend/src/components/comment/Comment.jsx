@@ -145,7 +145,6 @@ export default class Comments extends React.Component {
             {
                 console.log(document.getElementsByClassName(this.state.comment_id));
                 document.getElementsByClassName(this.state.comment_id)[2].textContent = e;
-
             }
             
             window.location.reload(true);
