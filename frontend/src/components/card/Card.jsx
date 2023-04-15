@@ -43,18 +43,28 @@ export default class Card extends React.Component {
   async deleteEvent() {
     if (window.confirm("Delete event?"))
     {
-      let obj = {event_id: this.state.event_id, name: this.state.name, description: this.state.description, 
-        date: this.state.date, time: this.state.time, email: this.state.email, 
-        phone: this.state.phone, lng: this.state.lng, lat: this.state.lat, loc: this.state.loc}
+      try 
+      {
+        // Pass user id and host_id rather than names for both.
+        let obj = {name: this.state.name, description: this.state.description, time: this.state.time, 
+          creator: this.state.id, host_rso: this.state.rso, date: this.state.date, 
+          email: this.state.email, event_type: this.state.event_type, phone: this.state.phone,
+          longitude: this.state.lng, latitude: this.state.lat} 
 
-      const response = await 
-      fetch('http://localhost:8000/api/events/',
-      {method:'POST', body: JSON.stringify(obj), headers: {'Content-Type': 'application/json'}});
+          const response = await 
+          fetch('http://localhost:8000/api/events/',
+          {method:'POST', body: JSON.stringify(obj), headers: {'Content-Type': 'application/json'}});
 
-      let r = await response.text();
-      console.log(r);
-    }
+          let r = await response.text();
+          console.log(r);
+      }
+      catch (e)
+      {
+        alert(e);
+      }
+    }  
   }
+  
 
   render() {
     return (
