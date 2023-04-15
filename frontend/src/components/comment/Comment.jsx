@@ -36,8 +36,6 @@ export default class Comments extends React.Component {
         {
             this.same = false;
         }
-
-        
     }
 
     // Edit Function
@@ -140,20 +138,22 @@ export default class Comments extends React.Component {
                 const response = await 
                 fetch('http://localhost:8000/api/delete_comment/',
                 {method:'DELETE', body:js, headers: {'Content-Type': 'application/json'}});
-                window.location.reload(true);
+                
 
             }
             catch (e)
             {
                 console.log(document.getElementsByClassName(this.state.comment_id));
                 document.getElementsByClassName(this.state.comment_id)[2].textContent = e;
-                
+
             }
             
+            window.location.reload(true);
         }
     }
     
     render() {
+        
         return (
             <div class="card mb-4">
                 <div class="card-body">
@@ -170,10 +170,10 @@ export default class Comments extends React.Component {
                             {this.same ? <>
                             {/* Edit should make popup to change information. 
                                 Close button will close and no update, update will call update. */}
-                            <button type="submit" class="btn btn-primary" id={this.state.comment_id} onClick={this.edit}>Edit</button>
-                            <button type="submit" className="btn btn-primary" id={this.state.comment_id} style={{'display': 'none'}} onClick={this.done}>Done</button>
+                            <button class="btn btn-primary" id={this.state.comment_id} onClick={this.edit}>Edit</button>
+                            <button class="btn btn-primary" id={this.state.comment_id} style={{'display': 'none'}} onClick={this.done}>Done</button>
 
-                            <button type="submit" class="btn btn-primary" id={this.state.comment_id} onClick={this.delete}>Delete</button>
+                            <button class="btn btn-primary" id={this.state.comment_id} onClick={this.delete}>Delete</button>
                             </> : <></>
                             }
                         </div>
