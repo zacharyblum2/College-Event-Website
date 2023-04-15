@@ -1,6 +1,8 @@
 import datetime
+import hashlib
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.hashers import make_password
 
 # Create your models here.
 
@@ -28,6 +30,12 @@ class Users(models.Model):
     email = models.TextField(max_length=512)
     user_type = models.IntegerField()
     university = models.ForeignKey('Universities', on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            some_salt = "some_salt"
+            self.password = make_password(self.password, some_salt)
+        super().save(*args, **kwargs)  # Call the "real" save() method.
 
 # class RSOS(models.Model):
 # 	rso_id = models.AutoField(primary_key=True, blank=True)

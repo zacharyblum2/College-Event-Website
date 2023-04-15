@@ -9,6 +9,7 @@ import json
 from .customExceptions import IncorrectPassword, ObjectAlreadyExists, OutOfUniversity
 from django.views.generic.edit import DeleteView
 import random
+from django.contrib.auth.hashers import make_password
 
 # Sample for how to parse data out of a request body
 # returnBody = str(request.body) + "\n" + str(request.scheme) + "\n" + str(request.path) + "\n" + str(request.content_type)
@@ -84,8 +85,8 @@ def Users_login(request):
         try:
             # try pulling out the user and if you get it then creating the return json body
             user = Users.objects.get(email=req_email)
-
-            if (req_password != str(user.password)):
+            hash_password = make_password(req_password, "some_salt")
+            if (hash_password != str(user.password)):
                 raise IncorrectPassword
 
             ret["data"]['name'] = str(user.name)
