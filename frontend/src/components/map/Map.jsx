@@ -19,8 +19,6 @@ const Map = (props) => {
   const [address, setAddress] = useState(defaultAddress);
   const [zoom, setZoom] = useState(DefaultZoom);
 
-  console.log(defaultAddress);
-
   function handleChangeLocation (lat, lng){
     setLocation({lat:lat, lng:lng});
     Geocode.fromLatLng(lat.toString(), lng.toString()).then(

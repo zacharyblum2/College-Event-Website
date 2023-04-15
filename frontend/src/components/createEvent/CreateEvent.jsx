@@ -52,6 +52,7 @@ const CreateEvent = () => {
 
     const makeEvent = async event => {
         event.preventDefault();
+        console.log("Making event");
         let eventMessage = document.querySelectorAll('p.eventMessage')[0];
 
         try {
@@ -150,7 +151,6 @@ const CreateEvent = () => {
                         <div class="form-outline mb-4">
                             <label class="form-label" for="phone">Contact Phone Number</label>
                             <input type="tel" id="phone" class="form-control" placeholder="123-456-789"
-                            pattern="[0-9]{3}-[0-9]{3]-[0-9]{3}"
                             required ref={ (c) => eventPhone = c}/>
                         </div>
 

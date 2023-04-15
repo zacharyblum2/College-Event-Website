@@ -11,7 +11,8 @@ export default class Card extends React.Component {
       name: props.name,
       description: props.description,
       creator: props.creator,
-      rso: props.rso, 
+      event_type: props.event_type,
+      rso: props.host_rso, 
       date: props.date,
       time: props.time,
       email: props.email,
@@ -21,6 +22,10 @@ export default class Card extends React.Component {
       loc: props.loc_name,
       sub_time: props.time.substring(12, 16)
     }
+    
+    console.log(typeof(this.state.creator));
+    console.log(typeof(JSON.parse(localStorage.getItem('user_data')).id));
+    console.log(this.state.creator === parseInt(JSON.parse(localStorage.getItem('user_data')).id))
     // Allows functions to access this.state properties.
     this.storeInformation = this.storeInformation.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
@@ -47,16 +52,16 @@ export default class Card extends React.Component {
       {
         // Pass user id and host_id rather than names for both.
         let obj = {name: this.state.name, description: this.state.description, time: this.state.time, 
-          creator: this.state.id, host_rso: this.state.rso, date: this.state.date, 
+          creator: this.state.creator, host_rso: this.state.rso, date: this.state.date, 
           email: this.state.email, event_type: this.state.event_type, phone: this.state.phone,
           longitude: this.state.lng, latitude: this.state.lat} 
 
+        let js = JSON.stringify(obj);
+        console.log(js);
+
           const response = await 
           fetch('http://localhost:8000/api/events/',
-          {method:'POST', body: JSON.stringify(obj), headers: {'Content-Type': 'application/json'}});
-
-          let r = await response.text();
-          console.log(r);
+          {method:'DELETE', body: js, headers: {'Content-Type': 'application/json'}});
       }
       catch (e)
       {
@@ -80,13 +85,12 @@ export default class Card extends React.Component {
                 <button class="btn btn-success more" onClick={this.storeInformation}>More Information</button>
                 {/* Check if the creator is viewing, only they are allowed to delete the event */}
                 {
-                  this.state.creator === localStorage.getItem('user_data').id ? 
+                  this.state.creator === parseInt(JSON.parse(localStorage.getItem('user_data')).id) ? 
                   <button class="btn btn-warning more" onClick={this.deleteEvent}>Delete Event</button> 
                   : <></>
                 }
                 
               </div>
-              <button class="btn btn-success stretched-link more" onClick={this.storeInformation}>More Information</button>
           </div>
       </div>
     )

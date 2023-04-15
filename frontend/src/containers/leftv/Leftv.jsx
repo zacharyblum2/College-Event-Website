@@ -142,7 +142,7 @@ const Leftv = () => {
                   <Card id={event.event_id} name={event.name} description={event.description} 
                   creator={event.creator} host_rso={event.host_rso} date={event.date} 
                   time={event.time} email={event.email} phone={event.phone} lng={event.longitude} 
-                  lat={event.latitude} loc_name={event.loc_name}/>)
+                  lat={event.latitude} loc_name={event.loc_name} event_type={event.event_type}/>)
                 }
               </div>
             </div>

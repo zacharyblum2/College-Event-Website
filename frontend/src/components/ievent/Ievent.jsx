@@ -8,6 +8,7 @@ const Ievent = () => {
     let user_data = JSON.parse(localStorage.getItem("user_data"));
     let event_info = JSON.parse(localStorage.getItem("event_info"));
     console.log(event_info);
+    console.log("VIEWING EVENT");
 
     let tweet = `https://twitter.com/intent/tweet?text=${user_data.uni} Events: Come hangout at ${event_info.name}!`;
 
