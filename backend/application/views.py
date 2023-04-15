@@ -463,7 +463,7 @@ def delete_comment(request):
         return JsonResponse(ret)
 
 
-@ csrf_exempt
+@csrf_exempt
 def edit_comment(request):
     if request.method == "POST":
         ret = {}
