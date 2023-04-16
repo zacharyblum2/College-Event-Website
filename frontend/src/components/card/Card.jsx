@@ -51,17 +51,16 @@ export default class Card extends React.Component {
       try 
       {
         // Pass user id and host_id rather than names for both.
-        let obj = {name: this.state.name, description: this.state.description, time: this.state.time, 
-          creator: this.state.creator, host_rso: this.state.rso, date: this.state.date, 
-          email: this.state.email, event_type: this.state.event_type, phone: this.state.phone,
-          longitude: this.state.lng, latitude: this.state.lat} 
+        let obj = {event_id: this.state.event_id} 
 
         let js = JSON.stringify(obj);
         console.log(js);
 
           const response = await 
-          fetch('http://localhost:8000/api/events/',
+          fetch('http://localhost:8000/api/delete_event/',
           {method:'DELETE', body: js, headers: {'Content-Type': 'application/json'}});
+
+          window.location.reload(true);
       }
       catch (e)
       {
