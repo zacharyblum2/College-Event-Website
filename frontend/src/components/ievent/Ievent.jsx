@@ -8,11 +8,11 @@ const Ievent = () => {
     let user_data = JSON.parse(localStorage.getItem("user_data"));
     let event_info = JSON.parse(localStorage.getItem("event_info"));
     console.log(event_info);
+    console.log("VIEWING EVENT");
 
     let tweet = `https://twitter.com/intent/tweet?text=${user_data.uni} Events: Come hangout at ${event_info.name}!`;
 
     // Using event_info.id, load comments for that specific event.
-
         return (
             <div class="container">
                 <div class="row">
@@ -62,7 +62,7 @@ const Ievent = () => {
                         </div>
                         <div class="location-type-container d-flex mb-3">
                             <span class="event-location-url">
-                            <Map create={false} location={{name: event_info.location[0], lat: event_info.location[1], lng: event_info.location[2]}}/>
+                            <Map create={false} location={{name: event_info.loc, lat: event_info.lat, lng: event_info.lng}}/>
                             </span>
                         </div>
                     </aside>

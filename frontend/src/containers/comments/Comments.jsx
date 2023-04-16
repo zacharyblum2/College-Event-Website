@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './comments.css';
-
 import { Comment } from '../../components';
-
 
 // Load all information in regarding comments, including user_id. 
 // For each comment, check if localStorage(user).user_id == comment.id, if so display edit or delete.
-const comments = [
-    { name: 'Martha Stewart', comment_id: 1, body: 'It was alright', rating: '2'},
-    { name: 'LeBron James', comment_id: 2, body: 'It was okay', rating: '3'},
-    { name: 'Martha Steward', comment_id: 3, body: 'I loved it!', rating: '4'},
-]
+// const comments = [
+//     { name: 'Martha Stewart', comment_id: 1, body: 'It was alright', rating: '2'},
+//     { name: 'LeBron James', comment_id: 2, body: 'It was okay', rating: '3'},
+//     { name: 'Martha Steward', comment_id: 3, body: 'I loved it!', rating: '4'},
+// ]
 
 // When we click on an event, store the event id in local storage.
 
@@ -24,9 +22,12 @@ const comments = [
 const Comments = () => {
     let user_data = JSON.parse(localStorage.getItem("user_data"));
     let event_info = JSON.parse(localStorage.getItem("event_info"));
+   
+    const [commentsLoaded, setCommentsLoad] = useState(false);
+    const [comments, setComments] = useState([]);
+
     let comment;
     let rating;
-    // const [commentsLoaded, setComments] = useState(false);
 
     // Create object to later pass. 
     // let obj = {user_id: user_data.id, event_id: event_info.id, comment: comment.value, rating: rating.value};
@@ -34,32 +35,29 @@ const Comments = () => {
     // Use eventInfo.id to search for all of the comments, store them in an array called comments
     // similar to above.
 
-    // const getComments = async event => {
-    //     event.preventDefault();
-    //     console.log("GETTING COMMENTS");
+    const getComments = async event => {
+        console.log("GETTING COMMENTS");
 
-    //     let obj = {event_id: event_info.id};
-    //     let js = JSON.stringify(obj);
-
-    //     const response = await 
-    //     fetch ('http://127.0.0.1:8000/api/get_event_comments/', 
-    //     {method:'GET', body:js, headers: {'Content-Type': 'application/json'}});
-
-    //     let r = await response.text();
-    //     let res = JSON.parse(r);
-    //     console.log("Comments" + res);
-
-    //     // What does an error return?
-
-    //     // Given response, assign it to array comments.
-    //     comments = res;
-    // }
-
-    const addComment = async event => {
-        event.preventDefault();
-        
-        let obj = {event: event_info.id, user: user_data.id, body: comment.value, rating: rating.value}
+        let obj = {event_id: event_info.event_id};
         let js = JSON.stringify(obj);
+
+        const response = await 
+        fetch ('http://localhost:8000/api/get_event_comments/', 
+        {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
+
+        let r = await response.text();
+        let res = JSON.parse(r);
+
+        setComments(res.data.comments);
+
+        return {success: true};
+    }
+
+    const addComment = async event => {        
+        let obj = {event: event_info.event_id, user: user_data.id, body: comment.value, rating: rating.value}
+        let js = JSON.stringify(obj);
+
+        console.log(js);
 
         const response = await
         fetch('http://127.0.0.1:8000/api/comments/',
@@ -68,12 +66,19 @@ const Comments = () => {
         let r = await response.text();
 
         let res = JSON.parse(r);
-
-        console.log(res);
     }
 
+    useEffect(() => {
+        (async() => {
+            let res = await getComments();
+
+            if (res.success)
+                setCommentsLoad(true);
+        })();
+    }, []);
+
     return (
-        <div className="containerComment">
+        <div className="containerComment" onLoad={getComments}>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-8 col-lg-6">
                 <div class="card shadow-0 border" style={{backgroundColor: "#f0f2f5"}}>
@@ -91,13 +96,8 @@ const Comments = () => {
                             <br/>
                             <button type="submit" class="btn btn-primary" onClick={addComment}>Add comment</button>
                         </form>
-
-                        {/* {
-                        comments.map((element) => <Comment user={element.user.name} comment_id={element.comment_id} body={element.body} rating={element.rating}/>)
-                        }    */}
-
                         {
-                            comments.map((comment) => <Comment user={comment.name} comment_id={comment.comment_id} body={comment.body} rating={comment.rating}/>)
+                            comments.map((comment) => <Comment user={comment.user} user_id={comment.user_id} comment_id={comment.comment_id} body={comment.body} rating={comment.rating}/>)
                         }
                     </div>
                 
