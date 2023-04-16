@@ -410,6 +410,8 @@ def delete_comment(request):
     
         return JsonResponse(ret)
 
+
+
 @csrf_exempt
 def edit_comment(request):
     if request.method == "POST":
@@ -435,6 +437,29 @@ def edit_comment(request):
             ret["data"]["comment_id"] = comment.comment_id
             ret["data"]["body"] = comment.body
             ret["data"]["rating"] = comment.rating
+
+        except ObjectDoesNotExist:
+            return HttpResponseBadRequest('Event Not found'.\
+                                        format(request.method), status=401)
+    
+        return JsonResponse(ret)
+
+@csrf_exempt
+def delete_event(request):
+    if request.method == "DELETE":
+        ret = {}
+        ret["error"] = ""
+        ret["data"] = {}
+
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+
+        req_event_id = int(body["event_id"])
+
+        try:
+            event = Events.objects.get(event_id=req_event_id)
+
+            event.delete()
 
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('Event Not found'.\
