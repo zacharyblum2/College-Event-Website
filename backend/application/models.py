@@ -87,6 +87,7 @@ class Events(models.Model):
     longitude = models.FloatField()
     latitude = models.FloatField()
     loc_name = models.CharField(max_length=80)
+    pending = models.IntegerField(blank=True, default=0)
 
     class Meta:
         unique_together = ["time", "loc_name"]

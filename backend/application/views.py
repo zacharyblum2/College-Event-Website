@@ -343,7 +343,8 @@ def get_user_events(request):
 
                 match int(event.event_type):
                     case 0:
-                        ret["data"]['events'].append(eventObject)
+                        if(event.pending == 1):
+                            ret["data"]['events'].append(eventObject)
                     case 1:
                         if (university == event.creator.university):
                             ret["data"]['events'].append(eventObject)
