@@ -6,10 +6,11 @@ from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, BadRequest
 import json
-from .customExceptions import IncorrectPassword, ObjectAlreadyExists, OutOfUniversity
+from .customExceptions import IncorrectPassword, ObjectAlreadyExists, OutOfUniversity, NotRSOAdmin
 from django.views.generic.edit import DeleteView
 import random
 from django.contrib.auth.hashers import make_password
+from dateutil.parser import parse
 
 # Sample for how to parse data out of a request body
 # returnBody = str(request.body) + "\n" + str(request.scheme) + "\n" + str(request.path) + "\n" + str(request.content_type)
@@ -462,6 +463,7 @@ def delete_comment(request):
 
         return JsonResponse(ret)
 
+
 @csrf_exempt
 def edit_comment(request):
     if request.method == "POST":
@@ -494,6 +496,7 @@ def edit_comment(request):
 
         return JsonResponse(ret)
 
+
 @csrf_exempt
 def delete_event(request):
     if request.method == "DELETE":
@@ -512,10 +515,74 @@ def delete_event(request):
             event.delete()
 
         except ObjectDoesNotExist:
-            return HttpResponseBadRequest('Event Not found'.\
+            return HttpResponseBadRequest('Event Not found'.
                                         format(request.method), status=401)
+
+        return JsonResponse(ret)
+
+
+@csrf_exempt
+def create_event(request):
+    if request.method == "POST":
+        ret = {}
+        ret["error"] = ""
+        ret["data"] = {}
+
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+
+        req_name = str(body["name"])
+        req_description = str(body["description"])
+        req_time = parse(body["time"])
+        req_creator = int(body["creator"])
+        req_host_rso = int(body["host_rso"])
+        req_date = parse(body["date"])
+        req_email = str(body["email"])
+        req_event_type = int(body["event_type"])
+        req_phone = str(body["phone"])
+        req_longitude = float(body["longitude"])
+        req_latitude = float(body["latitude"])
+        req_loc_name = str(body["loc_name"])
+
+        try:
+            creator = Users.objects.get(user_id=req_creator)
+            host_rso = RSOS.objects.get(rso_id=req_host_rso)
+
+            if(Events.objects.filter(time=req_time, loc_name=req_loc_name).exists()):
+                raise ObjectAlreadyExists
+
+            if((creator.user_id != host_rso.admin) and (req_event_type == 2)):
+                raise NotRSOAdmin
+
+            event = Events(name=req_name,
+                           description=req_description,
+                           time=req_time,
+                           creator=creator,
+                           host_rso=host_rso,
+                           date=req_date,
+                           email=req_email,
+                           event_type=req_event_type,
+                           phone=req_phone,
+                           longitude=req_longitude,
+                           latitude=req_latitude,
+                           loc_name=req_loc_name)
+            
+            event.save()
+        except NotRSOAdmin:
+            return HttpResponseBadRequest("The user is not an admin of the rso", format(request.method), status=401)
+        except ObjectAlreadyExists:
+            return HttpResponseBadRequest("Object already exists with this time and location", format(request.method), status=400)
+        except ObjectDoesNotExist:
+            return HttpResponseBadRequest('Event Not found'.\
+                                        format(request.method), status=400)
     
         return JsonResponse(ret)
+    
+
+
+
+
+
 
 class RSOS_view(viewsets.ModelViewSet):
     serializer_class = RSOS_serializer

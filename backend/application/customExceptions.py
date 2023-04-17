@@ -11,3 +11,7 @@ class ObjectAlreadyExists(Exception):
 class OutOfUniversity(Exception):
     "Raised if a user is trying to do an action with a university they don't have permission to do it on"
     pass
+
+class NotRSOAdmin(Exception):
+    "Raised if a user is trying to create an rso event but they are not admin of that rso"
+    pass

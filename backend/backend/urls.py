@@ -39,6 +39,7 @@ urlpatterns = [
     path('api/get_event_comments/', views.get_event_comments),
     path('api/delete_comment/', views.delete_comment),
     path('api/edit_comment/', views.edit_comment),
-    path('api/get_type/', views.get_type)
+    path('api/get_type/', views.get_type),
     path('api/delete_event/', views.delete_event),
+    path('api/create_event/', views.create_event),
 ]
