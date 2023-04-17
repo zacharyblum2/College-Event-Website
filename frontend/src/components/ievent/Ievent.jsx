@@ -10,7 +10,7 @@ const Ievent = () => {
     console.log(event_info);
     console.log("VIEWING EVENT");
 
-    let tweet = `https://twitter.com/intent/tweet?text=${user_data.uni} Events: Come hangout at ${event_info.name}!`;
+    let tweet = `https://twitter.com/intent/tweet?text=${user_data.uni} Events: Come hangout at ${event_info.name} where we'll be ${event_info.description}!`;
 
     // Using event_info.id, load comments for that specific event.
         return (

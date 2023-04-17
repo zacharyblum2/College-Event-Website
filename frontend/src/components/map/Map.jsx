@@ -61,7 +61,7 @@ const Map = (props) => {
                 style={{height:'700px'}}
                 onChangeLocation={handleChangeLocation} 
                 onChangeZoom={handleChangeZoom}
-                apiKey='AIzaSyD07E1VvpsN_0FvsmKAj4nK9GnLq-9jtj8'/>
+                apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}/>
          </>
       );
   }
@@ -86,7 +86,7 @@ const Map = (props) => {
                 zoom={18}
                 mapTypeId="roadmap"
                 style={{height:'700px'}}
-                apiKey='AIzaSyD07E1VvpsN_0FvsmKAj4nK9GnLq-9jtj8'/>
+                apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}/>
          </>
       );
   }

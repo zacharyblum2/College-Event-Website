@@ -57,15 +57,16 @@ const CreateEvent = () => {
 
         try {
             // Grab just date from eventDate.value;
-            let obj = {name: eventName.value, description: eventDesc.value, creator: user_data.id, host_rso: eventRso.value,
-                date: eventTime.value.substr(0, 10), time: eventTime.value, email: eventEmail.value, event_type: eventType.value,
-                phone: eventPhone.value, longitude: loc_data.lng, latitude: loc_data.lat, loc_name: loc_data.address};
+            let obj = { name: eventName.value, description: eventDesc.value, time: eventTime.value, 
+                        creator: user_data.id, host_rso: eventRso.value, date: eventTime.value.substr(0, 10), 
+                        email: eventEmail.value, event_type: eventType.value, phone: eventPhone.value, 
+                        loc_name: loc_data.address, longitude: loc_data.lng, latitude: loc_data.lat };
 
             let js = JSON.stringify(obj);
-            // alert(js);
+            console.log(js);
 
             const response = await
-            fetch('http://127.0.0.1:8000/api/events/',
+            fetch('http://127.0.0.1:8000/api/create_event/',
             {method:'POST', body:js, headers: {'Content-Type': 'application/json'}});
 
             let r = await response.text();
@@ -77,7 +78,7 @@ const CreateEvent = () => {
 
             console.log(res.data === undefined);
 
-            if (res.data !== undefined)
+            if (res.data === undefined)
             {
                 console.log("no data");
                 console.log(Object.keys(res)[0] + ":" + Object.values(res)[0]);
@@ -150,7 +151,7 @@ const CreateEvent = () => {
 
                         <div class="form-outline mb-4">
                             <label class="form-label" for="phone">Contact Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="123-456-789"
+                            <input type="tel" id="phone" class="form-control" placeholder="123456789"
                             required ref={ (c) => eventPhone = c}/>
                         </div>
 
