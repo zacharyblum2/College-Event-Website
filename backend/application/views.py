@@ -517,7 +517,7 @@ def delete_event(request):
 
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('Event Not found'.
-                                        format(request.method), status=401)
+                                          format(request.method), status=401)
 
         return JsonResponse(ret)
 
@@ -549,10 +549,10 @@ def create_event(request):
             creator = Users.objects.get(user_id=req_creator)
             host_rso = RSOS.objects.get(rso_id=req_host_rso)
 
-            if(Events.objects.filter(time=req_time, loc_name=req_loc_name).exists()):
+            if (Events.objects.filter(time=req_time, loc_name=req_loc_name).exists()):
                 raise ObjectAlreadyExists
 
-            if((creator.user_id != host_rso.admin) and (req_event_type == 2)):
+            if ((creator.user_id != host_rso.admin) and (req_event_type == 2)):
                 raise NotRSOAdmin
 
             event = Events(name=req_name,
@@ -567,22 +567,17 @@ def create_event(request):
                            longitude=req_longitude,
                            latitude=req_latitude,
                            loc_name=req_loc_name)
-            
+
             event.save()
         except NotRSOAdmin:
             return HttpResponseBadRequest("The user is not an admin of the rso", format(request.method), status=401)
         except ObjectAlreadyExists:
             return HttpResponseBadRequest("Object already exists with this time and location", format(request.method), status=400)
         except ObjectDoesNotExist:
-            return HttpResponseBadRequest('Event Not found'.\
-                                        format(request.method), status=400)
-    
+            return HttpResponseBadRequest('Event Not found'.
+                                          format(request.method), status=400)
+
         return JsonResponse(ret)
-    
-
-
-
-
 
 
 class RSOS_view(viewsets.ModelViewSet):

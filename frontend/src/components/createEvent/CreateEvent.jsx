@@ -78,7 +78,7 @@ const CreateEvent = () => {
 
             console.log(res.data === undefined);
 
-            if (res.data !== undefined)
+            if (res.data === undefined)
             {
                 console.log("no data");
                 console.log(Object.keys(res)[0] + ":" + Object.values(res)[0]);
