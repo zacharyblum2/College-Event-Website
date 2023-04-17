@@ -63,7 +63,7 @@ const CreateEvent = () => {
                         loc_name: loc_data.address, longitude: loc_data.lng, latitude: loc_data.lat };
 
             let js = JSON.stringify(obj);
-            // alert(js);
+            console.log(js);
 
             const response = await
             fetch('http://127.0.0.1:8000/api/create_event/',
@@ -151,7 +151,7 @@ const CreateEvent = () => {
 
                         <div class="form-outline mb-4">
                             <label class="form-label" for="phone">Contact Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="123-456-789"
+                            <input type="tel" id="phone" class="form-control" placeholder="123456789"
                             required ref={ (c) => eventPhone = c}/>
                         </div>
 
